@@ -75,8 +75,25 @@
             {{group.name}} {{group.existingFields.length}} <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
           </accordion-heading>
           <div id="collapse{{group.name}}">
-          <div ng-repeat="groupField in group.existingFields">
+          <!-- <div ng-repeat="groupField in group.existingFields">
             <div class="btn" data-drag="true" data-jqyoui-options="{revert: 'invalid'}" ng-model="field" jqyoui-draggable="{animate:true}" style="width:100%;background-color: #FD9753;border-color: #FB6705;text-align: left;font-weight: bold;font-size: 12px;border-radius: 0px;">{{groupField.name}}</div>
+          </div> -->
+
+          <div ng-repeat="template in group.existingFields | filter:templateFromGroupFilter" class="fg-field" dq-draggable="fg-edit-canvas" dq-drag-begin="{ source: 'palette', field: template }" style="width:100%;background-color: #FD9753;border-color: #FB6705;text-align: left;font-weight: bold;font-size: 12px;border-radius: 0px; margin-bottom: 0px;">
+            <!-- <div class="btn" data-drag="true" data-jqyoui-options="{revert: 'invalid'}" ng-model="field" jqyoui-draggable="{animate:true}" style="width:100%;background-color: #FD9753;border-color: #FB6705;text-align: left;font-weight: bold;font-size: 12px;border-radius: 0px;">{{groupField.name}}</div> -->
+
+              <div class="fg-field-overlay">
+                <div class="btn-toolbar btn-toolbar-right">
+                  <button class="btn btn-default btn-xs btn-primary" type="button" ng-click="schemaCtrl.addField(template)"
+                      title="Add this field.">
+                    <span class="glyphicon glyphicon-plus"></span>
+                  </button>
+                </div>
+              </div>
+              <div fg-field="template"
+                   fg-tab-index="-1"
+                   fg-no-validation-summary="true"
+                   fg-edit-mode="true"></div>
           </div>
           </div>
         </accordion-group> 

@@ -19,30 +19,46 @@ fg.controller('fgEditPaletteController', function ($scope, fgConfig) {
     return !$scope.selectedCategory || $scope.selectedCategory[template.type];
   };
 
+  $scope.templateFromGroupFilter = function (group) {
+    var t;
+    angular.forEach(fgConfig.fields.templates, function(templ) {
+      if (templ.type === group.type) {
+        t = templ;
+      }
+    });
+    return t;
+  };
+
   $scope.groups = [{
     name:'Pilot',
     value:'Pilot',
     existingFields:[{ 
         name : 'Pilot_ID',
-        type : 'TextField'
+        displayName : 'Pilot_ID',
+        type : 'text'
       },{ 
         name : 'Pilot Name',
-        type : 'TextField'
+        displayName : 'Pilot Name',
+        type : 'text'
       },{ 
         name : 'Pilot Base',
-        type : 'TextField'
+        displayName : 'Pilot Base',
+        type : 'text'
       }]
   }, {
     name:'Flight',
     value:'Flight',
     existingFields: [{
         name : 'Flight Number',
-        type : 'TextField'
+        displayName : 'Flight Number',
+        type : 'text'
       },{ 
         name : 'Flight Date',
-        type : 'DatePicker'
+        displayName : 'Flight Date',
+        type : 'text'
       },{ 
         name : 'Origin',
+        displayName : 'Origin',
         type : 'DropDown'
       },{ 
         name : 'Destination',
@@ -53,32 +69,40 @@ fg.controller('fgEditPaletteController', function ($scope, fgConfig) {
     value:'Hotel',
     existingFields:[{
         name : 'Name',
-        type : 'TextField'
+        displayName : 'Name',
+        type : 'text'
       }, {
         name : 'Location',
-        type : 'TextField'
+        displayName : 'Location',
+        type : 'text'
       }, {
         name : 'Date',
-        type : 'DatePicker'
+        displayName : 'Date',
+        type : 'text'
       }, {
         name : 'Room Type',
-        type : 'TextField'
+        displayName : 'Room Type',
+        type : 'text'
       }, {
         name : 'Catering',
-        type : 'TextField'
+        displayName : 'Catering',
+        type : 'text'
       }, {
         name : 'Name',
-        type : 'TextField'
+        displayName : 'Name',
+        type : 'text'
       }]
   }, {
     name:'Aircraft',
     value:'Aircraft',
     existingFields:[{
         name : 'Reg No',
-        type : 'TextField'
+        displayName : 'Reg No',
+        type : 'text'
       }, {
         name : 'Equipment Type',
-        type : 'TextField'
+        displayName : 'Equipment Type',
+        type : 'text'
       }]
   }, {
     name:'Misc',

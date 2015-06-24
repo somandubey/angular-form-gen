@@ -5,7 +5,10 @@
 
 
       <accordion close-others="accordion.oneAtATime">
-        <accordion-group heading="Add New Fields">
+        <accordion-group>
+          <accordion-heading>
+            Add New Field <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+          </accordion-heading>
           <div id="fieldType" class="row">
             <div class="col-sm-5">
               <h5>Field Type</h5>
@@ -64,10 +67,17 @@
           </div>
         </accordion-group>
       </accordion>
+
+      <span style="font-weight: bold;">Use Predefined Fields</span>
       <accordion close-others="accordion.oneAtATime"> 
-        <accordion-group heading="{{group.group_name}} {{group.group_existingFields.length}}" ng-repeat="group in form.form_groups">
-          <div ng-repeat="field in group.group_existingFields">
-            <div class="btn btn-primary" data-drag="true" data-jqyoui-options="{revert: 'invalid'}" ng-model="field" jqyoui-draggable="{animate:true}" ng-hide="!field">{{field.name}}</div>
+        <accordion-group class="field-pallette-accordian" data-toggle="collapse" data-target="#collapse{{group.name}}" ng-repeat="group in groups">
+          <accordion-heading>
+            {{group.name}} {{group.existingFields.length}} <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+          </accordion-heading>
+          <div id="collapse{{group.name}}">
+          <div ng-repeat="groupField in group.existingFields">
+            <div class="btn" data-drag="true" data-jqyoui-options="{revert: 'invalid'}" ng-model="field" jqyoui-draggable="{animate:true}" style="width:100%;background-color: #FD9753;border-color: #FB6705;text-align: left;font-weight: bold;font-size: 12px;border-radius: 0px;">{{groupField.name}}</div>
+          </div>
           </div>
         </accordion-group> 
       </accordion>

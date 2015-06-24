@@ -59,13 +59,13 @@ gulp.task('test-run', ['angular-form-gen'], function () {
     path.join(config.folders.dest, 'angular-form-gen/angular-form-gen.min.js'),
     path.join(config.folders.src, 'angular-form-gen/**/*.test.js')
   ])
-    .pipe(karma({
-      configFile: 'karma.conf.js',
-      action: 'run',
-      singleRun: true
-    })).on('error', function (err) {
-      throw err;
-    });
+    // .pipe(karma({
+    //   configFile: 'karma.conf.js',
+    //   action: 'run',
+    //   singleRun: true
+    // })).on('error', function (err) {
+    //   throw err;
+    // });
 
 });
 

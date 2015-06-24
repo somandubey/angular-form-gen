@@ -60,7 +60,7 @@
   position: absolute;
   margin: 0;
   /*    display: none;*/
-  top: -10px;
+  top: 9px;
 }
 
 /*.fg-field:hover .btn-toolbar {
@@ -68,7 +68,7 @@
 }
 */
 .fg-field-overlay .btn-toolbar-right {
-  right: 5px;
+  right: 11px;
 }
 
 .fg-field-overlay .btn-toolbar-left {

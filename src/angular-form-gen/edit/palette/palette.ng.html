@@ -2,21 +2,90 @@
   <!--<div class="form-horizontal">-->
     <fieldset>
       <div fg-edit-palette-categories data-category="selectedCategory"></div>
-      <div ng-repeat="template in templates | filter:templateFilter" class="fg-field"
-           dq-draggable="fg-edit-canvas" dq-drag-begin="{ source: 'palette', field: template }">
-        <div class="fg-field-overlay">
-          <div class="btn-toolbar btn-toolbar-right">
-            <button class="btn btn-default btn-xs btn-primary" type="button" ng-click="schemaCtrl.addField(template)"
-                title="Add this field.">
-              <span class="glyphicon glyphicon-plus"></span>
-            </button>
+
+
+      <accordion close-others="accordion.oneAtATime">
+        <accordion-group heading="Add New Fields">
+          <div id="fieldType" class="row">
+            <div class="col-sm-5">
+              <h5>Field Type</h5>
+            </div>
+            <div class="col-sm-7">
+              <!-- <select class="form-control" ng-model="addField.selected"  ng-change="changedFieldValue(addField.selected)" ng-options="type.name as type.value for type in addField.types"></select> -->
+              <select class="form-control" ng-model="selected"  ng-change="changedFieldValue(addField.selected)">
+                <option ng-repeat="template in templates | filter:templateFilter" class="fg-field">
+                  <span ng-click="schemaCtrl.addField(template)">{{template.displayName}}</span>
+                  <div fg-field="template"
+                       fg-tab-index="-1"
+                       fg-no-validation-summary="true"
+                       fg-edit-mode="true"></div>
+                </option>
+              </select>
+            </div>
           </div>
-        </div>
-        <div fg-field="template"
-             fg-tab-index="-1"
-             fg-no-validation-summary="true"
-             fg-edit-mode="true"></div>
-      </div>
+          <div ng-class="{ 'fg-drag-placeholder-visible' : dragPlaceholder.visible && dragPlaceholder.index === $index }" class="fg-drag-placeholder"></div>
+          <div fg-edit-canvas-field></div>
+          <!-- <div id="fieldName" class="row">
+            <div class="col-sm-5">
+              <h5>Field Name</h5>
+            </div>
+            <div class="col-sm-7">
+              <input class="form-control" type="text" ng-model="addField.name">
+            </div>
+          </div>
+          <div class="row" ng-show="populate_template"  ng-repeat="field in form.form_fields">
+             <field-directive field="field"></field-directive> 
+          </div>
+          <div class="row" ng-show="populate_template">{{populate_template}}
+            <field-directive field="form.form_field"></field-directive>           
+          </div>
+          <div id="userGroup" class="row">
+            <div class="col-sm-5">
+              <h5>User Groups</h5>
+            </div>
+            <div class="col-sm-7">
+             <div ng-include='"app/forms/add-group.html"'></div>
+              <select class="form-control" ng-model="addField.selectedGroup" ng-change="changedGroupValue(addField.selectedGroup)" ng-options="group.name as group.value for group in addField.groups"></select>
+            </div>
+          </div> -->
+          <div class="row">
+            <div class="col-sm-5">
+            <a ng-click="addNewField(addField.name,addField.selected,addField.selectedGroup)"
+                  class="btn btn-primary btn-sm margin-top-2"> <i
+                  class="fa fa-plus normal"></i> OK
+                </a></div>
+            <div class="col-sm-7">
+              
+                <a ng-click="resetField()" class="btn btn-primary btn-sm margin-top-2">
+                  <i class="fa fa-plus normal"></i> Cancel
+                </a>
+              
+            </div>
+          </div>
+        </accordion-group>
+      </accordion>
+      <accordion close-others="accordion.oneAtATime"> 
+        <accordion-group heading="{{group.group_name}} {{group.group_existingFields.length}}" ng-repeat="group in form.form_groups">
+          <div ng-repeat="field in group.group_existingFields">
+            <div class="btn btn-primary" data-drag="true" data-jqyoui-options="{revert: 'invalid'}" ng-model="field" jqyoui-draggable="{animate:true}" ng-hide="!field">{{field.name}}</div>
+          </div>
+        </accordion-group> 
+      </accordion>
+      
+      <!-- <div ng-repeat="template in templates | filter:templateFilter" class="fg-field" dq-draggable="fg-edit-canvas" dq-drag-begin="{ source: 'palette', field: template }">
+                <div class="fg-field-overlay">
+                  <div class="btn-toolbar btn-toolbar-right">
+                    <button class="btn btn-default btn-xs btn-primary" type="button" ng-click="schemaCtrl.addField(template)"
+                        title="Add this field.">
+                      <span class="glyphicon glyphicon-plus"></span>
+                    </button>
+                  </div>
+                </div>
+                <div fg-field="template"
+                     fg-tab-index="-1"
+                     fg-no-validation-summary="true"
+                     fg-edit-mode="true"></div>
+              </div> -->      
     </fieldset>
   <!--</div>-->
 </div>

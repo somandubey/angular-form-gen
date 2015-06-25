@@ -1,6 +1,7 @@
 fg.controller('fgEditPaletteController', function ($scope, fgConfig) {
 
   $scope.templates = [];
+  $scope.populate_template = false;
   
   var tmpls = fgConfig.fields.templates;
   var i = tmpls.length;
@@ -28,6 +29,19 @@ fg.controller('fgEditPaletteController', function ($scope, fgConfig) {
     });
     return t;
   };
+  
+  $scope.changedFieldValue=function(selected){
+    
+      console.log("SelectedField changedFieldValue"+selected);
+     $scope.populate_template = true;
+      for(var i=0;i<=tmpls.length;i++){
+        if(selected==tmpls[i].displayName) {
+           $scope.template=tmpls[i];
+           console.log("SelectedField changedFieldValue"+ $scope.template.displayName );
+           break;
+        }        
+      }
+    };
 
   $scope.groups = [{
     name:'Pilot',

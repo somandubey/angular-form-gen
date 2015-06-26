@@ -73,9 +73,9 @@
 
       <span style="font-weight: bold;">Use Predefined Fields</span>
       <accordion close-others="accordion.oneAtATime"> 
-        <accordion-group class="field-pallette-accordian" data-toggle="collapse" data-target="#collapse{{group.name}}" ng-repeat="group in groups">
+        <accordion-group class="field-pallette-accordian" data-toggle="collapse" data-target="#collapse{{group.fieldGroupName}}" ng-repeat="group in groups">
           <accordion-heading>
-            {{group.name}} {{group.existingFields.length}} <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+            {{group.fieldGroupName}} {{group.associatedFields ? group.associatedFields.length : 0}} <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
           </accordion-heading>
           <div id="collapse{{group.name}}">
           <!-- <div ng-repeat="groupField in group.existingFields">

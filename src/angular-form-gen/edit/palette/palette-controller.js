@@ -39,7 +39,7 @@ fg.controller('fgEditPaletteController', function ($scope, fgConfig) {
            $scope.template=tmpls[i];
            console.log("SelectedField changedFieldValue"+ $scope.template.displayName );
            $scope.template.$_displayProperties = true;
-           $scope.schemaCtrl.addField($scope.template);
+           //$scope.schemaCtrl.addField($scope.template);
            break;
         }        
       }

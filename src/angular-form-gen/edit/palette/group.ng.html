@@ -1,0 +1,9 @@
+<div >
+   <div fg-property-field="fieldGroup" fg-property-field-label="Field group">
+   <select class="form-control" ng-model="selected"  ng-change="changedGroupValue(selected)">
+                <option ng-repeat="group in groups" >
+                  <span>{{group.name}}</span>
+                </option>
+              </select>
+</div>
+<div >

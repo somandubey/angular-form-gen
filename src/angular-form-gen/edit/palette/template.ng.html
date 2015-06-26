@@ -1,64 +1,46 @@
 <!-- focus -->
 <!--<div ng-if="fields.focus">-->
-  <!--<div fg-property-field="fieldFocus">-->
-    <!--<div class="checkbox">-->
-      <!--<label title="Set the initial focus to this field.">-->
-        <!--<input type="checkbox" ng-model="field.focus"/>-->
-        <!--Set input focus-->
-      <!--</label>-->
-    <!--</div>-->
-  <!--</div>-->
+<!--<div fg-property-field="fieldFocus">-->
+<!--<div class="checkbox">-->
+<!--<label title="Set the initial focus to this field.">-->
+<!--<input type="checkbox" ng-model="field.focus"/>-->
+<!--Set input focus-->
+<!--</label>-->
 <!--</div>-->
-
+<!--</div>-->
+<!--</div>-->
 <!-- fieldName -->
 <div>
-<div >
-  <div fg-property-field="fieldName" fg-property-field-label="Name" class="ng-hide">
-    <input type="text"
-           class="form-control"
-           name="fieldName"
-           ng-model="field.name"
-           ng-required="false"
-           ng-pattern="/^[a-zA-Z]([\w]+)?$/"
-           fg-unique-field-name/>
+  <div>
+    <div fg-property-field="fieldName" fg-property-field-label="Name" class="ng-hide">
+      <input type="text" class="form-control" name="fieldName" ng-model="field.name" ng-required="false" ng-pattern="/^[a-zA-Z]([\w]+)?$/"
+      fg-unique-field-name/>
+    </div>
   </div>
-</div>
-
-<!-- displayName -->
-<div >
-  <div fg-property-field="displayName" fg-property-field-label="Label">
-    <input type="text" class="form-control" name="displayName" ng-model="field.displayName"/>
+  <!-- displayName -->
+  <div>
+    <div fg-property-field="displayName" fg-property-field-label="Label">
+      <input type="text" class="form-control" name="displayName" ng-model="field.displayName" />
+    </div>
   </div>
-</div>
-
-<!-- placeholder -->
-<div >
-  <div fg-property-field="fieldPlaceholder" fg-property-field-label="Placeholder text">
-    <input type="text"
-           class="form-control"
-           name="fieldPlaceholder"
-           ng-model="field.placeholder"/>
+  <!-- placeholder -->
+  <div>
+    <div fg-property-field="fieldPlaceholder" fg-property-field-label="Placeholder text">
+      <input type="text" class="form-control" name="fieldPlaceholder" ng-model="field.placeholder" />
+    </div>
   </div>
-</div>
-
-<!-- tooltip -->
-<div >
-  <div fg-property-field="fieldTooltip" fg-property-field-label="Tooltip">
-    <input type="text"
-           class="form-control"
-           name="fieldTooltip"
-           ng-model="field.tooltip"/>
+  <!-- tooltip -->
+  <div>
+    <div fg-property-field="fieldTooltip" fg-property-field-label="Tooltip">
+      <input type="text" class="form-control" name="fieldTooltip" ng-model="field.tooltip" />
+    </div>
   </div>
-</div>
-
-<! -- field group -->
-<div >
-   <div fg-property-field="fieldGroup" fg-property-field-label="Field group">
-   <select class="form-control" ng-model="selected"  ng-change="changedGroupValue(selected)">
-                <option ng-repeat="group in groups" >
-                  <span>{{group.name}}</span>
-                </option>
-              </select>
-</div>
-<div >
-</div>
+  <! -- field group -->
+  <div>
+    <div fg-property-field="fieldGroup" fg-property-field-label="Field group">
+      <select class="form-control" ng-model="selected" ng-change="changedGroupValue(selected)">
+        <option ng-repeat="group in groups">
+          <span>{{group.name}}</span>
+        </option>
+      </select>
+    </div>

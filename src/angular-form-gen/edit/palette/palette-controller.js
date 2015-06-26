@@ -96,6 +96,7 @@ fg.controller('fgEditPaletteController', function ($scope, fgConfig,$modal) {
                 group.associatedFields = []
               }
               group.associatedFields.push(response);
+              return false;
             }
           });
       });

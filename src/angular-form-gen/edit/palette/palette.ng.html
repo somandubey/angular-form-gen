@@ -28,7 +28,7 @@
               <div fg-edit-canvas-field-properties="template" ></div>
               <div>
                  <div fg-property-field="fieldGroup" fg-property-field-label="Associate field to field group">
-                   <select class="form-control" ng-model="selectedGroup" ng-change="changedGroupValue(selectedGroup)" ng-options="group.name as group.value for group in groups"></select>  
+                   <select class="form-control" ng-model="selectedGroup" ng-change="changedGroupValue(selectedGroup)" ng-options="group.fieldGroupName as group.fieldGroupId for group in groups"></select>  
 
                    <div class="row">
                     <div class="col-sm-3">

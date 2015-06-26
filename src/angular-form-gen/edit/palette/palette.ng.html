@@ -17,24 +17,34 @@
               <!-- <select class="form-control" ng-model="addField.selected"  ng-change="changedFieldValue(addField.selected)" ng-options="type.name as type.value for type in addField.types"></select> -->
               <select class="form-control" ng-model="selected"  ng-change="changedFieldValue(selected)">
                 <option ng-repeat="template in templates | filter:templateFilter" class="fg-field">
-                  <span ng-click="schemaCtrl.addField(template)">{{template.displayName}}</span>
+                  <span>{{template.displayName}}</span>
                   <div fg-field="template"
-                       fg-tab-index="-1"
+                       fg-tab-index="3"
                        fg-no-validation-summary="true"
                        fg-edit-mode="true"></div>
                 </option>
               </select>
             </div>
-             <div class="row" ng-show="populate_template">
-                          <!--  <div ng-include='"angular-form-gen/edit/palette/template.ng.html"'></div>  -->        
-                          <div template-directive field="template"></div>          
-                          <!--  <template-directive field="template"></template-directive>  -->
-                </div>
-
+            
+            <div class="col-sm-12" ng-show="populate_template">
+              <div fg-edit-canvas-field-properties="template" ></div>
+              <div class="row">
+                  <div class="col-sm-2">
+                    <a ng-click="addNewField(addField.name,addField.selected,addField.selectedGroup)"
+                          class="btn btn-primary btn-sm margin-top-2"> <i
+                          class="fa fa-plus normal"></i> OK
+                    </a>
+                  </div>
+                  <div class="col-sm-10">
+                    <a ng-click="resetField()" class="btn btn-primary btn-sm margin-top-2">
+                      <i class="fa fa-plus normal"></i> Cancel
+                    </a>
+                  </div>
               </div>
-          </div>
-          <!-- <div ng-class="{ 'fg-drag-placeholder-visible' : dragPlaceholder.visible && dragPlaceholder.index === $index }" class="fg-drag-placeholder"></div>
-          <div fg-edit-canvas-field></div> -->
+            </div>
+             
+          <div ng-class="{ 'fg-drag-placeholder-visible' : dragPlaceholder.visible && dragPlaceholder.index === $index }" class="fg-drag-placeholder"></div>
+         <!--  <div fg-edit-canvas-field></div> -->
           <!-- <div id="fieldName" class="row">
             <div class="col-sm-5">
               <h5>Field Name</h5>
@@ -58,20 +68,7 @@
               <select class="form-control" ng-model="addField.selectedGroup" ng-change="changedGroupValue(addField.selectedGroup)" ng-options="group.name as group.value for group in addField.groups"></select>
             </div>
           </div> -->
-          <div class="row">
-            <div class="col-sm-5">
-            <a ng-click="addNewField(addField.name,addField.selected,addField.selectedGroup)"
-                  class="btn btn-primary btn-sm margin-top-2"> <i
-                  class="fa fa-plus normal"></i> OK
-                </a></div>
-            <div class="col-sm-7">
-              
-                <a ng-click="resetField()" class="btn btn-primary btn-sm margin-top-2">
-                  <i class="fa fa-plus normal"></i> Cancel
-                </a>
-              
-            </div>
-          </div>
+          
         </accordion-group>
       </accordion>
 

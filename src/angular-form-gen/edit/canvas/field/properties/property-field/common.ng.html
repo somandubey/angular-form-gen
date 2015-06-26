@@ -12,12 +12,12 @@
 
 <!-- fieldName -->
 <div ng-if="fields.fieldname">
-  <div fg-property-field="fieldName" fg-property-field-label="Name">
+  <div fg-property-field="fieldName" fg-property-field-label="Name" class="ng-hide">
     <input type="text"
            class="form-control"
            name="fieldName"
            ng-model="field.name"
-           ng-required="true"
+           ng-required="false"
            ng-pattern="/^[a-zA-Z]([\w]+)?$/"
            fg-unique-field-name/>
   </div>
@@ -25,7 +25,7 @@
 
 <!-- displayName -->
 <div ng-if="fields.displayname">
-  <div fg-property-field="displayName" fg-property-field-label="Display name">
+  <div fg-property-field="displayName" fg-property-field-label="Label">
     <input type="text" class="form-control" name="displayName" ng-model="field.displayName"/>
   </div>
 </div>
@@ -61,15 +61,8 @@
   </div>
 </div>
 
-<div >
-   <div fg-property-field="fieldGroup" fg-property-field-label="Associate field to field group">
-   <select class="form-control" ng-model="selected"  ng-change="changedGroupValue(selected)">
-          <option ng-repeat="group in groups" >
-             <span>{{group.name}}</span>
-          </option>
-    </select>
-</div>
-<div >
+
+
 
 
 

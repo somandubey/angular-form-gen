@@ -131,16 +131,6 @@
 .fg-validation-summary {
 	margin-top: 10px;
 }
-.fg-tabs > .nav-tabs {
-	margin-bottom: 0px;
-}
-
-.fg-tabs .tab-content {
-	padding: 10px;
-	border: 1px solid #ddd;
-	border-top: none;
-	border-radius: 0px 0px 4px 4px;
-}
 /*.jsonify {*/
     /*position: relative;*/
     /*margin: 15px 0;*/
@@ -188,6 +178,16 @@
   position: absolute;
   margin: 0px;
   top: -10px;
+}
+.fg-tabs > .nav-tabs {
+	margin-bottom: 0px;
+}
+
+.fg-tabs .tab-content {
+	padding: 10px;
+	border: 1px solid #ddd;
+	border-top: none;
+	border-radius: 0px 0px 4px 4px;
 }
 
 .fg-edit-canvas .fg-field-properties .control-group {

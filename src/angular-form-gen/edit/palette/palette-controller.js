@@ -1,4 +1,4 @@
-fg.controller('fgEditPaletteController', function ($scope, fgConfig,$modal) {
+fg.controller('fgEditPaletteController', function ($scope, fgConfig, $modal) {
 
   $scope.templates = [];
   $scope.populate_template = false;
@@ -30,75 +30,76 @@ fg.controller('fgEditPaletteController', function ($scope, fgConfig,$modal) {
     });
     return t;
   };
-  
-  $scope.changedFieldValue=function(selected){     
-      console.log("SelectedField changedFieldValue"+selected);
-     $scope.populate_template = true;
-      for(var i=0;i<=tmpls.length;i++){
-        if(selected==tmpls[i].displayName) {
-           $scope.template=tmpls[i];
-           console.log("SelectedField changedFieldValue"+ $scope.template.displayName );
-           $scope.template.$_displayProperties = true;
-           //$scope.schemaCtrl.addField($scope.template);
-           break;
-        }
+
+  $scope.changedFieldValue = function (selected) {
+    console.log("SelectedField changedFieldValue" + selected);
+    $scope.populate_template = true;
+    for (var i = 0; i <= tmpls.length; i++) {
+      if (selected == tmpls[i].displayName) {
+        $scope.template = tmpls[i];
+        console.log("SelectedField changedFieldValue" + $scope.template.displayName);
+        $scope.template.$_displayProperties = true;
+        //$scope.schemaCtrl.addField($scope.template);
+        break;
       }
+    }
   };
-  
-  $scope.changedGroupValue=function(selectedGroup){
-    if(selectedGroup=="Create New User Group"){ 
+
+  $scope.changedGroupValue = function (selectedGroup) {
+    if (selectedGroup == "Create New User Group") {
       var modalInstance = $modal.open({
         animation: $scope.animationsEnabled,
         templateUrl: 'angular-form-gen/edit/palette/group.ng.html',
-         controller: 'addGrpCtrl',
-               size: '',
+        controller: 'addGrpCtrl',
+        size: '',
         resolve: {
           selectedFieldGroup: function () {
             return $scope.selectedFieldGroup;
           }
         }
-      });      
+      });
     }
   };
 
-  $scope.associateField=function(field,selectedGroup){
-      console.log("addNewField" + selectedGroup + field.name);
-      for(var i=0;i<$scope.groups.length;i++){ 
-        console.log("Scope group Namesss"+ $scope.groups[i].name);
-        if($scope.groups[i].name == selectedGroup){
-           $scope.groups[i].existingFields.push(
-              {"name":field.name, 
-              "displayName":field.displayName,
-                "type":field.name
-              }
+  $scope.associateField = function (field, selectedGroup) {
+    console.log("addNewField" + selectedGroup + field.name);
+    for (var i = 0; i < $scope.groups.length; i++) {
+      console.log("Scope group Namesss" + $scope.groups[i].name);
+      if ($scope.groups[i].name == selectedGroup) {
+        $scope.groups[i].existingFields.push(
+          {
+            "name": field.name,
+            "displayName": field.displayName,
+            "type": field.name
+          }
           );
-        }
       }
-    };
-      
+    }
+  };
+
   var _loadGroups = function () {
     $scope.functions.getGroups().then(function (groups) {
       $scope.groups = groups;
     });
   } ();
-  
-    $scope.associateField = function(field, groupId) {
-      var _fields = [{
-        "type": field.type,
-        "name": field.displayName
-      }];
-      $scope.functions.createField(_fields, groupId).then(function (response) {
-          _.forEach($scope.groups, function(group) {
-            if(group.fieldGroupId === groupId) {
-              if(group.associatedFields && group.associatedFields.length){
-                group.associatedFields = []
-              }
-              group.associatedFields.push(field);
-              return false;
-            }
-          });
+
+  $scope.associateField = function (field, groupId) {
+    var _fields = [{
+      "type": field.type,
+      "name": field.displayName
+    }];
+    $scope.functions.createField(_fields, groupId).then(function (response) {
+      _.forEach($scope.groups, function (group) {
+        if (group.fieldGroupId === groupId) {
+          if (group.associatedFields && group.associatedFields.length) {
+            group.associatedFields = []
+          }
+          group.associatedFields.push(field);
+          return false;
+        }
       });
-    };
+    });
+  };
 
   // $scope.groups = [{
   //   name:'Pilot',
@@ -183,13 +184,13 @@ fg.controller('fgEditPaletteController', function ($scope, fgConfig,$modal) {
   
 }).controller('addGrpCtrl', function ($scope, $modalInstance, selectedFieldGroup) {
 
-    $scope.selectedFieldGroup = selectedFieldGroup;
-    console.log('addGrpCtrl');
-    $scope.ok = function () {
-      //$modalInstance.close($scope.selected.item);
-    };
-    $scope.cancel = function () {
-      $modalInstance.dismiss('cancel');
-    };
+  $scope.selectedFieldGroup = selectedFieldGroup;
+  console.log('addGrpCtrl');
+  $scope.ok = function () {
+    //$modalInstance.close($scope.selected.item);
+  };
+  $scope.cancel = function () {
+    $modalInstance.dismiss('cancel');
+  };
 
-  });
+});

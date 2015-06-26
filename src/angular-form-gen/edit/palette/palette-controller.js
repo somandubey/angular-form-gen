@@ -1,4 +1,4 @@
-fg.controller('fgEditPaletteController', function ($scope, fgConfig) {
+fg.controller('fgEditPaletteController', function ($scope, fgConfig,$modal) {
 
   $scope.templates = [];
   $scope.populate_template = false;
@@ -30,8 +30,7 @@ fg.controller('fgEditPaletteController', function ($scope, fgConfig) {
     return t;
   };
   
-  $scope.changedFieldValue=function(selected){
-    
+  $scope.changedFieldValue=function(selected){     
       console.log("SelectedField changedFieldValue"+selected);
      $scope.populate_template = true;
       for(var i=0;i<=tmpls.length;i++){
@@ -44,6 +43,44 @@ fg.controller('fgEditPaletteController', function ($scope, fgConfig) {
         }        
       }
     };
+
+    $scope.changedGroupValue=function(selectedGroup){
+    
+    if(selectedGroup=="Create New User Group"){ 
+      var modalInstance = $modal.open({
+        animation: $scope.animationsEnabled,
+        templateUrl: 'angular-form-gen/edit/palette/group.ng.html',
+         controller: 'addGrpCtrl',
+              size:'',
+                
+        resolve: {
+          selectedFieldGroup: function () {
+            return $scope.selectedFieldGroup;
+
+          }
+        }
+      });      
+    }
+  }
+
+  
+
+$scope.associateField=function(field,selectedGroup){
+    console.log("addNewField" + selectedGroup + field.name);
+    for(var i=0;i<$scope.groups.length;i++){ 
+      console.log("Scope group Namesss"+ $scope.groups[i].name);
+      if($scope.groups[i].name == selectedGroup){
+         $scope.groups[i].existingFields.push(
+            {"name":field.name, 
+            "displayName":field.displayName,
+              "type":field.name
+            }
+        );
+      }
+    }
+  }
+
+
 
   $scope.groups = [{
     name:'Pilot',
@@ -131,4 +168,15 @@ fg.controller('fgEditPaletteController', function ($scope, fgConfig) {
   //   existingFields:[]
   }];
   
-});
+}).controller('addGrpCtrl', function ($scope, $modalInstance, selectedFieldGroup) {
+
+    $scope.selectedFieldGroup = selectedFieldGroup;
+    console.log('addGrpCtrl');
+    $scope.ok = function () {
+      //$modalInstance.close($scope.selected.item);
+    };
+    $scope.cancel = function () {
+      $modalInstance.dismiss('cancel');
+    };
+
+  });

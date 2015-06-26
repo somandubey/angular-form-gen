@@ -28,21 +28,28 @@
             
             <div class="col-sm-12" ng-show="populate_template">
               <div fg-edit-canvas-field-properties="template" ></div>
-              <div ng-include='"angular-form-gen/edit/palette/group.ng.html"'>              
-            </div>
-            <div class="row">
-                  <div class="col-sm-2">
-                    <a ng-click="addNewField(addField.name,addField.selected,addField.selectedGroup)"
-                          class="btn btn-primary btn-sm margin-top-2"> <i
-                          class="fa fa-plus normal"></i> OK
-                    </a>
-                  </div>
-                  <div class="col-sm-10">
-                    <a ng-click="resetField()" class="btn btn-primary btn-sm margin-top-2">
-                      <i class="fa fa-plus normal"></i> Cancel
-                    </a>
+              <div>
+                 <div fg-property-field="fieldGroup" fg-property-field-label="Associate field to field group">
+                   <select class="form-control" ng-model="selectedGroup" ng-change="changedGroupValue(selectedGroup)" ng-options="group.name as group.value for group in groups"></select>  
+
+                   <div class="row">
+                    <div class="col-sm-3">
+                      <a ng-click="associateField(template,selectedGroup)"
+                            class="btn btn-primary btn-sm margin-top-2"> <i
+                            class="fa fa-plus normal"></i> OK
+                      </a>
+                    </div>
+                    <div class="col-sm-9">
+                      <a ng-click="resetField()" class="btn btn-primary btn-sm margin-top-2">
+                        <i class="fa fa-plus normal"></i> Cancel
+                      </a>
+                    </div>
+               </div>
+
+
                   </div>
               </div>
+            </div>
              
           <div ng-class="{ 'fg-drag-placeholder-visible' : dragPlaceholder.visible && dragPlaceholder.index === $index }" class="fg-drag-placeholder"></div>
          <!--  <div fg-edit-canvas-field></div> -->

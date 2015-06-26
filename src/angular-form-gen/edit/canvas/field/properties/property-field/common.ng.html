@@ -31,6 +31,8 @@
 </div>
 
 <!-- placeholder -->
+
+
 <div ng-if="fields.placeholder">
   <div fg-property-field="fieldPlaceholder" fg-property-field-label="Placeholder text">
     <input type="text"
@@ -49,4 +51,27 @@
            ng-model="field.tooltip"/>
   </div>
 </div>
+
+<div ng-if="fields.group">
+  <div fg-property-field="fieldTooltip" fg-property-field-label="Tooltip">
+    <input type="text"
+           class="form-control"
+           name="fieldTooltip"
+           ng-model="field.tooltip"/>
+  </div>
+</div>
+
+<div >
+   <div fg-property-field="fieldGroup" fg-property-field-label="Associate field to field group">
+   <select class="form-control" ng-model="selected"  ng-change="changedGroupValue(selected)">
+          <option ng-repeat="group in groups" >
+             <span>{{group.name}}</span>
+          </option>
+    </select>
+</div>
+<div >
+
+
+
+
 

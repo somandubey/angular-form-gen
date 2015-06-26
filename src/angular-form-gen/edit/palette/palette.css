@@ -47,20 +47,9 @@
   right: auto;
   left: auto;
 }
-.panel-default > .panel-heading {
-  background: -webkit-gradient(linear,0% 0,0% 100%,from(#4db4fa),to(#00467f)) !important;
-  background: -webkit-gradient(linear, left top, left bottom, from(#4db4fa), to(#00467f)) !important;
-  background-color: #00467f;
-  color: #fff;
-}
-a:hover, a:active {
+/*a:hover, a:active {
   color: #FCFCFC !important;
-}
-
-.panel-body {
-  padding: 0px !important;
-}
-
+}*/
 /*@media (min-width: 768px) and (max-width: 979px) {*/
   /*.fg-edit-palette select,*/
   /*.fg-edit-palette input,*/

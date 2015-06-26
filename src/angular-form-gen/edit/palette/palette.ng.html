@@ -28,8 +28,9 @@
             
             <div class="col-sm-12" ng-show="populate_template">
               <div fg-edit-canvas-field-properties="template" ></div>
-              <div ng-include='"angular-form-gen/edit/palette/group.ng.html"'>
-              <div class="row">
+              <div ng-include='"angular-form-gen/edit/palette/group.ng.html"'>              
+            </div>
+            <div class="row">
                   <div class="col-sm-2">
                     <a ng-click="addNewField(addField.name,addField.selected,addField.selectedGroup)"
                           class="btn btn-primary btn-sm margin-top-2"> <i
@@ -42,7 +43,6 @@
                     </a>
                   </div>
               </div>
-            </div>
              
           <div ng-class="{ 'fg-drag-placeholder-visible' : dragPlaceholder.visible && dragPlaceholder.index === $index }" class="fg-drag-placeholder"></div>
          <!--  <div fg-edit-canvas-field></div> -->

@@ -28,6 +28,7 @@
             
             <div class="col-sm-12" ng-show="populate_template">
               <div fg-edit-canvas-field-properties="template" ></div>
+              <div ng-include='"angular-form-gen/edit/palette/group.ng.html"'>
               <div class="row">
                   <div class="col-sm-2">
                     <a ng-click="addNewField(addField.name,addField.selected,addField.selectedGroup)"

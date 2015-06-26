@@ -82,9 +82,7 @@ fg.controller('fgEditPaletteController', function ($scope, fgConfig,$modal) {
     });
   } ();
   
-    $scope.associateField = function(field, selectedGroup) {
-      console.log(selectedGroup);
-      var groupId = selectedGroup.fieldGroupId;
+    $scope.associateField = function(field, groupId) {
       var _fields = [{
         "type": field.type,
         "name": field.displayName
@@ -95,7 +93,7 @@ fg.controller('fgEditPaletteController', function ($scope, fgConfig,$modal) {
               if(group.associatedFields && group.associatedFields.length){
                 group.associatedFields = []
               }
-              group.associatedFields.push(response);
+              group.associatedFields.push(field);
               return false;
             }
           });

@@ -81,6 +81,25 @@ fg.controller('fgEditPaletteController', function ($scope, fgConfig,$modal) {
       $scope.groups = groups;
     });
   } ();
+  
+    $scope.associateField = function(field, selectedGroup) {
+      console.log(selectedGroup);
+      var groupId = selectedGroup.fieldGroupId;
+      var _fields = [{
+        "type": field.type,
+        "name": field.displayName
+      }];
+      $scope.functions.createField(_fields, groupId).then(function (response) {
+          _.forEach($scope.groups, function(group) {
+            if(group.fieldGroupId === groupId) {
+              if(group.associatedFields && group.associatedFields.length){
+                group.associatedFields = []
+              }
+              group.associatedFields.push(response);
+            }
+          });
+      });
+    };
 
   // $scope.groups = [{
   //   name:'Pilot',

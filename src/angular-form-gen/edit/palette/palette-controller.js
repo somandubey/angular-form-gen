@@ -32,12 +32,10 @@ fg.controller('fgEditPaletteController', function ($scope, fgConfig, $modal) {
   };
 
   $scope.changedFieldValue = function (selected) {
-    console.log("SelectedField changedFieldValue" + selected);
     $scope.populate_template = true;
     for (var i = 0; i <= tmpls.length; i++) {
       if (selected == tmpls[i].displayName) {
         $scope.template = tmpls[i];
-        console.log("SelectedField changedFieldValue" + $scope.template.displayName);
         $scope.template.$_displayProperties = true;
         //$scope.schemaCtrl.addField($scope.template);
         break;
@@ -80,15 +78,20 @@ fg.controller('fgEditPaletteController', function ($scope, fgConfig, $modal) {
   var _loadGroups = function () {
     $scope.functions.getGroups().then(function (groups) {
       $scope.groups = groups;
+      _.forEach($scope.groups, function (group){
+         _.forEach($scope.groups.associatedFields, function (field){
+          field.type = field.type || 'text';
+        });
+      });
     });
   } ();
 
   $scope.associateField = function (field, groupId) {
-    var _fields = [{
-      "type": field.type,
+    var _field = [{
+      "type": field.type || 'text',
       "name": field.displayName
     }];
-    $scope.functions.createField(_fields, groupId).then(function (response) {
+    $scope.functions.createField(_field, groupId).then(function (response) {
       _.forEach($scope.groups, function (group) {
         if (group.fieldGroupId === groupId) {
           if (group.associatedFields && group.associatedFields.length) {

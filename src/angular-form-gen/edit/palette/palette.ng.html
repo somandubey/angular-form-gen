@@ -72,7 +72,7 @@
     <accordion close-others="accordion.oneAtATime">
       <accordion-group class="field-pallette-accordian" data-toggle="collapse" data-target="#collapse{{group.fieldGroupName}}"
       ng-repeat="group in groups">
-        <accordion-heading>{{group.fieldGroupName}} {{group.associatedFields ? group.associatedFields.length : 0}}
+        <accordion-heading>{{group.fieldGroupName}}
           <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
         </accordion-heading>
         <div id="collapse{{group.name}}">

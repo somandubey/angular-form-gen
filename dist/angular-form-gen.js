@@ -307,9 +307,9 @@ angular.module('fg').run(['$templateCache', function($templateCache){
   $templateCache.put('angular-form-gen/common/tabs/tabs-pane.ng.html', '<div class=\"fg-tabs-pane\" ng-show=\"tabs.active === pane\"><div ng-if=\"tabs.active === pane || pane.renderAlways\" ng-transclude=\"\"></div></div>');
   $templateCache.put('angular-form-gen/common/tabs/tabs.ng.html', '<div class=\"fg-tabs tabbable\"><ul class=\"nav nav-tabs\"><li ng-repeat=\"tab in tabs.items\" ng-class=\"{ active: tab === tabs.active, disabled: tab.disabled }\"><a href=\"\" ng-click=\"tabs.activate(tab)\">{{ tab.title }}</a></li></ul><div class=\"tab-content\" ng-transclude=\"\"></div></div>');
   $templateCache.put('angular-form-gen/edit/canvas/canvas.ng.html', '<div class=\"fg-edit-canvas\" ng-class=\"{ \'fg-edit-canvas-dragging\': dragging }\"><fieldset><div class=\"fg-edit-canvas-area\" dq-drag-area=\"fg-edit-canvas\" dq-drag-enter=\"canvasCtrl.dragEnter()\" dq-drag-leave=\"canvasCtrl.dragLeave()\" dq-drop=\"canvasCtrl.drop()\"><div ng-if=\"!(schema.fields.length)\"><div ng-if=\"!dragPlaceholder.visible\" class=\"fg-edit-canvas-area-empty alert alert-info text-center\"><p class=\"lead hidden-phone\"><strong>Drag</strong> one of the <strong>Fields</strong> from <strong>Field Palette</strong> onto <strong>Form Designer</strong> to create a new form.</p></div></div><div ng-repeat=\"field in schema.fields\"><div ng-class=\"{ \'fg-drag-placeholder-visible\' : dragPlaceholder.visible && dragPlaceholder.index === $index }\" class=\"fg-drag-placeholder\"></div><div fg-edit-canvas-field=\"\"></div></div><div ng-class=\"{ \'fg-drag-placeholder-visible\': dragPlaceholder.visible && dragPlaceholder.index == schema.fields.length }\" class=\"fg-drag-placeholder\"></div></div></fieldset></div>');
-  $templateCache.put('angular-form-gen/edit/palette/group.ng.html', '<div><div fg-property-field=\"fieldGroup\" fg-property-field-label=\"Associate field to field group\"><select class=\"form-control\" ng-model=\"selected\" ng-change=\"changedGroupValue(selected)\"><option ng-repeat=\"group in groups\"><span>{{group.fieldGroupName}}</span></option></select></div><div></div></div>');
-  $templateCache.put('angular-form-gen/edit/palette/palette.ng.html', '<div class=\"fg-edit-palette\"><fieldset><div fg-edit-palette-categories=\"\" data-category=\"selectedCategory\"></div><accordion close-others=\"accordion.oneAtATime\"><accordion-group><accordion-heading>Add New Field <i class=\"pull-right glyphicon\" ng-class=\"{\'glyphicon-chevron-down\': status.open, \'glyphicon-chevron-right\': !status.open}\"></i></accordion-heading><div id=\"fieldType\" class=\"row\"><div class=\"col-sm-5\"><h5>Field Type</h5></div><div class=\"col-sm-7\"><select class=\"form-control\" ng-model=\"selected\" ng-change=\"changedFieldValue(selected)\"><option ng-repeat=\"template in templates | filter:templateFilter\" class=\"fg-field\"><span>{{template.displayName}}</span><div fg-field=\"template\" fg-tab-index=\"3\" fg-no-validation-summary=\"true\" fg-edit-mode=\"true\"></div></option></select></div><div class=\"col-sm-12\" ng-show=\"populate_template\"><div fg-edit-canvas-field-properties=\"template\"></div><div><div fg-property-field=\"fieldGroup\" fg-property-field-label=\"Associate field to field group\"><select class=\"form-control\" ng-model=\"selectedGroup\" ng-change=\"changedGroupValue(selectedGroup)\" ng-options=\"group.fieldGroupId as group.fieldGroupName for group in groups\"></select><div class=\"row\"><div class=\"col-sm-3\"><a ng-click=\"associateField(template, selectedGroup)\" class=\"btn btn-primary btn-sm margin-top-2\"><i class=\"fa fa-plus normal\"></i> OK</a></div><div class=\"col-sm-9\"><a ng-click=\"resetField()\" class=\"btn btn-primary btn-sm margin-top-2\"><i class=\"fa fa-plus normal\"></i> Cancel</a></div></div></div></div></div><div ng-class=\"{ \'fg-drag-placeholder-visible\' : dragPlaceholder.visible && dragPlaceholder.index === $index }\" class=\"fg-drag-placeholder\"></div></div></accordion-group></accordion><span style=\"font-weight: bold;\">Use Predefined Fields</span><accordion close-others=\"accordion.oneAtATime\"><accordion-group class=\"field-pallette-accordian\" data-toggle=\"collapse\" data-target=\"#collapse{{group.fieldGroupName}}\" ng-repeat=\"group in groups\"><accordion-heading>{{group.fieldGroupName}} <i class=\"pull-right glyphicon\" ng-class=\"{\'glyphicon-chevron-down\': status.open, \'glyphicon-chevron-right\': !status.open}\"></i></accordion-heading><div id=\"collapse{{group.name}}\"><div ng-repeat=\"template in group.associatedFields | filter:templateFromGroupFilter\" class=\"fg-field\" dq-draggable=\"fg-edit-canvas\" dq-drag-begin=\"{ source: \'palette\', field: template }\" style=\"width:100%;background-color: #FD9753;border-color: #FB6705;text-align: left;font-weight: bold;font-size: 12px;border-radius: 0px; margin-bottom: 0px;\"><div class=\"fg-field-overlay\"><div class=\"btn-toolbar btn-toolbar-right\"><button class=\"btn btn-default btn-xs btn-primary\" type=\"button\" ng-click=\"schemaCtrl.addField(template)\" title=\"Add this field.\"><span class=\"glyphicon glyphicon-plus\"></span></button></div></div><div fg-field=\"template\" fg-tab-index=\"-1\" fg-no-validation-summary=\"true\" fg-edit-mode=\"true\"></div></div></div></accordion-group></accordion></fieldset></div>');
-  $templateCache.put('angular-form-gen/edit/palette/template.ng.html', '<div><div><div fg-property-field=\"fieldName\" fg-property-field-label=\"Name\" class=\"ng-hide\"><input type=\"text\" class=\"form-control\" name=\"fieldName\" ng-model=\"field.name\" ng-required=\"false\" ng-pattern=\"/^[a-zA-Z]([\\w]+)?$/\" fg-unique-field-name=\"\"></div></div><div><div fg-property-field=\"displayName\" fg-property-field-label=\"Label\"><input type=\"text\" class=\"form-control\" name=\"displayName\" ng-model=\"field.displayName\"></div></div><div><div fg-property-field=\"fieldPlaceholder\" fg-property-field-label=\"Placeholder text\"><input type=\"text\" class=\"form-control\" name=\"fieldPlaceholder\" ng-model=\"field.placeholder\"></div></div><div><div fg-property-field=\"fieldTooltip\" fg-property-field-label=\"Tooltip\"><input type=\"text\" class=\"form-control\" name=\"fieldTooltip\" ng-model=\"field.tooltip\"></div></div><! -- field group --><div><div fg-property-field=\"fieldGroup\" fg-property-field-label=\"Field group\"><select class=\"form-control\" ng-model=\"selected\" ng-change=\"changedGroupValue(selected)\"><option ng-repeat=\"group in groups\"><span>{{group.name}}</span></option></select></div></div></div>');
+  $templateCache.put('angular-form-gen/edit/palette/group.ng.html', '<div class=\"modal-header\"><h3 class=\"modal-title\">Add Field group name</h3></div><div class=\"modal-body\"><div class=\"form-group\"><input type=\"text\" class=\"form-control\" name=\"group-name\" ,=\"\" ng-model=\"model.groupName\" placeholder=\"Enter field group name\"></div></div><div class=\"modal-footer\"><button class=\"btn btn-primary\" ng-click=\"ok()\">OK</button> <button class=\"btn btn-warning\" ng-click=\"cancel()\">Cancel</button></div>');
+  $templateCache.put('angular-form-gen/edit/palette/palette.ng.html', '<div class=\"fg-edit-palette\"><fieldset><div fg-edit-palette-categories=\"\" data-category=\"selectedCategory\"></div><accordion close-others=\"accordion.oneAtATime\"><accordion-group><accordion-heading>Add New Field <i class=\"pull-right glyphicon\" ng-class=\"{\'glyphicon-chevron-down\': status.open, \'glyphicon-chevron-right\': !status.open}\"></i></accordion-heading><div id=\"fieldType\" class=\"row\"><div class=\"col-sm-5\"><h5>Field Type</h5></div><div class=\"col-sm-7\"><select class=\"form-control\" ng-model=\"selected\" ng-change=\"changedFieldValue(selected)\"><option ng-repeat=\"template in templates | filter:templateFilter\" class=\"fg-field\"><span>{{template.displayName}}</span><div fg-field=\"template\" fg-tab-index=\"3\" fg-no-validation-summary=\"true\" fg-edit-mode=\"true\"></div></option></select></div><div class=\"col-sm-12\" ng-show=\"populate_template\"><div fg-edit-canvas-field-properties=\"template\"></div><div class=\"row\"><div fg-property-field=\"fieldGroup\" fg-property-field-label=\"Associate field to field group\"><div class=\"row\"><div class=\"col-md-9\"><select class=\"form-control\" ng-model=\"selectedGroup\" ng-options=\"group.fieldGroupId as group.fieldGroupName for group in groups\"></select></div><div class=\"col-md-3\"><button class=\"btn btn-primary btn-sm\" ng-click=\"openCreateGroupModal()\"><i class=\"fa fa-plus\"></i></button></div></div><div class=\"row\"><div class=\"col-sm-3\"><a ng-click=\"associateField(template, selectedGroup)\" class=\"btn btn-primary btn-sm margin-top-2\"><i class=\"fa fa-plus normal\"></i> OK</a></div><div class=\"col-sm-9\"><a ng-click=\"resetField()\" class=\"btn btn-primary btn-sm margin-top-2\"><i class=\"fa fa-plus normal\"></i> Cancel</a></div></div></div></div></div><div ng-class=\"{ \'fg-drag-placeholder-visible\' : dragPlaceholder.visible && dragPlaceholder.index === $index }\" class=\"fg-drag-placeholder\"></div></div></accordion-group></accordion><span style=\"font-weight: bold;\">Use Predefined Fields</span><accordion close-others=\"accordion.oneAtATime\"><accordion-group class=\"field-pallette-accordian\" data-toggle=\"collapse\" data-target=\"#collapse{{group.fieldGroupName}}\" ng-repeat=\"group in groups\"><accordion-heading>{{group.fieldGroupName}} <i class=\"pull-right glyphicon\" ng-class=\"{\'glyphicon-chevron-down\': status.open, \'glyphicon-chevron-right\': !status.open}\"></i></accordion-heading><div id=\"collapse{{group.name}}\"><div ng-repeat=\"template in group.associatedFields\" class=\"fg-field\" dq-draggable=\"fg-edit-canvas\" dq-drag-begin=\"{ source: \'palette\', field: template }\" style=\"width:100%;background-color: #FD9753;border-color: #FB6705;text-align: left;font-weight: bold;font-size: 12px;border-radius: 0px; margin-bottom: 0px;\"><div class=\"fg-field-overlay\"><div class=\"btn-toolbar btn-toolbar-right\"><button class=\"btn btn-default btn-xs btn-primary\" type=\"button\" ng-click=\"schemaCtrl.addField(template)\" title=\"Add this field.\"><span class=\"glyphicon glyphicon-plus\"></span></button></div></div><div fg-field=\"template\" fg-tab-index=\"-1\" fg-no-validation-summary=\"true\" fg-edit-mode=\"true\"></div></div></div></accordion-group></accordion></fieldset></div>');
+  $templateCache.put('angular-form-gen/edit/palette/template.ng.html', '<div><div><div fg-property-field=\"fieldName\" fg-property-field-label=\"Name\" class=\"ng-hide\"><input type=\"text\" class=\"form-control\" name=\"fieldName\" ng-model=\"field.type\" ng-required=\"false\" ng-pattern=\"/^[a-zA-Z]([\\w]+)?$/\" fg-unique-field-name=\"\"></div></div><div><div fg-property-field=\"displayName\" fg-property-field-label=\"Label\"><input type=\"text\" class=\"form-control\" name=\"displayName\" ng-model=\"field.name\"></div></div><div><div fg-property-field=\"fieldPlaceholder\" fg-property-field-label=\"Placeholder text\"><input type=\"text\" class=\"form-control\" name=\"fieldPlaceholder\" ng-model=\"field.placeholder\"></div></div><div><div fg-property-field=\"fieldTooltip\" fg-property-field-label=\"Tooltip\"><input type=\"text\" class=\"form-control\" name=\"fieldTooltip\" ng-model=\"field.tooltip\"></div></div><! -- field group --><div><div fg-property-field=\"fieldGroup\" fg-property-field-label=\"Field group\"><select class=\"form-control\" ng-model=\"selected\" ng-change=\"changedGroupValue(selected)\"><option ng-repeat=\"group in groups\"><span>{{group.name}}</span></option></select></div></div></div>');
   $templateCache.put('angular-form-gen/field-templates/default/checkbox.ng.html', '<div class=\"checkbox\"><label title=\"{{ field.schema.tooltip }}\"><input fg-field-input=\"\" id=\"{{ field.$_id }}\" type=\"checkbox\" tabindex=\"{{ tabIndex }}\" ng-model=\"form.data[field.schema.name]\"> <span ng-if=\"field.schema.nolabel\">{{ field.schema.displayName }}</span></label></div>');
   $templateCache.put('angular-form-gen/field-templates/default/checkboxlist.ng.html', '<div fg-checkboxlist=\"\" fg-field-input=\"\" ng-model=\"form.data[field.schema.name]\" name=\"{{ field.schema.name }}\"><div class=\"checkbox\" ng-repeat=\"option in field.schema.options\"><label title=\"{{ field.schema.tooltip }}\"><input type=\"checkbox\" tabindex=\"{{ tabIndex }}\" value=\"{{ option.value }}\" ng-model=\"form.data[field.schema.name][option.value]\"> <span>{{option.text || option.value}}</span></label></div></div>');
   $templateCache.put('angular-form-gen/field-templates/default/dropdownlist.ng.html', '<div fg-field-input=\"\" fg-dropdown-input=\"field.schema.options\" title=\"{{ field.schema.tooltip }}\" id=\"{{ field.$_id }}\" ng-model=\"form.data[field.schema.name]\" ng-required=\"field.schema.validation.required\" tabindex=\"{{ tabIndex }}\" placeholder=\"{{ field.schema.placeholder }}\" ng-minlength=\"{{ field.schema.validation.minlength }}\" ng-maxlength=\"{{ field.schema.validation.maxlength }}\" ng-pattern=\"/{{ field.schema.validation.pattern }}/\"></div>');
@@ -333,7 +333,7 @@ angular.module('fg').run(['$templateCache', function($templateCache){
   $templateCache.put('angular-form-gen/field-templates/properties/text.ng.html', '<div fg-tabs-pane=\"Properties\"><div fg-property-field-common=\"{ fieldname: true, displayname: true, placeholder: true, tooltip: true }\"></div><div fg-property-field-value=\"\"><input type=\"text\" class=\"form-control\" name=\"fieldValue\" ng-model=\"field.value\" ng-minlength=\"{{ field.validation.minlength }}\" ng-maxlength=\"{{ field.validation.maxlength }}\" ng-pattern=\"/{{ field.validation.pattern }}/\"></div></div><div fg-tabs-pane=\"Validation\"><div fg-property-field-validation=\"{ required: true, minlength: true, maxlength: true, pattern: true }\"></div></div>');
   $templateCache.put('angular-form-gen/field-templates/properties/textarea.ng.html', '<div fg-tabs-pane=\"Properties\"><div fg-property-field-common=\"{ fieldname: true, displayname: true, placeholder: true, tooltip: true }\"></div><div fg-property-field-value=\"\"><textarea name=\"fieldValue\" class=\"form-control\" ng-model=\"field.value\" ng-minlength=\"{{ field.validation.minlength }}\" ng-maxlength=\"{{ field.validation.maxlength }}\" ng-pattern=\"/{{ field.validation.pattern }}/\">\n' +
     '    </textarea></div></div><div fg-tabs-pane=\"Validation\"><div fg-property-field-validation=\"{ required: true, minlength: true, maxlength: true, pattern: true }\"></div></div>');
-  $templateCache.put('angular-form-gen/form/field/field.ng.html', '<div class=\"fg-field-inner form-group\" ng-class=\"{ \'fg-field-required\': fieldSchema.validation.required, \'has-error\': form.state[field.name].$invalid }\"><label ng-if=\"!field.schema.nolabel\" class=\"col-sm-3 control-label\" for=\"{{ field.$_id }}\">{{ fieldSchema.name }}</label><div class=\"col-sm-9\" ng-class=\"{ \'col-sm-offset-3\': field.schema.nolabel }\"><div ng-include=\"renderInfo.templateUrl\"></div><div fg-validation-summary=\"\" fg-validation-messages=\"fieldSchema.validation.messages\" ng-if=\"!noValidationSummary\"></div></div></div>');
+  $templateCache.put('angular-form-gen/form/field/field.ng.html', '<div class=\"fg-field-inner form-group\" ng-class=\"{ \'fg-field-required\': fieldSchema.validation.required, \'has-error\': form.state[field.type].$invalid }\"><label ng-if=\"!field.schema.nolabel\" class=\"col-sm-3 control-label\" for=\"{{ field.$_id }}\">{{ fieldSchema.name }}</label><div class=\"col-sm-9\" ng-class=\"{ \'col-sm-offset-3\': field.schema.nolabel }\"><div ng-include=\"renderInfo.templateUrl\"></div><div fg-validation-summary=\"\" fg-validation-messages=\"fieldSchema.validation.messages\" ng-if=\"!noValidationSummary\"></div></div></div>');
   $templateCache.put('angular-form-gen/form/form-fields/form-fields.ng.html', '<div class=\"fg-form-fields\"><fieldset><div ng-repeat=\"field in form.schema.fields\"><div fg-field=\"field\"></div></div></fieldset></div>');
   $templateCache.put('angular-form-gen/edit/canvas/field/field.ng.html', '<div class=\"fg-field fg-field-{{ field.type }} fg-edit-canvas-field\" ng-class=\"{ \'error\': field.$_invalid, \'dragging\': field.$_isDragging }\" dq-draggable=\"fg-edit-canvas\" dq-drag-disabled=\"dragEnabled === false\" dq-drag-begin=\"canvasCtrl.dragBeginCanvasField($index, field)\" dq-drag-end=\"canvasCtrl.dragEndCanvasField(field)\"><div class=\"fg-field-overlay\" ng-mouseenter=\"dragEnabled = true\" ng-mouseleave=\"dragEnabled = false\"><div class=\"fg-field-overlay-drag-top\" dq-drag-enter=\"dragPlaceholder.index = $index\"></div><div class=\"fg-field-overlay-drag-bottom\" dq-drag-enter=\"dragPlaceholder.index = ($index + 1)\"></div><div class=\"btn-toolbar btn-toolbar-right\"><button class=\"btn btn-default btn-xs\" type=\"button\" ng-click=\"schemaCtrl.swapFields($index - 1, $index)\" ng-disabled=\"$index === 0\" title=\"Move up\"><span class=\"glyphicon glyphicon-arrow-up\"></span></button> <button class=\"btn btn-default btn-xs\" type=\"button\" ng-click=\"schemaCtrl.swapFields($index, $index + 1)\" ng-disabled=\"$index === schema.fields.length - 1\" title=\"Move down\"><span class=\"glyphicon glyphicon-arrow-down\"></span></button> <button class=\"btn btn-default btn-xs btn-danger\" type=\"button\" ng-click=\"schemaCtrl.removeField($index)\" title=\"Remove\"><span class=\"glyphicon glyphicon-trash\"></span></button></div></div><div ng-form=\"\" fg-null-form=\"\"><div fg-field=\"field\" fg-tab-index=\"-1\" fg-edit-mode=\"true\" fg-no-validation-summary=\"true\"></div></div><div class=\"fg-field-properties-container\" ng-class=\"{ visible: field.$_displayProperties }\"><div fg-edit-canvas-field-properties=\"field\" ng-if=\"expanded\"></div></div></div>');
   $templateCache.put('angular-form-gen/edit/palette/categories/categories.ng.html', '<legend ng-click=\"paletteCategoriesMenuOpen = !paletteCategoriesMenuOpen\" ng-class=\"{ \'open\': paletteCategoriesMenuOpen }\">Field Palette</legend>');
@@ -1731,8 +1731,10 @@ fg.controller('fgEditPaletteController', ["$scope", "fgConfig", "$modal", functi
   };
 
   $scope.templateFromGroupFilter = function (group) {
+    console.log(group);
     var t;
     angular.forEach(fgConfig.fields.templates, function (templ) {
+      console.log(templ);
       if (templ.type === group.type) {
         t = templ;
       }
@@ -1746,61 +1748,45 @@ fg.controller('fgEditPaletteController', ["$scope", "fgConfig", "$modal", functi
       if (selected == tmpls[i].displayName) {
         $scope.template = tmpls[i];
         $scope.template.$_displayProperties = true;
-        //$scope.schemaCtrl.addField($scope.template);
         break;
       }
     }
   };
 
-  $scope.changedGroupValue = function (selectedGroup) {
-    if (selectedGroup == "Create New User Group") {
-      var modalInstance = $modal.open({
-        animation: $scope.animationsEnabled,
-        templateUrl: 'angular-form-gen/edit/palette/group.ng.html',
-        controller: 'addGrpCtrl',
-        size: '',
-        resolve: {
-          selectedFieldGroup: function () {
-            return $scope.selectedFieldGroup;
-          }
+  $scope.openCreateGroupModal = function () {
+    var modalInstance = $modal.open({
+      animation: $scope.animationsEnabled,
+      templateUrl: 'angular-form-gen/edit/palette/group.ng.html',
+      controller: 'addGrpCtrl',
+      size: ''
+    });
+    modalInstance.result.then(function (groupName) {
+      var _group = { "fieldGroupName": groupName };
+      $scope.functions.createGroup(_group).then(function (response) {
+        if (!($scope.groups && $scope.groups.length)) {
+          $scope.groups = [];
         }
+        $scope.groups.push(response);
       });
-    }
-  };
-
-  $scope.associateField = function (field, selectedGroup) {
-    console.log("addNewField" + selectedGroup + field.name);
-    for (var i = 0; i < $scope.groups.length; i++) {
-      console.log("Scope group Namesss" + $scope.groups[i].name);
-      if ($scope.groups[i].name == selectedGroup) {
-        $scope.groups[i].existingFields.push(
-          {
-            "name": field.name,
-            "displayName": field.displayName,
-            "type": field.name
-          }
-          );
-      }
-    }
+    }, function () { });
   };
 
   var _loadGroups = function () {
-    $scope.functions.getGroups().then(function (groups) {
-      $scope.groups = groups;
-      _.forEach($scope.groups, function (group){
-         _.forEach($scope.groups.associatedFields, function (field){
-          field.type = field.type || 'text';
-        });
+    if ($scope.functions.getGroups) {
+      $scope.functions.getGroups().then(function (groups) {
+        $scope.groups = groups;
       });
-    });
-  } ();
+    }
+  }();
 
   $scope.associateField = function (field, groupId) {
+    console.log(field);
     var _field = [{
-      "type": field.type || 'text',
+      "type": field.name,
       "name": field.displayName
     }];
     $scope.functions.createField(_field, groupId).then(function (response) {
+      console.log(response);
       _.forEach($scope.groups, function (group) {
         if (group.fieldGroupId === groupId) {
           if (group.associatedFields && group.associatedFields.length) {
@@ -1813,94 +1799,14 @@ fg.controller('fgEditPaletteController', ["$scope", "fgConfig", "$modal", functi
     });
   };
 
-  // $scope.groups = [{
-  //   name:'Pilot',
-  //   value:'Pilot',
-  //   existingFields:[{ 
-  //       name : 'Pilot_ID',
-  //       displayName : 'Pilot_ID',
-  //       type : 'text'
-  //     },{ 
-  //       name : 'Pilot Name',
-  //       displayName : 'Pilot Name',
-  //       type : 'text'
-  //     },{ 
-  //       name : 'Pilot Base',
-  //       displayName : 'Pilot Base',
-  //       type : 'text'
-  //     }]
-  // }, {
-  //   name:'Flight',
-  //   value:'Flight',
-  //   existingFields: [{
-  //       name : 'Flight Number',
-  //       displayName : 'Flight Number',
-  //       type : 'text'
-  //     },{ 
-  //       name : 'Flight Date',
-  //       displayName : 'Flight Date',
-  //       type : 'text'
-  //     },{ 
-  //       name : 'Origin',
-  //       displayName : 'Origin',
-  //       type : 'DropDown'
-  //     },{ 
-  //       name : 'Destination',
-  //       type : 'DropDown'
-  //     }]
-  // }, {
-  //   name:'Hotel',
-  //   value:'Hotel',
-  //   existingFields:[{
-  //       name : 'Name',
-  //       displayName : 'Name',
-  //       type : 'text'
-  //     }, {
-  //       name : 'Location',
-  //       displayName : 'Location',
-  //       type : 'text'
-  //     }, {
-  //       name : 'Date',
-  //       displayName : 'Date',
-  //       type : 'text'
-  //     }, {
-  //       name : 'Room Type',
-  //       displayName : 'Room Type',
-  //       type : 'text'
-  //     }, {
-  //       name : 'Catering',
-  //       displayName : 'Catering',
-  //       type : 'text'
-  //     }, {
-  //       name : 'Name',
-  //       displayName : 'Name',
-  //       type : 'text'
-  //     }]
-  // }, {
-  //   name:'Aircraft',
-  //   value:'Aircraft',
-  //   existingFields:[{
-  //       name : 'Reg No',
-  //       displayName : 'Reg No',
-  //       type : 'text'
-  //     }, {
-  //       name : 'Equipment Type',
-  //       displayName : 'Equipment Type',
-  //       type : 'text'
-  //     }]
-  // }, {
-  //   name:'Misc',
-  //   value:'Misc',
-  //   existingFields:[]
-  // }];
-  
-}]).controller('addGrpCtrl', ["$scope", "$modalInstance", "selectedFieldGroup", function ($scope, $modalInstance, selectedFieldGroup) {
+}]).controller('addGrpCtrl', ["$scope", "$modalInstance", function ($scope, $modalInstance) {
 
-  $scope.selectedFieldGroup = selectedFieldGroup;
-  console.log('addGrpCtrl');
+  $scope.model = {};
+
   $scope.ok = function () {
-    //$modalInstance.close($scope.selected.item);
+    $modalInstance.close($scope.model.groupName);
   };
+
   $scope.cancel = function () {
     $modalInstance.dismiss('cancel');
   };

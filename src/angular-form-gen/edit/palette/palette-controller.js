@@ -37,61 +37,45 @@ fg.controller('fgEditPaletteController', function ($scope, fgConfig, $modal) {
       if (selected == tmpls[i].displayName) {
         $scope.template = tmpls[i];
         $scope.template.$_displayProperties = true;
-        //$scope.schemaCtrl.addField($scope.template);
         break;
       }
     }
   };
 
-  $scope.changedGroupValue = function (selectedGroup) {
-    if (selectedGroup == "Create New User Group") {
-      var modalInstance = $modal.open({
-        animation: $scope.animationsEnabled,
-        templateUrl: 'angular-form-gen/edit/palette/group.ng.html',
-        controller: 'addGrpCtrl',
-        size: '',
-        resolve: {
-          selectedFieldGroup: function () {
-            return $scope.selectedFieldGroup;
-          }
+  $scope.openCreateGroupModal = function () {
+    var modalInstance = $modal.open({
+      animation: $scope.animationsEnabled,
+      templateUrl: 'angular-form-gen/edit/palette/group.ng.html',
+      controller: 'addGrpCtrl',
+      size: ''
+    });
+    modalInstance.result.then(function (groupName) {
+      var _group = { "fieldGroupName": groupName };
+      $scope.functions.createGroup(_group).then(function (response) {
+        if (!($scope.groups && $scope.groups.length)) {
+          $scope.groups = [];
         }
+        $scope.groups.push(response);
       });
-    }
-  };
-
-  $scope.associateField = function (field, selectedGroup) {
-    console.log("addNewField" + selectedGroup + field.name);
-    for (var i = 0; i < $scope.groups.length; i++) {
-      console.log("Scope group Namesss" + $scope.groups[i].name);
-      if ($scope.groups[i].name == selectedGroup) {
-        $scope.groups[i].existingFields.push(
-          {
-            "name": field.name,
-            "displayName": field.displayName,
-            "type": field.name
-          }
-          );
-      }
-    }
+    }, function () { });
   };
 
   var _loadGroups = function () {
-    $scope.functions.getGroups().then(function (groups) {
-      $scope.groups = groups;
-      _.forEach($scope.groups, function (group){
-         _.forEach($scope.groups.associatedFields, function (field){
-          field.type = field.type || 'text';
-        });
+    if ($scope.functions.getGroups) {
+      $scope.functions.getGroups().then(function (groups) {
+        $scope.groups = groups;
       });
-    });
-  } ();
+    }
+  }();
 
   $scope.associateField = function (field, groupId) {
+    console.log(field);
     var _field = [{
-      "type": field.type || 'text',
+      "type": field.type,
       "name": field.displayName
     }];
     $scope.functions.createField(_field, groupId).then(function (response) {
+      console.log(response);
       _.forEach($scope.groups, function (group) {
         if (group.fieldGroupId === groupId) {
           if (group.associatedFields && group.associatedFields.length) {
@@ -104,94 +88,14 @@ fg.controller('fgEditPaletteController', function ($scope, fgConfig, $modal) {
     });
   };
 
-  // $scope.groups = [{
-  //   name:'Pilot',
-  //   value:'Pilot',
-  //   existingFields:[{ 
-  //       name : 'Pilot_ID',
-  //       displayName : 'Pilot_ID',
-  //       type : 'text'
-  //     },{ 
-  //       name : 'Pilot Name',
-  //       displayName : 'Pilot Name',
-  //       type : 'text'
-  //     },{ 
-  //       name : 'Pilot Base',
-  //       displayName : 'Pilot Base',
-  //       type : 'text'
-  //     }]
-  // }, {
-  //   name:'Flight',
-  //   value:'Flight',
-  //   existingFields: [{
-  //       name : 'Flight Number',
-  //       displayName : 'Flight Number',
-  //       type : 'text'
-  //     },{ 
-  //       name : 'Flight Date',
-  //       displayName : 'Flight Date',
-  //       type : 'text'
-  //     },{ 
-  //       name : 'Origin',
-  //       displayName : 'Origin',
-  //       type : 'DropDown'
-  //     },{ 
-  //       name : 'Destination',
-  //       type : 'DropDown'
-  //     }]
-  // }, {
-  //   name:'Hotel',
-  //   value:'Hotel',
-  //   existingFields:[{
-  //       name : 'Name',
-  //       displayName : 'Name',
-  //       type : 'text'
-  //     }, {
-  //       name : 'Location',
-  //       displayName : 'Location',
-  //       type : 'text'
-  //     }, {
-  //       name : 'Date',
-  //       displayName : 'Date',
-  //       type : 'text'
-  //     }, {
-  //       name : 'Room Type',
-  //       displayName : 'Room Type',
-  //       type : 'text'
-  //     }, {
-  //       name : 'Catering',
-  //       displayName : 'Catering',
-  //       type : 'text'
-  //     }, {
-  //       name : 'Name',
-  //       displayName : 'Name',
-  //       type : 'text'
-  //     }]
-  // }, {
-  //   name:'Aircraft',
-  //   value:'Aircraft',
-  //   existingFields:[{
-  //       name : 'Reg No',
-  //       displayName : 'Reg No',
-  //       type : 'text'
-  //     }, {
-  //       name : 'Equipment Type',
-  //       displayName : 'Equipment Type',
-  //       type : 'text'
-  //     }]
-  // }, {
-  //   name:'Misc',
-  //   value:'Misc',
-  //   existingFields:[]
-  // }];
-  
-}).controller('addGrpCtrl', function ($scope, $modalInstance, selectedFieldGroup) {
+}).controller('addGrpCtrl', function ($scope, $modalInstance) {
 
-  $scope.selectedFieldGroup = selectedFieldGroup;
-  console.log('addGrpCtrl');
+  $scope.model = {};
+
   $scope.ok = function () {
-    //$modalInstance.close($scope.selected.item);
+    $modalInstance.close($scope.model.groupName);
   };
+
   $scope.cancel = function () {
     $modalInstance.dismiss('cancel');
   };

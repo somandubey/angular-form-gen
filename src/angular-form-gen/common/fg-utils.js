@@ -34,9 +34,12 @@ fg.factory('fgUtils', function ($templateCache, $window, fgConfig) {
       },
       defaultArea: 'default',
       getRenderInfo: function(field) {
+        
+        
         //var renderInfo = fg.Field[field.type];
         var renderInfo = fgConfig.fields.renderInfo[field.type];
-
+        console.log(renderInfo);
+        console.log(field);
         if(!renderInfo) {
           renderInfo = {};
           // fg.Field[field.type] = renderInfo;
@@ -57,9 +60,9 @@ fg.factory('fgUtils', function ($templateCache, $window, fgConfig) {
         return 'angular-form-gen/field-templates/' + (area || this.defaultArea) + '/' + type + '.ng.html';
       },
       getTemplateUrl: function (field, area) {
-
+        console.log(field, area);
         area = area || this.defaultArea;
-
+        
         // IE8 fix: Aliases removed
         // var templateType = fgConfig.fields.aliases[field.type] || field.type;
         var templateType = field.type;
@@ -71,7 +74,7 @@ fg.factory('fgUtils', function ($templateCache, $window, fgConfig) {
 
           // Url is not in cache -- fallback to default area.
           // Properties area will never fallback to default area.
-
+          
           if (area !== 'properties' && area !== this.defaultArea) {
             templateUrl = this.getTemplateUrl(field, this.defaultArea);
           } else {

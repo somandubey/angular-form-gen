@@ -13,23 +13,20 @@
 <div>
   <div>
     <div fg-property-field="fieldName" fg-property-field-label="Name" class="ng-hide">
-      <input type="text" class="form-control" name="fieldName" ng-model="field.name" ng-required="false" ng-pattern="/^[a-zA-Z]([\w]+)?$/"
+      <input type="text" class="form-control" name="fieldName" ng-model="field.type" ng-required="false" ng-pattern="/^[a-zA-Z]([\w]+)?$/"
       fg-unique-field-name/>
     </div>
   </div>
-  <!-- displayName -->
   <div>
     <div fg-property-field="displayName" fg-property-field-label="Label">
-      <input type="text" class="form-control" name="displayName" ng-model="field.displayName" />
+      <input type="text" class="form-control" name="displayName" ng-model="field.name" />
     </div>
   </div>
-  <!-- placeholder -->
   <div>
     <div fg-property-field="fieldPlaceholder" fg-property-field-label="Placeholder text">
       <input type="text" class="form-control" name="fieldPlaceholder" ng-model="field.placeholder" />
     </div>
   </div>
-  <!-- tooltip -->
   <div>
     <div fg-property-field="fieldTooltip" fg-property-field-label="Tooltip">
       <input type="text" class="form-control" name="fieldTooltip" ng-model="field.tooltip" />

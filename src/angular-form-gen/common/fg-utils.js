@@ -67,14 +67,13 @@ fg.factory('fgUtils', function ($templateCache, $window, fgConfig) {
         // var templateType = fgConfig.fields.aliases[field.type] || field.type;
         var templateType = field.type;
         var templateUrl = this.formatTemplateUrl(templateType, area);
-
+        console.log(templateType, templateUrl);
+        
         var cached = $templateCache.get(templateUrl);
 
         if (!cached) {
-
           // Url is not in cache -- fallback to default area.
           // Properties area will never fallback to default area.
-          
           if (area !== 'properties' && area !== this.defaultArea) {
             templateUrl = this.getTemplateUrl(field, this.defaultArea);
           } else {
@@ -89,7 +88,6 @@ fg.factory('fgUtils', function ($templateCache, $window, fgConfig) {
       },
       copyField: function(field) {
         var copy = angular.copy(field);
-        copy.name = 'field' + this.getUnique();
         return copy;
       },
       findElementsByClass: function (root, className, recursive, buffer) {

@@ -308,9 +308,9 @@ angular.module('fg').run(['$templateCache', function($templateCache){
   $templateCache.put('angular-form-gen/common/tabs/tabs.ng.html', '<div class=\"fg-tabs tabbable\"><ul class=\"nav nav-tabs\"><li ng-repeat=\"tab in tabs.items\" ng-class=\"{ active: tab === tabs.active, disabled: tab.disabled }\"><a href=\"\" ng-click=\"tabs.activate(tab)\">{{ tab.title }}</a></li></ul><div class=\"tab-content\" ng-transclude=\"\"></div></div>');
   $templateCache.put('angular-form-gen/edit/canvas/canvas.ng.html', '<div class=\"fg-edit-canvas\" ng-class=\"{ \'fg-edit-canvas-dragging\': dragging }\"><fieldset><div class=\"fg-edit-canvas-area\" dq-drag-area=\"fg-edit-canvas\" dq-drag-enter=\"canvasCtrl.dragEnter()\" dq-drag-leave=\"canvasCtrl.dragLeave()\" dq-drop=\"canvasCtrl.drop()\"><div ng-if=\"!(schema.fields.length)\"><div ng-if=\"!dragPlaceholder.visible\" class=\"fg-edit-canvas-area-empty alert alert-info text-center\"><p class=\"lead hidden-phone\"><strong>Drag</strong> one of the <strong>Fields</strong> from <strong>Field Palette</strong> onto <strong>Form Designer</strong> to create a new form.</p></div></div><div ng-repeat=\"field in schema.fields\"><div ng-class=\"{ \'fg-drag-placeholder-visible\' : dragPlaceholder.visible && dragPlaceholder.index === $index }\" class=\"fg-drag-placeholder\"></div><div fg-edit-canvas-field=\"\"></div></div><div ng-class=\"{ \'fg-drag-placeholder-visible\': dragPlaceholder.visible && dragPlaceholder.index == schema.fields.length }\" class=\"fg-drag-placeholder\"></div></div></fieldset></div>');
   $templateCache.put('angular-form-gen/edit/palette/group.ng.html', '<div class=\"modal-header\"><h3 class=\"modal-title\">Add Field group name</h3></div><div class=\"modal-body\"><div class=\"form-group\"><input type=\"text\" class=\"form-control\" name=\"group-name\" ,=\"\" ng-model=\"model.groupName\" placeholder=\"Enter field group name\"></div></div><div class=\"modal-footer\"><button class=\"btn btn-primary\" ng-click=\"ok()\">OK</button> <button class=\"btn btn-warning\" ng-click=\"cancel()\">Cancel</button></div>');
-  $templateCache.put('angular-form-gen/edit/palette/palette.ng.html', '<div class=\"fg-edit-palette\"><fieldset><div fg-edit-palette-categories=\"\" data-category=\"selectedCategory\"></div><accordion close-others=\"accordion.oneAtATime\"><accordion-group><accordion-heading>Add New Field <i class=\"pull-right glyphicon\" ng-class=\"{\'glyphicon-chevron-down\': status.open, \'glyphicon-chevron-right\': !status.open}\"></i></accordion-heading><div id=\"fieldType\" class=\"row\"><div class=\"col-sm-5\"><h5>Field Type</h5></div><div class=\"col-sm-7\"><select class=\"form-control\" ng-model=\"selected\" ng-change=\"changedFieldValue(selected)\"><option ng-repeat=\"template in allTemplates | filter:allTemplateFilter\" class=\"fg-field\"><span>{{template.displayName}}</span><div fg-field=\"template\" fg-tab-index=\"3\" fg-no-validation-summary=\"true\" fg-edit-mode=\"true\"></div></option></select></div><div class=\"col-sm-12\" ng-show=\"populate_template\"><div fg-edit-canvas-field-properties=\"template\"></div><div class=\"row\"><div fg-property-field=\"fieldGroup\" fg-property-field-label=\"Associate field to field group\"><div class=\"row\"><div class=\"col-md-9\"><select class=\"form-control\" ng-model=\"selectedGroup\" ng-options=\"group.fieldGroupId as group.fieldGroupName for group in groups\"></select></div><div class=\"col-md-3\"><button class=\"btn btn-primary btn-sm\" ng-click=\"openCreateGroupModal()\"><i class=\"fa fa-plus\"></i></button></div></div><div class=\"row\"><div class=\"col-sm-3\"><a ng-click=\"associateField(template, selectedGroup)\" class=\"btn btn-primary btn-sm margin-top-2\"><i class=\"fa fa-plus normal\"></i> OK</a></div><div class=\"col-sm-9\"><a ng-click=\"resetField()\" class=\"btn btn-primary btn-sm margin-top-2\"><i class=\"fa fa-plus normal\"></i> Cancel</a></div></div></div></div></div><div ng-class=\"{ \'fg-drag-placeholder-visible\' : dragPlaceholder.visible && dragPlaceholder.index === $index }\" class=\"fg-drag-placeholder\"></div></div></accordion-group></accordion><span style=\"font-weight: bold;\">Use Predefined Fields</span><accordion close-others=\"accordion.oneAtATime\"><accordion-group class=\"field-pallette-accordian\" data-toggle=\"collapse\" data-target=\"#collapse{{group.fieldGroupName}}\" ng-repeat=\"group in groups\"><accordion-heading>{{group.fieldGroupName}} <i class=\"pull-right glyphicon\" ng-class=\"{\'glyphicon-chevron-down\': status.open, \'glyphicon-chevron-right\': !status.open}\"></i></accordion-heading><div id=\"collapse{{group.name}}\"><div ng-repeat=\"template in group.associatedFields\" class=\"fg-field\" dq-draggable=\"fg-edit-canvas\" dq-drag-begin=\"{ source: \'palette\', field: template }\" style=\"width:100%;background-color: #FD9753;border-color: #FB6705;text-align: left;font-weight: bold;font-size: 12px;border-radius: 0px; margin-bottom: 0px;\"><div class=\"fg-field-overlay\"><div class=\"btn-toolbar btn-toolbar-right\"><button class=\"btn btn-default btn-xs btn-primary\" type=\"button\" ng-click=\"schemaCtrl.addField(template)\" title=\"Add this field.\"><span class=\"glyphicon glyphicon-plus\"></span></button></div></div><div fg-field=\"template\" fg-tab-index=\"-1\" fg-no-validation-summary=\"true\" fg-edit-mode=\"true\"></div></div></div></accordion-group></accordion></fieldset></div>');
+  $templateCache.put('angular-form-gen/edit/palette/palette.ng.html', '<div class=\"fg-edit-palette\"><fieldset><div fg-edit-palette-categories=\"\" data-category=\"selectedCategory\"></div><accordion close-others=\"accordion.oneAtATime\"><accordion-group><accordion-heading>Add New Field <i class=\"pull-right glyphicon\" ng-class=\"{\'glyphicon-chevron-down\': status.open, \'glyphicon-chevron-right\': !status.open}\"></i></accordion-heading><div id=\"fieldType\" class=\"row\"><div class=\"col-sm-5\"><h5>Field Type</h5></div><div class=\"col-sm-7\"><select class=\"form-control\" ng-model=\"selected\" ng-change=\"changedFieldValue(selected)\"><option ng-repeat=\"template in allTemplates | filter:allTemplateFilter\" class=\"fg-field\"><div fg-field=\"template\" fg-tab-index=\"3\" fg-no-validation-summary=\"true\" fg-edit-mode=\"true\"></div></option></select></div><div class=\"col-sm-12\" ng-show=\"populate_template\"><div fg-edit-canvas-field-properties=\"template\"></div><div class=\"row\"><div fg-property-field=\"fieldGroup\" fg-property-field-label=\"Associate field to field group\"><div class=\"row\"><div class=\"col-md-9\"><select class=\"form-control\" ng-model=\"selectedGroup\" ng-options=\"group.fieldGroupId as group.fieldGroupName for group in groups\"></select></div><div class=\"col-md-3\"><button class=\"btn btn-primary btn-sm\" ng-click=\"openCreateGroupModal()\"><i class=\"fa fa-plus\"></i></button></div></div><div class=\"row\"><div class=\"col-sm-3\"><a ng-click=\"associateField(template, selectedGroup)\" class=\"btn btn-primary btn-sm margin-top-2\"><i class=\"fa fa-plus normal\"></i> OK</a></div><div class=\"col-sm-9\"><a ng-click=\"resetField()\" class=\"btn btn-primary btn-sm margin-top-2\"><i class=\"fa fa-plus normal\"></i> Cancel</a></div></div></div></div></div><div ng-class=\"{ \'fg-drag-placeholder-visible\' : dragPlaceholder.visible && dragPlaceholder.index === $index }\" class=\"fg-drag-placeholder\"></div></div></accordion-group></accordion><accordion close-others=\"accordion.oneAtATime\"><accordion-group class=\"field-pallette-accordian\" data-toggle=\"collapse\" data-target=\"#collapse{{group.fieldGroupName}}\" ng-repeat=\"group in groups\"><accordion-heading>{{group.fieldGroupName}} <i class=\"pull-right glyphicon\" ng-class=\"{\'glyphicon-chevron-down\': status.open, \'glyphicon-chevron-right\': !status.open}\"></i></accordion-heading><div id=\"collapse{{group.name}}\"><div ng-repeat=\"template in group.associatedFields\" class=\"fg-field\" dq-draggable=\"fg-edit-canvas\" dq-drag-begin=\"{ source: \'palette\', field: template }\" style=\"width:100%;background-color: #FD9753;border-color: #FB6705;text-align: left;font-weight: bold;font-size: 12px;border-radius: 0px; margin-bottom: 0px;\"><div class=\"fg-field-overlay\"><div class=\"btn-toolbar btn-toolbar-right\"><button class=\"btn btn-default btn-xs btn-primary\" type=\"button\" ng-click=\"schemaCtrl.addField(template)\" title=\"Add this field.\"><span class=\"glyphicon glyphicon-plus\"></span></button></div></div><div fg-field=\"template\" fg-tab-index=\"-1\" fg-no-validation-summary=\"true\" fg-edit-mode=\"true\"></div></div></div></accordion-group></accordion></fieldset></div>');
   $templateCache.put('angular-form-gen/edit/palette/template.ng.html', '<div><div><div fg-property-field=\"fieldName\" fg-property-field-label=\"Name\" class=\"ng-hide\"><input type=\"text\" class=\"form-control\" name=\"fieldName\" ng-model=\"field.type\" ng-required=\"false\" ng-pattern=\"/^[a-zA-Z]([\\w]+)?$/\" fg-unique-field-name=\"\"></div></div><div><div fg-property-field=\"displayName\" fg-property-field-label=\"Label\"><input type=\"text\" class=\"form-control\" name=\"displayName\" ng-model=\"field.name\"></div></div><div><div fg-property-field=\"fieldPlaceholder\" fg-property-field-label=\"Placeholder text\"><input type=\"text\" class=\"form-control\" name=\"fieldPlaceholder\" ng-model=\"field.placeholder\"></div></div><div><div fg-property-field=\"fieldTooltip\" fg-property-field-label=\"Tooltip\"><input type=\"text\" class=\"form-control\" name=\"fieldTooltip\" ng-model=\"field.tooltip\"></div></div><! -- field group --><div><div fg-property-field=\"fieldGroup\" fg-property-field-label=\"Field group\"><select class=\"form-control\" ng-model=\"selected\" ng-change=\"changedGroupValue(selected)\"><option ng-repeat=\"group in groups\"><span>{{group.name}}</span></option></select></div></div></div>');
-  $templateCache.put('angular-form-gen/field-templates/default/checkbox.ng.html', '<div class=\"checkbox\"><label title=\"{{ field.schema.tooltip }}\"><input fg-field-input=\"\" id=\"{{ field.$_id }}\" type=\"checkbox\" tabindex=\"{{ tabIndex }}\" ng-model=\"form.data[field.schema.name]\"> <span ng-if=\"field.schema.nolabel\">{{ field.schema.displayName }}</span></label></div>');
+  $templateCache.put('angular-form-gen/field-templates/default/checkbox.ng.html', '<div class=\"checkbox\"><label title=\"{{ field.schema.tooltip }}\"><input fg-field-input=\"\" id=\"{{ field.$_id }}\" type=\"checkbox\" tabindex=\"{{ tabIndex }}\" ng-model=\"form.data[field.schema.name]\"> <span ng-if=\"field.schema.nolabel\">{{ field.schema.name }}</span></label></div>');
   $templateCache.put('angular-form-gen/field-templates/default/checkboxlist.ng.html', '<div fg-checkboxlist=\"\" fg-field-input=\"\" ng-model=\"form.data[field.schema.name]\" name=\"{{ field.schema.name }}\"><div class=\"checkbox\" ng-repeat=\"option in field.schema.options\"><label title=\"{{ field.schema.tooltip }}\"><input type=\"checkbox\" tabindex=\"{{ tabIndex }}\" value=\"{{ option.value }}\" ng-model=\"form.data[field.schema.name][option.value]\"> <span>{{option.text || option.value}}</span></label></div></div>');
   $templateCache.put('angular-form-gen/field-templates/default/dropdownlist.ng.html', '<div fg-field-input=\"\" fg-dropdown-input=\"field.schema.options\" title=\"{{ field.schema.tooltip }}\" id=\"{{ field.$_id }}\" ng-model=\"form.data[field.schema.name]\" ng-required=\"field.schema.validation.required\" tabindex=\"{{ tabIndex }}\" placeholder=\"{{ field.schema.placeholder }}\" ng-minlength=\"{{ field.schema.validation.minlength }}\" ng-maxlength=\"{{ field.schema.validation.maxlength }}\" ng-pattern=\"/{{ field.schema.validation.pattern }}/\"></div>');
   $templateCache.put('angular-form-gen/field-templates/default/email.ng.html', '<input class=\"form-control\" fg-field-input=\"\" type=\"email\" id=\"{{ field.$_id }}\" title=\"{{ field.schema.tooltip }}\" tabindex=\"{{ tabIndex }}\" placeholder=\"{{ field.schema.placeholder }}\" ng-model=\"form.data[field.schema.name]\" ng-required=\"field.schema.validation.required\" ng-minlength=\"{{ field.schema.validation.minlength }}\" ng-maxlength=\"{{ field.schema.validation.maxlength }}\" ng-pattern=\"/{{ field.schema.validation.pattern }}/\">');
@@ -339,329 +339,12 @@ angular.module('fg').run(['$templateCache', function($templateCache){
   $templateCache.put('angular-form-gen/edit/palette/categories/categories.ng.html', '<legend ng-click=\"paletteCategoriesMenuOpen = !paletteCategoriesMenuOpen\" ng-class=\"{ \'open\': paletteCategoriesMenuOpen }\">Field Palette</legend>');
   $templateCache.put('angular-form-gen/edit/canvas/field/properties/properties.ng.html', '<div class=\"fg-field-properties\"><div novalidate=\"\" ng-form=\"fieldPropertiesForm\"><div fg-tabs=\"property.tabs\"><div ng-include=\"renderInfo.propertiesTemplateUrl\"></div><div fg-tabs-pane=\"Properties\"><div fg-property-field-common=\"{ fieldname: true, displayname: true, placeholder: true, tooltip: true }\"></div><div fg-property-field-value=\"\"><textarea name=\"fieldValue\" class=\"form-control\" ng-model=\"field.value\" ng-minlength=\"{{ field.validation.minlength }}\" ng-maxlength=\"{{ field.validation.maxlength }}\" ng-pattern=\"/{{ field.validation.pattern }}/\">\n' +
     '		    </textarea></div></div><div fg-tabs-pane=\"Validation\"><div fg-property-field-validation=\"{ required: true, minlength: true, maxlength: true, pattern: true }\"></div></div></div></div></div>');
-  $templateCache.put('angular-form-gen/edit/canvas/field/properties/property-field/common.ng.html', '<div ng-if=\"fields.fieldname\"><div fg-property-field=\"fieldName\" fg-property-field-label=\"Name\" class=\"ng-hide\"><input type=\"text\" class=\"form-control\" name=\"fieldName\" ng-model=\"field.name\" ng-required=\"false\" ng-pattern=\"/^[a-zA-Z]([\\w]+)?$/\" fg-unique-field-name=\"\"></div></div><div ng-if=\"fields.displayname\"><div fg-property-field=\"displayName\" fg-property-field-label=\"Label\"><input type=\"text\" class=\"form-control\" name=\"displayName\" ng-model=\"field.displayName\"></div></div><div ng-if=\"fields.placeholder\"><div fg-property-field=\"fieldPlaceholder\" fg-property-field-label=\"Placeholder text\"><input type=\"text\" class=\"form-control\" name=\"fieldPlaceholder\" ng-model=\"field.placeholder\"></div></div><div ng-if=\"fields.tooltip\"><div fg-property-field=\"fieldTooltip\" fg-property-field-label=\"Tooltip\"><input type=\"text\" class=\"form-control\" name=\"fieldTooltip\" ng-model=\"field.tooltip\"></div></div><div ng-if=\"fields.group\"><div fg-property-field=\"fieldTooltip\" fg-property-field-label=\"Tooltip\"><input type=\"text\" class=\"form-control\" name=\"fieldTooltip\" ng-model=\"field.tooltip\"></div></div>');
-  $templateCache.put('angular-form-gen/edit/canvas/field/properties/property-field/field-value.ng.html', '<div ng-if=\"draw\"><div fg-property-field=\"fieldValue\" fg-property-field-label=\"Initial value\"><div ng-transclude=\"\"></div></div></div>');
-  $templateCache.put('angular-form-gen/edit/canvas/field/properties/property-field/property-field.ng.html', '<div class=\"form-group fg-property-field\" ng-class=\"{ \'has-error\': fieldPropertiesForm[fieldName].$invalid }\"><label class=\"col-sm-5 col-md-4 control-label\">{{ fieldLabel }}</label><div class=\"col-sm-7 col-md-8\"><div ng-transclude=\"\"></div><div fg-validation-summary=\"{{ fieldName }}\"></div></div></div>');
+  $templateCache.put('angular-form-gen/edit/canvas/field/properties/options/options.ng.html', '<div ng-if=\"!field.options || field.options.length === 0\" ng-click=\"optionsCtrl.addOption()\" class=\"alert alert-info\"><h2>No options defined</h2><p class=\"lead\">Click here to add a new option definition to this field.</p></div><table ng-if=\"field.options.length > 0\" class=\"table-field-options\"><thead><tr><th></th><th>Value</th><th>Text</th><th><a href=\"\" class=\"btn btn-default btn-xs\" ng-click=\"optionsCtrl.addOption()\" title=\"Add a new option to the list\"><i class=\"glyphicon glyphicon-plus\"></i></a></th><th class=\"table-field-options-padding\"></th></tr></thead><tbody><tr ng-form=\"fieldOptionForm\" ng-repeat=\"option in field.options\" ng-class=\"{ \'error\': fieldOptionForm.$invalid }\"><td ng-if=\"multiple === false\"><input type=\"radio\" name=\"{{ field.name }}selection[]\" value=\"{{ option.value }}\" ng-model=\"field.value\" ng-click=\"optionsCtrl.toggleOption(option.value)\"></td><td ng-if=\"multiple === true\"><input type=\"checkbox\" name=\"{{ field.name }}selection[]\" value=\"{{ option.value }}\" ng-model=\"field.value[option.value]\"></td><td><input type=\"text\" name=\"optionValue\" ng-model=\"option.value\" class=\"form-control\" ng-required=\"field.type != \'selectlist\'\"></td><td><input type=\"text\" ng-model=\"option.text\" class=\"form-control\"></td><td><a href=\"\" class=\"btn btn-default btn-xs\" ng-click=\"optionsCtrl.removeOption($index)\" title=\"Remove this option from the list\"><i class=\"glyphicon glyphicon-trash\"></i></a></td><td></td></tr></tbody></table>');
   $templateCache.put('angular-form-gen/edit/canvas/field/properties/validation/validation-message.ng.html', '<div ng-form=\"valMsgForm\"><div fg-property-field=\"message\" fg-property-field-label=\"Message\"><input type=\"text\" name=\"message\" title=\"{{ tooltip }}\" placeholder=\"Optional message\" ng-model=\"field.validation.messages[validationType]\" class=\"form-control\"></div></div>');
   $templateCache.put('angular-form-gen/edit/canvas/field/properties/validation/validation.ng.html', '<div ng-if=\"fields.minlength\" class=\"fg-property-field-validation\"><div fg-property-field=\"minlength\" fg-property-field-label=\"Minimum length\"><input type=\"text\" fg-field-redraw=\"\" fg-input-number=\"\" title=\"The minimum length of characters that should be entered.\" name=\"minlength\" ng-model=\"field.validation.minlength\" class=\"form-control\"></div><div ng-if=\"field.validation.minlength >= 1\"><div fg-edit-validation-message=\"minlength\"></div></div></div><div ng-if=\"fields.maxlength\" class=\"fg-property-field-validation\"><div fg-property-field=\"maxlength\" fg-property-field-label=\"Maximum length\"><input type=\"text\" fg-field-redraw=\"\" fg-input-number=\"\" title=\"The maximum length of characters that should be entered.\" name=\"maxlength\" ng-model=\"field.validation.maxlength\" class=\"form-control\"></div><div ng-if=\"field.validation.maxlength >= 1\"><div fg-edit-validation-message=\"maxlength\"></div></div></div><div ng-if=\"fields.pattern\" class=\"fg-property-field-validation\"><div fg-property-field=\"pattern\" fg-property-field-label=\"Pattern\"><div fg-dropdown-input=\"patternOptions\" name=\"pattern\" title=\"The pattern that should match with the input value.\" fg-parse-pattern=\"\" fg-field-redraw=\"\" ng-model=\"field.validation.pattern\"></div></div><div ng-if=\"field.validation.pattern.length > 0\"><div fg-edit-validation-message=\"pattern\"></div></div></div><div ng-if=\"fields.required\" class=\"fg-property-field-validation\"><div fg-property-field=\"required\"><div class=\"checkbox\"><label title=\"Indicates if a value is required for this field.\"><input type=\"checkbox\" ng-model=\"field.validation.required\">Required</label></div></div><div ng-if=\"field.validation.required\"><div fg-edit-validation-message=\"required\"></div></div></div>');
-  $templateCache.put('angular-form-gen/edit/canvas/field/properties/options/options.ng.html', '<div ng-if=\"!field.options || field.options.length === 0\" ng-click=\"optionsCtrl.addOption()\" class=\"alert alert-info\"><h2>No options defined</h2><p class=\"lead\">Click here to add a new option definition to this field.</p></div><table ng-if=\"field.options.length > 0\" class=\"table-field-options\"><thead><tr><th></th><th>Value</th><th>Text</th><th><a href=\"\" class=\"btn btn-default btn-xs\" ng-click=\"optionsCtrl.addOption()\" title=\"Add a new option to the list\"><i class=\"glyphicon glyphicon-plus\"></i></a></th><th class=\"table-field-options-padding\"></th></tr></thead><tbody><tr ng-form=\"fieldOptionForm\" ng-repeat=\"option in field.options\" ng-class=\"{ \'error\': fieldOptionForm.$invalid }\"><td ng-if=\"multiple === false\"><input type=\"radio\" name=\"{{ field.name }}selection[]\" value=\"{{ option.value }}\" ng-model=\"field.value\" ng-click=\"optionsCtrl.toggleOption(option.value)\"></td><td ng-if=\"multiple === true\"><input type=\"checkbox\" name=\"{{ field.name }}selection[]\" value=\"{{ option.value }}\" ng-model=\"field.value[option.value]\"></td><td><input type=\"text\" name=\"optionValue\" ng-model=\"option.value\" class=\"form-control\" ng-required=\"field.type != \'selectlist\'\"></td><td><input type=\"text\" ng-model=\"option.text\" class=\"form-control\"></td><td><a href=\"\" class=\"btn btn-default btn-xs\" ng-click=\"optionsCtrl.removeOption($index)\" title=\"Remove this option from the list\"><i class=\"glyphicon glyphicon-trash\"></i></a></td><td></td></tr></tbody></table>');
-}]);
-angular.module('dq', []).factory('dqUtils', ["$window", "$rootScope", function($window, $rootScope) {
-
-  var _dragData = null;
-
-  //noinspection FunctionWithInconsistentReturnsJS
-  return {
-    getEvent: function (e) {
-      return e && e.originalEvent ? e.originalEvent : e || $window.event;
-    },
-    stopEvent: function (e) {
-      // e.cancelBubble is supported by IE8 -
-      // this will kill the bubbling process.
-      e.cancelBubble = true;
-      e.bubbles = false;
-      
-      // e.stopPropagation works in modern browsers
-      if (e.stopPropagation) e.stopPropagation();
-      if (e.preventDefault) e.preventDefault();
-
-      return false;
-    },
-    dragData: function (data) {
-      if (data === undefined) {
-        return _dragData;
-      }
-      _dragData = data;
-    },
-    getParentArea: function ($scope) {
-      var area = {};
-      $scope.$emit('dqLocateArea', area);
-      return area.name;
-    },
-    isAreaMatch: function ($scope) {
-      var parentArea = this.getParentArea($scope);
-      var eventArea = _dragData ? _dragData.area : "";
-
-      return parentArea === eventArea;
-    }
-  };
-}]);
-angular.module('dq').directive('dqDragArea', ["dqUtils", function (dqUtils) {
-
-  function evalBroadcastEvent($scope, args, areaName, expression) {
-    if (expression && args && args.area === areaName) {
-      $scope.$eval(expression);
-    }
-  }
-
-  return {
-    restrict: 'AEC',
-    link: function ($scope, $element, $attrs) {
-
-      var areaName = $attrs.dqDragArea || $attrs.dqDragAreaName || "";
-
-      $scope.$on('dqDragBegin', function ($event, args) {
-        evalBroadcastEvent($scope, args, areaName, $attrs.dqDragProgressBegin);
-      });
-
-      $scope.$on('dqDragEnd', function ($event, args) {
-        evalBroadcastEvent($scope, args, areaName, $attrs.dqDragProgressEnd);
-      });
-
-      $scope.$on('dqLocateArea', function($event, args) {
-        args.name = areaName;
-        $event.stopPropagation();
-      });
-    }
-  }
-}]);
-
-angular.module('dq').directive('dqDragEnter',["dqDragTrack", function (dqDragTrack) {
-  return {
-    link: dqDragTrack
-  };
-}]).directive('dqDragLeave',["dqDragTrack", function (dqDragTrack) {
-    return {
-      link: dqDragTrack
-    };
-  }]).directive('dqDragOver',["dqDragTrack", function (dqDragTrack) {
-    return {
-      link: dqDragTrack
-    };
-  }]).directive('dqDrop',["dqDragTrack", function (dqDragTrack) {
-    return {
-      link: dqDragTrack
-    };
-  }]).factory('dqDragTrack', ["dqUtils", "$document", function (dqUtils, $document) {
-
-    // Combines both nq-drag-enter & nq-drag-leave & nq-drag-over
-
-    return function ($scope, $element, $attrs) {
-
-      // Tracking already set on the element?
-
-      if ($element.data('dqDragTrack') !== true) {
-
-        var trackingEnabled = false; // Toggled on drag-begin if the area name does not match the target
-        var inbound = false; // Toggle to indicate if the dragging is in or outbound element
-        var element = $element[0];
-        var dropEffect = 'none'; // Drop effect used in the dragover event
-        var doingLeaveDoubleCheck = false; // Toggle that indicates the body has a dragover event to do.
-
-        var $body = $document.find('body');
-
-        function dragLeaveDoubleCheck($e) {
-          var e = dqUtils.getEvent($e);
-
-          // Check if the drag over element is a child of the this element
-
-          var target = e.target || $e.target;
-
-          if (target !== element) {
-
-            // TODO: we're not really checking if the target element is visually within the $element.
-
-            if (!element.contains(target)) {
-
-              // Drag over element is out of bounds
-
-              dragLeaveForSure(true);
-            }
-          }
-
-          // We're done with the expensive body call
-
-          $body.off('dragover', dragLeaveDoubleCheck);
-
-          // Notify the local element event callback there's no event listener on the body and the next event
-          // can safely be cancelled.
-
-          doingLeaveDoubleCheck = false;
-
-          e.dataTransfer.dropEffect = dropEffect;
-
-          // Always cancel the dragover -- otherwise the dropEffect is not used.
-
-          return dqUtils.stopEvent($e);
-        }
-
-        function dragLeaveForSure(apply) {
-          inbound = false;
-          var expression = $attrs.dqDragLeave;
-          if (expression) {
-            if (apply) {
-              $scope.$apply(function () {
-                $scope.$eval(expression);
-              });
-            } else {
-              $scope.$eval(expression);
-            }
-          }
-        }
-
-        $scope.$on('$destroy', function () {
-          // Just to be sure
-          $body.off('dragover', dragLeaveDoubleCheck);
-        });
-
-        $scope.$on('dqDragBegin', function () {
-          // Check if we should track drag movements
-          trackingEnabled = dqUtils.isAreaMatch($scope);
-        });
-
-        $scope.$on('dqDragEnd', function () {
-          if (trackingEnabled) {
-            // Gief cake
-            dragLeaveForSure(false);
-          }
-        });
-
-        $element.on('dragenter', function (e) {
-          if (trackingEnabled && inbound === false) {
-            inbound = true;
-            var expression = $attrs.dqDragEnter;
-            if (expression) {
-              $scope.$apply(function () {
-                $scope.$eval(expression);
-              });
-            }
-          }
-        });
-
-        $element.on('dragleave', function () {
-          if (trackingEnabled && inbound === true) {
-
-            // dragleave is a lie -- hovering child elements will cause this event to trigger also.
-            // We fake the cake by tracking the drag ourself.
-
-            // Notify the "real" dragover event that he has to play nice with the body and not to
-            // cancel the event chain.
-
-            doingLeaveDoubleCheck = true;
-            $body.on('dragover', dragLeaveDoubleCheck);
-          }
-        });
-
-        //noinspection FunctionWithInconsistentReturnsJS
-        $element.on('dragover', function ($e) {
-
-          if (trackingEnabled) {
-
-            var e = dqUtils.getEvent($e);
-
-            var expression = $attrs.dqDragOver;
-            var result;
-
-            if (expression) {
-              $scope.$apply(function () {
-                result = $scope.$eval(expression);
-              });
-            }
-
-            // The evaluated expression can indicate to cancel the drop
-
-            dropEffect = result === false ? 'none' : 'copy';
-
-            if (!doingLeaveDoubleCheck) {
-
-              // There's no dragover queued on the body.
-              // The event needs to be terminated here else the dropEffect will
-              // not be applied (and dropping is not allowed).
-
-              e.dataTransfer.dropEffect = dropEffect;
-              return dqUtils.stopEvent($e);
-            }
-          }
-        });
-
-        //noinspection FunctionWithInconsistentReturnsJS
-        $element.on('drop', function($e) {
-
-          var e = dqUtils.getEvent($e);
-
-          if(trackingEnabled) {
-            var expression = $attrs.dqDrop;
-
-            if(expression) {
-              $scope.$apply(expression);
-            }
-          }
-
-          return dqUtils.stopEvent($e);
-        });
-
-        // Ensure that we only do all this magic stuff on this element for one time only.
-
-        $element.data('dqDragTrack', true);
-      }
-    };
-
-  }]);
-
-angular.module('dq').directive('dqDraggable', ["dqUtils", "$rootScope", function (dqUtils, $rootScope) {
-
-  function evalAndBroadcast(eventName, targetArea, $scope, expression, cb) {
-    $scope.$apply(function () {
-      var data = $scope.$eval(expression);
-
-      var bcData = {
-        area: targetArea,
-        data: data
-      };
-
-      cb(bcData);
-
-      $rootScope.$broadcast(eventName, bcData);
-    });
-  }
-
-  return {
-    restrict: 'AEC',
-    link: function ($scope, $element, $attrs) {
-
-      var targetArea = $attrs.dqDraggable || $attrs.dqDragTargetArea || "";
-      var disabled = false;
-
-      $scope.$watch($attrs.dqDragDisabled, function(value) {
-        disabled = value;
-        $element.attr('draggable', disabled ? 'false' : 'true');
-      });
-
-      $element.on('selectstart',function (e) {
-
-        // Pure IE evilness
-
-        if (!disabled && this.dragDrop) {
-          this.dragDrop();
-          e = dqUtils.getEvent(e);
-          return dqUtils.stopEvent(e);
-        }
-      }).on('dragstart',function (e) {
-
-          e = dqUtils.getEvent(e);
-
-          if(disabled) {
-            return dqUtils.stopEvent(e);
-          }
-
-          var dt = e.dataTransfer;
-          dt.effectAllowed = 'all';
-          dt.setData('Text', 'The cake is a lie!');
-
-          evalAndBroadcast('dqDragBegin', targetArea, $scope, $attrs.dqDragBegin, function(dragData) {
-            dqUtils.dragData(dragData);
-          });
-
-        }).on('dragend', function () {
-
-          evalAndBroadcast('dqDragEnd', targetArea, $scope, $attrs.dqDragEnd, function() {
-            dqUtils.dragData(null);
-          });
-
-        });
-    }
-  };
-
+  $templateCache.put('angular-form-gen/edit/canvas/field/properties/property-field/common.ng.html', '<div ng-if=\"fields.fieldname\"><div fg-property-field=\"fieldName\" fg-property-field-label=\"Name\" class=\"ng-hide\"><input type=\"text\" class=\"form-control\" name=\"fieldName\" ng-model=\"field.type\" ng-required=\"false\" ng-pattern=\"/^[a-zA-Z]([\\w]+)?$/\" fg-unique-field-name=\"\"></div></div><div ng-if=\"fields.name\"><div fg-property-field=\"displayName\" fg-property-field-label=\"Label\"><input type=\"text\" class=\"form-control\" name=\"displayName\" ng-model=\"field.name\"></div></div><div ng-if=\"fields.placeholder\"><div fg-property-field=\"fieldPlaceholder\" fg-property-field-label=\"Placeholder text\"><input type=\"text\" class=\"form-control\" name=\"fieldPlaceholder\" ng-model=\"field.placeholder\"></div></div><div ng-if=\"fields.tooltip\"><div fg-property-field=\"fieldTooltip\" fg-property-field-label=\"Tooltip\"><input type=\"text\" class=\"form-control\" name=\"fieldTooltip\" ng-model=\"field.tooltip\"></div></div><div ng-if=\"fields.group\"><div fg-property-field=\"fieldTooltip\" fg-property-field-label=\"Tooltip\"><input type=\"text\" class=\"form-control\" name=\"fieldTooltip\" ng-model=\"field.tooltip\"></div></div>');
+  $templateCache.put('angular-form-gen/edit/canvas/field/properties/property-field/field-value.ng.html', '<div ng-if=\"draw\"><div fg-property-field=\"fieldValue\" fg-property-field-label=\"Initial value\"><div ng-transclude=\"\"></div></div></div>');
+  $templateCache.put('angular-form-gen/edit/canvas/field/properties/property-field/property-field.ng.html', '<div class=\"form-group fg-property-field\" ng-class=\"{ \'has-error\': fieldPropertiesForm[fieldName].$invalid }\"><label class=\"col-sm-5 col-md-4 control-label\">{{ fieldLabel }}</label><div class=\"col-sm-7 col-md-8\"><div ng-transclude=\"\"></div><div fg-validation-summary=\"{{ fieldName }}\"></div></div></div>');
 }]);
 fg.directive('fgBindExpression', ["$interpolate", function ($interpolate) {
 
@@ -1128,14 +811,13 @@ fg.factory('fgUtils', ["$templateCache", "$window", "fgConfig", function ($templ
         // var templateType = fgConfig.fields.aliases[field.type] || field.type;
         var templateType = field.type;
         var templateUrl = this.formatTemplateUrl(templateType, area);
-
+        console.log(templateType, templateUrl);
+        
         var cached = $templateCache.get(templateUrl);
 
         if (!cached) {
-
           // Url is not in cache -- fallback to default area.
           // Properties area will never fallback to default area.
-          
           if (area !== 'properties' && area !== this.defaultArea) {
             templateUrl = this.getTemplateUrl(field, this.defaultArea);
           } else {
@@ -1150,7 +832,6 @@ fg.factory('fgUtils', ["$templateCache", "$window", "fgConfig", function ($templ
       },
       copyField: function(field) {
         var copy = angular.copy(field);
-        copy.name = 'field' + this.getUnique();
         return copy;
       },
       findElementsByClass: function (root, className, recursive, buffer) {
@@ -1176,6 +857,323 @@ fg.factory('fgUtils', ["$templateCache", "$window", "fgConfig", function ($templ
       }
     };
   }]);
+angular.module('dq', []).factory('dqUtils', ["$window", "$rootScope", function($window, $rootScope) {
+
+  var _dragData = null;
+
+  //noinspection FunctionWithInconsistentReturnsJS
+  return {
+    getEvent: function (e) {
+      return e && e.originalEvent ? e.originalEvent : e || $window.event;
+    },
+    stopEvent: function (e) {
+      // e.cancelBubble is supported by IE8 -
+      // this will kill the bubbling process.
+      e.cancelBubble = true;
+      e.bubbles = false;
+      
+      // e.stopPropagation works in modern browsers
+      if (e.stopPropagation) e.stopPropagation();
+      if (e.preventDefault) e.preventDefault();
+
+      return false;
+    },
+    dragData: function (data) {
+      if (data === undefined) {
+        return _dragData;
+      }
+      _dragData = data;
+    },
+    getParentArea: function ($scope) {
+      var area = {};
+      $scope.$emit('dqLocateArea', area);
+      return area.name;
+    },
+    isAreaMatch: function ($scope) {
+      var parentArea = this.getParentArea($scope);
+      var eventArea = _dragData ? _dragData.area : "";
+
+      return parentArea === eventArea;
+    }
+  };
+}]);
+angular.module('dq').directive('dqDragArea', ["dqUtils", function (dqUtils) {
+
+  function evalBroadcastEvent($scope, args, areaName, expression) {
+    if (expression && args && args.area === areaName) {
+      $scope.$eval(expression);
+    }
+  }
+
+  return {
+    restrict: 'AEC',
+    link: function ($scope, $element, $attrs) {
+
+      var areaName = $attrs.dqDragArea || $attrs.dqDragAreaName || "";
+
+      $scope.$on('dqDragBegin', function ($event, args) {
+        evalBroadcastEvent($scope, args, areaName, $attrs.dqDragProgressBegin);
+      });
+
+      $scope.$on('dqDragEnd', function ($event, args) {
+        evalBroadcastEvent($scope, args, areaName, $attrs.dqDragProgressEnd);
+      });
+
+      $scope.$on('dqLocateArea', function($event, args) {
+        args.name = areaName;
+        $event.stopPropagation();
+      });
+    }
+  }
+}]);
+
+angular.module('dq').directive('dqDragEnter',["dqDragTrack", function (dqDragTrack) {
+  return {
+    link: dqDragTrack
+  };
+}]).directive('dqDragLeave',["dqDragTrack", function (dqDragTrack) {
+    return {
+      link: dqDragTrack
+    };
+  }]).directive('dqDragOver',["dqDragTrack", function (dqDragTrack) {
+    return {
+      link: dqDragTrack
+    };
+  }]).directive('dqDrop',["dqDragTrack", function (dqDragTrack) {
+    return {
+      link: dqDragTrack
+    };
+  }]).factory('dqDragTrack', ["dqUtils", "$document", function (dqUtils, $document) {
+
+    // Combines both nq-drag-enter & nq-drag-leave & nq-drag-over
+
+    return function ($scope, $element, $attrs) {
+
+      // Tracking already set on the element?
+
+      if ($element.data('dqDragTrack') !== true) {
+
+        var trackingEnabled = false; // Toggled on drag-begin if the area name does not match the target
+        var inbound = false; // Toggle to indicate if the dragging is in or outbound element
+        var element = $element[0];
+        var dropEffect = 'none'; // Drop effect used in the dragover event
+        var doingLeaveDoubleCheck = false; // Toggle that indicates the body has a dragover event to do.
+
+        var $body = $document.find('body');
+
+        function dragLeaveDoubleCheck($e) {
+          var e = dqUtils.getEvent($e);
+
+          // Check if the drag over element is a child of the this element
+
+          var target = e.target || $e.target;
+
+          if (target !== element) {
+
+            // TODO: we're not really checking if the target element is visually within the $element.
+
+            if (!element.contains(target)) {
+
+              // Drag over element is out of bounds
+
+              dragLeaveForSure(true);
+            }
+          }
+
+          // We're done with the expensive body call
+
+          $body.off('dragover', dragLeaveDoubleCheck);
+
+          // Notify the local element event callback there's no event listener on the body and the next event
+          // can safely be cancelled.
+
+          doingLeaveDoubleCheck = false;
+
+          e.dataTransfer.dropEffect = dropEffect;
+
+          // Always cancel the dragover -- otherwise the dropEffect is not used.
+
+          return dqUtils.stopEvent($e);
+        }
+
+        function dragLeaveForSure(apply) {
+          inbound = false;
+          var expression = $attrs.dqDragLeave;
+          if (expression) {
+            if (apply) {
+              $scope.$apply(function () {
+                $scope.$eval(expression);
+              });
+            } else {
+              $scope.$eval(expression);
+            }
+          }
+        }
+
+        $scope.$on('$destroy', function () {
+          // Just to be sure
+          $body.off('dragover', dragLeaveDoubleCheck);
+        });
+
+        $scope.$on('dqDragBegin', function () {
+          // Check if we should track drag movements
+          trackingEnabled = dqUtils.isAreaMatch($scope);
+        });
+
+        $scope.$on('dqDragEnd', function () {
+          if (trackingEnabled) {
+            // Gief cake
+            dragLeaveForSure(false);
+          }
+        });
+
+        $element.on('dragenter', function (e) {
+          if (trackingEnabled && inbound === false) {
+            inbound = true;
+            var expression = $attrs.dqDragEnter;
+            if (expression) {
+              $scope.$apply(function () {
+                $scope.$eval(expression);
+              });
+            }
+          }
+        });
+
+        $element.on('dragleave', function () {
+          if (trackingEnabled && inbound === true) {
+
+            // dragleave is a lie -- hovering child elements will cause this event to trigger also.
+            // We fake the cake by tracking the drag ourself.
+
+            // Notify the "real" dragover event that he has to play nice with the body and not to
+            // cancel the event chain.
+
+            doingLeaveDoubleCheck = true;
+            $body.on('dragover', dragLeaveDoubleCheck);
+          }
+        });
+
+        //noinspection FunctionWithInconsistentReturnsJS
+        $element.on('dragover', function ($e) {
+
+          if (trackingEnabled) {
+
+            var e = dqUtils.getEvent($e);
+
+            var expression = $attrs.dqDragOver;
+            var result;
+
+            if (expression) {
+              $scope.$apply(function () {
+                result = $scope.$eval(expression);
+              });
+            }
+
+            // The evaluated expression can indicate to cancel the drop
+
+            dropEffect = result === false ? 'none' : 'copy';
+
+            if (!doingLeaveDoubleCheck) {
+
+              // There's no dragover queued on the body.
+              // The event needs to be terminated here else the dropEffect will
+              // not be applied (and dropping is not allowed).
+
+              e.dataTransfer.dropEffect = dropEffect;
+              return dqUtils.stopEvent($e);
+            }
+          }
+        });
+
+        //noinspection FunctionWithInconsistentReturnsJS
+        $element.on('drop', function($e) {
+
+          var e = dqUtils.getEvent($e);
+
+          if(trackingEnabled) {
+            var expression = $attrs.dqDrop;
+
+            if(expression) {
+              $scope.$apply(expression);
+            }
+          }
+
+          return dqUtils.stopEvent($e);
+        });
+
+        // Ensure that we only do all this magic stuff on this element for one time only.
+
+        $element.data('dqDragTrack', true);
+      }
+    };
+
+  }]);
+
+angular.module('dq').directive('dqDraggable', ["dqUtils", "$rootScope", function (dqUtils, $rootScope) {
+
+  function evalAndBroadcast(eventName, targetArea, $scope, expression, cb) {
+    $scope.$apply(function () {
+      var data = $scope.$eval(expression);
+
+      var bcData = {
+        area: targetArea,
+        data: data
+      };
+
+      cb(bcData);
+
+      $rootScope.$broadcast(eventName, bcData);
+    });
+  }
+
+  return {
+    restrict: 'AEC',
+    link: function ($scope, $element, $attrs) {
+
+      var targetArea = $attrs.dqDraggable || $attrs.dqDragTargetArea || "";
+      var disabled = false;
+
+      $scope.$watch($attrs.dqDragDisabled, function(value) {
+        disabled = value;
+        $element.attr('draggable', disabled ? 'false' : 'true');
+      });
+
+      $element.on('selectstart',function (e) {
+
+        // Pure IE evilness
+
+        if (!disabled && this.dragDrop) {
+          this.dragDrop();
+          e = dqUtils.getEvent(e);
+          return dqUtils.stopEvent(e);
+        }
+      }).on('dragstart',function (e) {
+
+          e = dqUtils.getEvent(e);
+
+          if(disabled) {
+            return dqUtils.stopEvent(e);
+          }
+
+          var dt = e.dataTransfer;
+          dt.effectAllowed = 'all';
+          dt.setData('Text', 'The cake is a lie!');
+
+          evalAndBroadcast('dqDragBegin', targetArea, $scope, $attrs.dqDragBegin, function(dragData) {
+            dqUtils.dragData(dragData);
+          });
+
+        }).on('dragend', function () {
+
+          evalAndBroadcast('dqDragEnd', targetArea, $scope, $attrs.dqDragEnd, function() {
+            dqUtils.dragData(null);
+          });
+
+        });
+    }
+  };
+
+}]);
 fg.controller('fgEditController', ["$scope", "fgUtils", "$location", function ($scope, fgUtils, $location) {
 
 //  var self = this;
@@ -1658,8 +1656,9 @@ fg.controller('fgEditCanvasController', ["$scope", "dqUtils", "$timeout", "fgUti
     var dragData = dqUtils.dragData();
 
     if (dragData && dragData.data) {
-
+      console.log(dragData.data);
       var field = dragData.data.field;
+      console.log(field);
       var source = dragData.data.source;
       var index = dragData.data.index;
       var fields = $scope.schema.fields;
@@ -1754,7 +1753,7 @@ fg.controller('fgEditPaletteController', ["$scope", "fgConfig", "$modal", functi
   $scope.changedFieldValue = function (selected) {
     $scope.populate_template = true;
     for (var i = 0; i <= tmpls.length; i++) {
-      if (selected == tmpls[i].displayName) {
+      if (selected == tmpls[i].name) {
         $scope.template = tmpls[i];
         $scope.template.$_displayProperties = true;
         break;

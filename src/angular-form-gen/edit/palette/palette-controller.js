@@ -42,7 +42,7 @@ fg.controller('fgEditPaletteController', function ($scope, fgConfig, $modal) {
   $scope.changedFieldValue = function (selected) {
     $scope.populate_template = true;
     for (var i = 0; i <= tmpls.length; i++) {
-      if (selected == tmpls[i].name) {
+      if (selected == tmpls[i].displayName) {
         $scope.template = tmpls[i];
         $scope.template.$_displayProperties = true;
         break;
@@ -84,7 +84,9 @@ fg.controller('fgEditPaletteController', function ($scope, fgConfig, $modal) {
       "placeholder": field.placeholder,
       "tooltip": field.tooltip
     };
-    _field["name"] = _field["displayName"].replaceAll(" ", "");
+    if (!_field["name"]) {
+      _field["name"] = _field["displayName"].replaceAll(" ", "");
+    }
     var fv = field.validation;
     if (fv) {
       _field["validation"] = {

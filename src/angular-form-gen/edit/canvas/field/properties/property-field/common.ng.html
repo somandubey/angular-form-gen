@@ -1,16 +1,16 @@
 <div ng-if="fields.fieldname">
   <div fg-property-field="fieldName" fg-property-field-label="Name" class="ng-hide">
-    <input type="text" class="form-control" name="fieldName" ng-model="field.type" ng-required="false" ng-pattern="/^[a-zA-Z]([\w]+)?$/"
+    <input type="text" class="form-control" name="fieldName" ng-model="field.name" ng-required="false" ng-pattern="/^[a-zA-Z]([\w]+)?$/"
     fg-unique-field-name/>
   </div>
 </div>
-<div ng-if="fields.name">
-  <div fg-property-field="displayName" fg-property-field-label="Label">
-    <input type="text" class="form-control" name="displayName" ng-model="field.name" />
+<div ng-if="fields.displayName">
+  <div fg-property-field="fieldDisplayName" fg-property-field-label="Label">
+    <input type="text" class="form-control" name="fieldDisplayName" ng-model="field.displayName" />
   </div>
 </div>
 <div ng-if="fields.placeholder">
-  <div fg-property-field="fieldPlaceholder" fg-property-field-label="Placeholder text">
+  <div fg-property-field="fieldPlaceholder" fg-property-field-label="Placeholder Text">
     <input type="text" class="form-control" name="fieldPlaceholder" ng-model="field.placeholder" />
   </div>
 </div>
@@ -20,7 +20,7 @@
   </div>
 </div>
 <div ng-if="fields.group">
-  <div fg-property-field="fieldTooltip" fg-property-field-label="Tooltip">
-    <input type="text" class="form-control" name="fieldTooltip" ng-model="field.tooltip" />
+  <div fg-property-field="fieldGroup" fg-property-field-label="Group">
+    <input type="text" class="form-control" name="fieldGroup" ng-model="field.group" />
   </div>
 </div>

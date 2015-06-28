@@ -2,26 +2,29 @@
   <fieldset>
     <div fg-edit-palette-categories data-category="selectedCategory"></div>
     <accordion close-others="accordion.oneAtATime">
-      <accordion-group>
+      <accordion-group is-open="model.ifNewFieldOpen">
         <accordion-heading>Add New Field
           <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
         </accordion-heading>
         <div id="fieldType" class="row">
-          <div class="col-sm-5">
-            <h5>Field Type</h5>
+          <div class='col-sm-12 margin-top-5'>
+            <div class="col-sm-5">
+              <h5>Field Type</h5>
+            </div>
+            <div class="col-sm-7">
+              <select class="form-control" ng-model="selected" ng-change="changedFieldValue(selected)">
+                <option ng-repeat="template in templates | filter:templateFilter" class="fg-field">
+                  <span>{{template.name}}</span>
+                  <div fg-field="template" fg-tab-index="3" fg-no-validation-summary="true" fg-edit-mode="true"></div>
+                </option>
+              </select>
+            </div>
           </div>
-          <div class="col-sm-7">
-            <select class="form-control" ng-model="selected" ng-change="changedFieldValue(selected)">
-              <option ng-repeat="template in templates | filter:templateFilter" class="fg-field">
-                <span>{{template.name}}</span>
-                <div fg-field="template" fg-tab-index="3" fg-no-validation-summary="true" fg-edit-mode="true"></div>
-              </option>
-            </select>
-          </div>
+          <div class='row'><hr class='m5 col-xs-12'></div>
           <div class="col-sm-12" ng-show="populate_template">
             <div fg-edit-canvas-field-properties="template"></div>
             <div class="row">
-              <div fg-property-field="fieldGroup" fg-property-field-label="Associate field to field group">
+              <div fg-property-field="fieldGroup" fg-property-field-label="Field group">
                 <div class='row'>
                   <div class='col-md-9'>
                     <select class="form-control" ng-model="selectedGroup" ng-options="group.fieldGroupId as group.fieldGroupName for group in groups"></select>
@@ -57,8 +60,8 @@
           <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
         </accordion-heading>
         <div id="collapse{{group.name}}">
-          <div ng-repeat="template in group.associatedFields" class="fg-field" dq-draggable="fg-edit-canvas"
-          dq-drag-begin="{ source: 'palette', field: template }" style="width:100%;background-color: #FD9753;border-color: #FB6705;text-align: left;font-weight: bold;font-size: 12px;border-radius: 0px; margin-bottom: 0px;">
+          <div ng-repeat="template in group.associatedFields" class="fg-field" dq-draggable="fg-edit-canvas" dq-drag-begin="{ source: 'palette', field: template }"
+          style="width:100%;background-color: #FD9753;border-color: #FB6705;text-align: left;font-weight: bold;font-size: 12px;border-radius: 0px; margin-bottom: 0px;">
             <div class="fg-field-overlay">
               <div class="btn-toolbar btn-toolbar-right">
                 <button class="btn btn-default btn-xs btn-primary" type="button" ng-click="schemaCtrl.addField(template)" title="Add this field.">

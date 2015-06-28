@@ -2,7 +2,9 @@ fg.controller('fgEditPaletteController', function ($scope, fgConfig, $modal) {
 
   $scope.templates = [];
   $scope.populate_template = false;
-
+  $scope.model = {
+    ifNewFieldOpen: false
+  };
 
   console.log($scope.functions);
 
@@ -66,7 +68,12 @@ fg.controller('fgEditPaletteController', function ($scope, fgConfig, $modal) {
         $scope.groups = groups;
       });
     }
-  }();
+  } ();
+
+  $scope.resetField = function () {
+    $scope.model.ifNewFieldOpen = false;
+  };
+
 
   $scope.associateField = function (field, groupId) {
     var _field = {
@@ -93,8 +100,8 @@ fg.controller('fgEditPaletteController', function ($scope, fgConfig, $modal) {
           "required": fvm.required
         }
       }
-    }
-    
+    };
+
     $scope.functions.createField(_field, groupId).then(function (createdField) {
       _.forEach($scope.groups, function (group) {
         if (group.fieldGroupId === groupId) {
@@ -105,6 +112,9 @@ fg.controller('fgEditPaletteController', function ($scope, fgConfig, $modal) {
           return false;
         }
       });
+      field = {};
+      groupId = false;
+      $scope.resetField();
     });
   };
 

@@ -4,13 +4,13 @@
     fg-unique-field-name/>
   </div>
 </div>
-<div ng-if="fields.name">
+<div>
   <div fg-property-field="displayName" fg-property-field-label="Label">
-    <input type="text" class="form-control" name="displayName" ng-model="field.name" />
+    <input type="text" class="form-control" name="displayName" ng-model="field.displayName" />
   </div>
 </div>
 <div ng-if="fields.placeholder">
-  <div fg-property-field="fieldPlaceholder" fg-property-field-label="Placeholder text">
+  <div fg-property-field="fieldPlaceholder" fg-property-field-label="Placeholder">
     <input type="text" class="form-control" name="fieldPlaceholder" ng-model="field.placeholder" />
   </div>
 </div>

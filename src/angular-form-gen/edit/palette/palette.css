@@ -47,6 +47,17 @@
   right: auto;
   left: auto;
 }
+.margin-top-5 {
+  margin-top: 5px !important;
+}
+.fg-form{
+  max-height: 400px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+hr.m5{
+  margin: 5px 0px !important;
+}
 /*a:hover, a:active {
   color: #FCFCFC !important;
 }*/
@@ -63,3 +74,23 @@
     /*width: auto;*/
   /*}*/
 /*}*/
+
+
+.fg-form::-webkit-scrollbar {
+  width: 5px;
+}
+ 
+.fg-form::-webkit-scrollbar-thumb:vertical {
+  margin: 5px;
+  background-color: #999;
+  -webkit-border-radius: 5px;
+}
+ 
+.fg-form::-webkit-scrollbar-button:start:decrement,
+.fg-form::-webkit-scrollbar-button:end:increment {
+  height: 5px;
+  display: block;
+}
+.fg-form .panel-body{
+  padding:  0px !important;
+}

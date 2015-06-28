@@ -8,14 +8,15 @@
       <div fg-tabs-pane="Properties">
 		  <div
 		      fg-property-field-common="{ fieldname: true, displayname: true, placeholder: true, tooltip: true }"></div>
+		  <!-- <div
+		      fg-property-field-common="{ displayname: true, placeholder: true, tooltip: true }"></div> -->
 		  <div fg-property-field-value>
-		    <textarea name="fieldValue"
+		    <input type="text" name="fieldValue"
 		              class="form-control"
 		              ng-model="field.value"
 		              ng-minlength="{{ field.validation.minlength }}"
 		              ng-maxlength="{{ field.validation.maxlength }}"
-		              ng-pattern="/{{ field.validation.pattern }}/">
-		    </textarea>
+		              ng-pattern="/{{ field.validation.pattern }}/" />
 		  </div>
 		</div>
 	<div fg-tabs-pane="Validation">

@@ -1,6 +1,8 @@
 fg.controller('fgEditPaletteController', function ($scope, fgConfig, $modal) {
 
   $scope.templates = [];
+  $scope.allTemplates = [];
+  $scope.allTemplatesCategory = {};
   $scope.populate_template = false;
 
 
@@ -11,6 +13,8 @@ fg.controller('fgEditPaletteController', function ($scope, fgConfig, $modal) {
 
   while (i--) {
     var tmpl = tmpls[i];
+    $scope.allTemplates.unshift(angular.copy(tmpl));
+    $scope.allTemplatesCategory[tmpl.type] = tmpl;
     if (tmpl.editor && tmpl.editor.visible == false) {
       continue;
     }
@@ -19,6 +23,10 @@ fg.controller('fgEditPaletteController', function ($scope, fgConfig, $modal) {
 
   $scope.templateFilter = function (template) {
     return !$scope.selectedCategory || $scope.selectedCategory[template.type];
+  };
+
+  $scope.allTemplateFilter = function (template) {
+    return !$scope.allTemplatesCategory || $scope.allTemplatesCategory[template.type];
   };
 
   $scope.templateFromGroupFilter = function (group) {
@@ -76,6 +84,7 @@ fg.controller('fgEditPaletteController', function ($scope, fgConfig, $modal) {
       "placeholder": field.placeholder,
       "tooltip": field.tooltip
     };
+    _field["name"] = _field["displayName"].replaceAll(" ", "");
     var fv = field.validation;
     if (fv) {
       _field["validation"] = {
@@ -96,7 +105,6 @@ fg.controller('fgEditPaletteController', function ($scope, fgConfig, $modal) {
     }
     
     $scope.functions.createField(_field, groupId).then(function (createdField) {
-      console.log(response);
       _.forEach($scope.groups, function (group) {
         if (group.fieldGroupId === groupId) {
           if (!group.associatedFields || group.associatedFields.length) {

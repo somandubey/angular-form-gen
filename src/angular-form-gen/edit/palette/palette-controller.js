@@ -87,103 +87,45 @@ fg.controller('fgEditPaletteController', function ($scope, fgConfig, $modal) {
   } ();
 
   $scope.associateField = function (field, groupId) {
-    var _field = [{
+    var _field = {
       "type": field.type || 'text',
-      "name": field.displayName
-    }];
-    $scope.functions.createField(_field, groupId).then(function (response) {
+      "name": field.name,
+      "displayName": field.displayName,
+      "placeholder": field.placeholder,
+      "tooltip": field.tooltip
+    };
+    var fv = field.validation;
+    if (fv) {
+      _field["validation"] = {
+        "minlength": fv.minlength,
+        "maxlength": fv.maxlength,
+        "pattern": fv.pattern,
+        "required": fv.required
+      }
+      var fvm = fv.messages;
+      if (fvm) {
+        _field["validation"]["messages"] = {
+          "minlength": fvm.minlength,
+          "maxlength": fvm.maxlength,
+          "pattern": fvm.pattern,
+          "required": fvm.required
+        }
+      }
+    }
+    
+    $scope.functions.createField(_field, groupId).then(function (createdField) {
       _.forEach($scope.groups, function (group) {
         if (group.fieldGroupId === groupId) {
-          if (group.associatedFields && group.associatedFields.length) {
+          if (!group.associatedFields || group.associatedFields.length) {
             group.associatedFields = []
           }
-          group.associatedFields.push(field);
+          group.associatedFields.push(createdField);
           return false;
         }
       });
     });
   };
 
-  // $scope.groups = [{
-  //   name:'Pilot',
-  //   value:'Pilot',
-  //   existingFields:[{ 
-  //       name : 'Pilot_ID',
-  //       displayName : 'Pilot_ID',
-  //       type : 'text'
-  //     },{ 
-  //       name : 'Pilot Name',
-  //       displayName : 'Pilot Name',
-  //       type : 'text'
-  //     },{ 
-  //       name : 'Pilot Base',
-  //       displayName : 'Pilot Base',
-  //       type : 'text'
-  //     }]
-  // }, {
-  //   name:'Flight',
-  //   value:'Flight',
-  //   existingFields: [{
-  //       name : 'Flight Number',
-  //       displayName : 'Flight Number',
-  //       type : 'text'
-  //     },{ 
-  //       name : 'Flight Date',
-  //       displayName : 'Flight Date',
-  //       type : 'text'
-  //     },{ 
-  //       name : 'Origin',
-  //       displayName : 'Origin',
-  //       type : 'DropDown'
-  //     },{ 
-  //       name : 'Destination',
-  //       type : 'DropDown'
-  //     }]
-  // }, {
-  //   name:'Hotel',
-  //   value:'Hotel',
-  //   existingFields:[{
-  //       name : 'Name',
-  //       displayName : 'Name',
-  //       type : 'text'
-  //     }, {
-  //       name : 'Location',
-  //       displayName : 'Location',
-  //       type : 'text'
-  //     }, {
-  //       name : 'Date',
-  //       displayName : 'Date',
-  //       type : 'text'
-  //     }, {
-  //       name : 'Room Type',
-  //       displayName : 'Room Type',
-  //       type : 'text'
-  //     }, {
-  //       name : 'Catering',
-  //       displayName : 'Catering',
-  //       type : 'text'
-  //     }, {
-  //       name : 'Name',
-  //       displayName : 'Name',
-  //       type : 'text'
-  //     }]
-  // }, {
-  //   name:'Aircraft',
-  //   value:'Aircraft',
-  //   existingFields:[{
-  //       name : 'Reg No',
-  //       displayName : 'Reg No',
-  //       type : 'text'
-  //     }, {
-  //       name : 'Equipment Type',
-  //       displayName : 'Equipment Type',
-  //       type : 'text'
-  //     }]
-  // }, {
-  //   name:'Misc',
-  //   value:'Misc',
-  //   existingFields:[]
-  // }];
   
 }).controller('addGrpCtrl', function ($scope, $modalInstance, selectedFieldGroup) {
 

@@ -96,7 +96,6 @@ fg.controller('fgEditPaletteController', function ($scope, fgConfig, $modal) {
     }
     
     $scope.functions.createField(_field, groupId).then(function (createdField) {
-      console.log(response);
       _.forEach($scope.groups, function (group) {
         if (group.fieldGroupId === groupId) {
           if (!group.associatedFields || group.associatedFields.length) {

@@ -1780,19 +1780,40 @@ fg.controller('fgEditPaletteController', ["$scope", "fgConfig", "$modal", functi
   }();
 
   $scope.associateField = function (field, groupId) {
-    console.log(field);
-    var _field = [{
+    var _field = {
       "type": field.type,
-      "name": field.displayName
-    }];
-    $scope.functions.createField(_field, groupId).then(function (response) {
+      "name": field.name,
+      "displayName": field.displayName,
+      "placeholder": field.placeholder,
+      "tooltip": field.tooltip
+    };
+    var fv = field.validation;
+    if (fv) {
+      _field["validation"] = {
+        "minlength": fv.minlength,
+        "maxlength": fv.maxlength,
+        "pattern": fv.pattern,
+        "required": fv.required
+      }
+      var fvm = fv.messages;
+      if (fvm) {
+        _field["validation"]["messages"] = {
+          "minlength": fvm.minlength,
+          "maxlength": fvm.maxlength,
+          "pattern": fvm.pattern,
+          "required": fvm.required
+        }
+      }
+    }
+    
+    $scope.functions.createField(_field, groupId).then(function (createdField) {
       console.log(response);
       _.forEach($scope.groups, function (group) {
         if (group.fieldGroupId === groupId) {
-          if (group.associatedFields && group.associatedFields.length) {
+          if (!group.associatedFields || group.associatedFields.length) {
             group.associatedFields = []
           }
-          group.associatedFields.push(field);
+          group.associatedFields.push(createdField);
           return false;
         }
       });

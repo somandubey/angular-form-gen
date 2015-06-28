@@ -1,9 +1,13 @@
-<div>
-  <div fg-property-field="fieldGroup" fg-property-field-label="Associate field to field group">
-    <select class="form-control" ng-model="selected" ng-change="changedGroupValue(selected)">
-      <option ng-repeat="group in groups">
-        <span>{{group.fieldGroupName}}</span>
-      </option>
-    </select>
+<div class="modal-header">
+  <h3 class="modal-title">Add Field group name</h3>
+</div>
+<div class='modal-body'>
+  <div class="form-group">
+    <input type='text' class="form-control" name='group-name' , ng-model='model.groupName' placeholder='Enter field group name'
+    />
   </div>
-  <div>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-primary" ng-click="ok()">OK</button>
+  <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+</div>

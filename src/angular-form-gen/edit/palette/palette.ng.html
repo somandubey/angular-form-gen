@@ -1,5 +1,4 @@
 <div class="fg-edit-palette">
-  <!--<div class="form-horizontal">-->
   <fieldset>
     <div fg-edit-palette-categories data-category="selectedCategory"></div>
     <accordion close-others="accordion.oneAtATime">
@@ -12,8 +11,6 @@
             <h5>Field Type</h5>
           </div>
           <div class="col-sm-7">
-            <!-- <select class="form-control" ng-model="addField.selected" ng-change="changedFieldValue(addField.selected)" ng-options="type.name
-            as type.value for type in addField.types"></select> -->
             <select class="form-control" ng-model="selected" ng-change="changedFieldValue(selected)">
               <option ng-repeat="template in templates | filter:templateFilter" class="fg-field">
                 <span>{{template.displayName}}</span>
@@ -23,9 +20,18 @@
           </div>
           <div class="col-sm-12" ng-show="populate_template">
             <div fg-edit-canvas-field-properties="template"></div>
-            <div>
+            <div class="row">
               <div fg-property-field="fieldGroup" fg-property-field-label="Associate field to field group">
-                <select class="form-control" ng-model="selectedGroup" ng-change="changedGroupValue(selectedGroup)" ng-options="group.fieldGroupId as group.fieldGroupName for group in groups"></select>
+                <div class='row'>
+                  <div class='col-md-9'>
+                    <select class="form-control" ng-model="selectedGroup" ng-options="group.fieldGroupId as group.fieldGroupName for group in groups"></select>
+                  </div>
+                  <div class='col-md-3'>
+                    <button class='btn btn-primary btn-sm' ng-click='openCreateGroupModal()'>
+                      <i class='fa fa-plus'></i>
+                    </button>
+                  </div>
+                </div>
                 <div class="row">
                   <div class="col-sm-3">
                     <a ng-click="associateField(template, selectedGroup)" class="btn btn-primary btn-sm margin-top-2"> <i
@@ -42,30 +48,6 @@
             </div>
           </div>
           <div ng-class="{ 'fg-drag-placeholder-visible' : dragPlaceholder.visible && dragPlaceholder.index === $index }" class="fg-drag-placeholder"></div>
-          <!-- <div fg-edit-canvas-field></div> -->
-          <!-- <div id="fieldName" class="row">
-            <div class="col-sm-5">
-              <h5>Field Name</h5>
-            </div>
-            <div class="col-sm-7">
-              <input class="form-control" type="text" ng-model="addField.name">
-            </div>
-          </div>
-          <div class="row" ng-show="populate_template"  ng-repeat="field in form.form_fields">
-             <field-directive field="field"></field-directive> 
-          </div>
-          <div class="row" ng-show="populate_template">{{populate_template}}
-            <field-directive field="form.form_field"></field-directive>           
-          </div>
-          <div id="userGroup" class="row">
-            <div class="col-sm-5">
-              <h5>User Groups</h5>
-            </div>
-            <div class="col-sm-7">
-             <div ng-include='"app/forms/add-group.html"'></div>
-              <select class="form-control" ng-model="addField.selectedGroup" ng-change="changedGroupValue(addField.selectedGroup)" ng-options="group.name as group.value for group in addField.groups"></select>
-            </div>
-          </div> -->
       </accordion-group>
     </accordion>
     <span style="font-weight: bold;">Use Predefined Fields</span>
@@ -76,14 +58,8 @@
           <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
         </accordion-heading>
         <div id="collapse{{group.name}}">
-          <!-- <div ng-repeat="groupField in group.existingFields">
-            <div class="btn" data-drag="true" data-jqyoui-options="{revert: 'invalid'}" ng-model="field" jqyoui-draggable="{animate:true}" style="width:100%;background-color: #FD9753;border-color: #FB6705;text-align: left;font-weight: bold;font-size: 12px;border-radius: 0px;">{{groupField.name}}</div>
-          </div> -->
-          <div ng-repeat="template in group.associatedFields | filter:templateFromGroupFilter" class="fg-field" dq-draggable="fg-edit-canvas"
+          <div ng-repeat="template in group.associatedFields" class="fg-field" dq-draggable="fg-edit-canvas"
           dq-drag-begin="{ source: 'palette', field: template }" style="width:100%;background-color: #FD9753;border-color: #FB6705;text-align: left;font-weight: bold;font-size: 12px;border-radius: 0px; margin-bottom: 0px;">
-            <!-- <div class="btn" data-drag="true" data-jqyoui-options="{revert: 'invalid'}" ng-model="field" jqyoui-draggable="{animate:true}"
-            style="width:100%;background-color: #FD9753;border-color: #FB6705;text-align: left;font-weight: bold;font-size: 12px;border-radius:
-            0px;">{{groupField.name}}</div> -->
             <div class="fg-field-overlay">
               <div class="btn-toolbar btn-toolbar-right">
                 <button class="btn btn-default btn-xs btn-primary" type="button" ng-click="schemaCtrl.addField(template)" title="Add this field.">
@@ -96,21 +72,6 @@
         </div>
       </accordion-group>
     </accordion>
-    <!-- <div ng-repeat="template in templates | filter:templateFilter" class="fg-field" dq-draggable="fg-edit-canvas" dq-drag-begin="{
-    source: 'palette', field: template }">
-                <div class="fg-field-overlay">
-                  <div class="btn-toolbar btn-toolbar-right">
-                    <button class="btn btn-default btn-xs btn-primary" type="button" ng-click="schemaCtrl.addField(template)"
-                        title="Add this field.">
-                      <span class="glyphicon glyphicon-plus"></span>
-                    </button>
-                  </div>
-                </div>
-                <div fg-field="template"
-                     fg-tab-index="-1"
-                     fg-no-validation-summary="true"
-                     fg-edit-mode="true"></div>
-              </div> -->
   </fieldset>
-  <!--</div>-->
   </div>
+</div>

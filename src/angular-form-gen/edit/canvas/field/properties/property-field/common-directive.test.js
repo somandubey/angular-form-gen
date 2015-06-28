@@ -38,7 +38,7 @@ describe('fg-property-field-common', function() {
 
       expect($scope.fields).toBeDefined();
       expect($scope.fields.fieldname).toBe(true);
-      expect($scope.fields.displayname).toBeFalsy();
+      expect($scope.fields.name).toBeFalsy();
       expect($scope.fields.placeholder).toBeFalsy();
       expect($scope.fields.myOtherProp).toBe('gedoe');
     });

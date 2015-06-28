@@ -54,8 +54,9 @@ fg.controller('fgEditCanvasController', function ($scope, dqUtils, $timeout, fgU
     var dragData = dqUtils.dragData();
 
     if (dragData && dragData.data) {
-
+      console.log(dragData.data);
       var field = dragData.data.field;
+      console.log(field);
       var source = dragData.data.source;
       var index = dragData.data.index;
       var fields = $scope.schema.fields;

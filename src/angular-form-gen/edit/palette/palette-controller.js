@@ -34,7 +34,7 @@ fg.controller('fgEditPaletteController', function ($scope, fgConfig, $modal) {
   $scope.changedFieldValue = function (selected) {
     $scope.populate_template = true;
     for (var i = 0; i <= tmpls.length; i++) {
-      if (selected == tmpls[i].displayName) {
+      if (selected == tmpls[i].name) {
         $scope.template = tmpls[i];
         $scope.template.$_displayProperties = true;
         break;

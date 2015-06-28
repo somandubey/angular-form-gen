@@ -1,12 +1,12 @@
 <div ng-if="fields.fieldname">
   <div fg-property-field="fieldName" fg-property-field-label="Name" class="ng-hide">
-    <input type="text" class="form-control" name="fieldName" ng-model="field.name" ng-required="false" ng-pattern="/^[a-zA-Z]([\w]+)?$/"
+    <input type="text" class="form-control" name="fieldName" ng-model="field.type" ng-required="false" ng-pattern="/^[a-zA-Z]([\w]+)?$/"
     fg-unique-field-name/>
   </div>
 </div>
-<div ng-if="fields.displayname">
+<div ng-if="fields.name">
   <div fg-property-field="displayName" fg-property-field-label="Label">
-    <input type="text" class="form-control" name="displayName" ng-model="field.displayName" />
+    <input type="text" class="form-control" name="displayName" ng-model="field.name" />
   </div>
 </div>
 <div ng-if="fields.placeholder">

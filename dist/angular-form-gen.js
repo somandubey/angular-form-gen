@@ -160,7 +160,7 @@ fg.config(["fgConfigProvider", "FgField", function (fgConfigProvider, FgField) {
 
   fgConfigProvider.validation.message({
     required: 'A value is required for this field.',
-    minlength: 'The value does not match the minimum length{{ field.schema && (" of " + field.schema.validation.minlength + " characters" || "")}}.',
+    minlength: 'The value does not match the minimum length{{ field.validation && (" of " + field.validation.minlength + " characters" || "")}}.',
     maxlength: 'The value exceeds the maximum length{{ field.schema && (" of " + field.schema.validation.maxlength + " characters" || "")}}.',
     pattern: 'The value "{{ field.state.$viewValue }}" does not match the required format.',
     email: 'The value "{{ field.state.$viewValue }}" is not a valid email address.',
@@ -302,7 +302,7 @@ fg.config(["fgConfigProvider", "FgField", function (fgConfigProvider, FgField) {
 // SO ALL YOUR CHANGES WILL BE LOST THE NEXT TIME THE FILE IS GENERATED
 angular.module('fg').run(['$templateCache', function($templateCache){
   $templateCache.put('angular-form-gen/edit/edit.ng.html', '<div class=\"fg-edit row form-group\" ng-form=\"$fg\"><div class=\"col-sm-8\"><div fg-form=\"\" fg-edit-canvas=\"\" fg-no-render=\"true\"></div></div><div class=\"col-sm-4\" ng-form=\"$palette\" fg-null-form=\"\"><div fg-form=\"\" fg-edit-palette=\"\" fg-no-render=\"true\"></div></div></div>');
-  $templateCache.put('angular-form-gen/validation/summary.ng.html', '<ul class=\"fg-validation-summary help-block unstyled\" ng-if=\"field.state.$invalid && field.state.$dirty\"><li ng-repeat=\"(key, error) in field.state.$error\" ng-if=\"error\" fg-bind-expression=\"messages[key]\">{{messages[key]}}</li></ul>');
+  $templateCache.put('angular-form-gen/validation/summary.ng.html', '<ul class=\"fg-validation-summary help-block unstyled\" ng-if=\"field.state.$invalid && field.state.$dirty\"><li ng-repeat=\"(key, error) in field.state.$error\" ng-if=\"error\" fg-bind-expression=\"messages[key]\"></li></ul>');
   $templateCache.put('angular-form-gen/common/jsonify/jsonify.ng.html', '<div class=\"jsonify\"><div class=\"btn-toolbar btn-toolbar-right\"><button class=\"btn btn-default btn-xs\" type=\"button\" title=\"Copy the json data.\" ng-click=\"copy()\"><span class=\"glyphicon glyphicon-transfer\"></span></button> <button class=\"btn btn-default btn-xs\" type=\"button\" title=\"Display hidden properties.\" ng-click=\"displayHidden = !displayHidden\" ng-class=\"{ \'active\': displayHidden }\"><span class=\"glyphicon glyphicon-eye-open\"></span></button></div><pre><code>{{ jsonify | j$on:displayHidden }}</code></pre></div>');
   $templateCache.put('angular-form-gen/common/tabs/tabs-pane.ng.html', '<div class=\"fg-tabs-pane\" ng-show=\"tabs.active === pane\"><div ng-if=\"tabs.active === pane || pane.renderAlways\" ng-transclude=\"\"></div></div>');
   $templateCache.put('angular-form-gen/common/tabs/tabs.ng.html', '<div class=\"fg-tabs tabbable\" style=\"margin-bottom: 0px;\"><ul class=\"nav nav-tabs\"><li ng-repeat=\"tab in tabs.items\" ng-class=\"{ active: tab === tabs.active, disabled: tab.disabled }\"><a href=\"\" ng-click=\"tabs.activate(tab)\">{{ tab.title }}</a></li></ul><div class=\"tab-content\" ng-transclude=\"\"></div></div>');
@@ -350,7 +350,7 @@ fg.directive('fgBindExpression', ["$interpolate", function ($interpolate) {
   function buildWatchExpression(interpolateFn) {
     var sb = [];
     var parts = interpolateFn.parts;
-    var ii = parts.length;
+    var ii = parts && parts.length;
 
     while (ii--) {
       var part = parts[ii];
@@ -856,6 +856,93 @@ fg.factory('fgUtils', ["$templateCache", "$window", "fgConfig", function ($templ
       }
     };
   }]);
+fg.controller('fgEditController', ["$scope", "fgUtils", "$location", function ($scope, fgUtils, $location) {
+
+//  var self = this;
+
+//  $scope.preview = $location.search().preview;
+//
+//  this.setMetaForm = function(metaForm) {
+//    self.metaForm = metaForm;
+//  };
+
+//  this.togglePreview = function() {
+//    $scope.preview = !$scope.preview;
+//  };
+
+//  $scope.$watch(function () {
+//
+//    var schema = $scope.schemaCtrl.model();
+//
+//    // Seems that this watch is sometimes fired after the scope has been destroyed(?)
+//
+//    if (schema) {
+////      schema.$_invalid = self.metaForm ? self.metaForm.$invalid : false;
+////
+////      if (!schema.$_invalid) {
+//
+//      var fields = schema.fields;
+//
+//      if (fields) {
+//
+//        var i = fields.length;
+//
+//        while (--i >= 0 && !schema.$_invalid) {
+//          schema.$_invalid = fields[i].$_invalid;
+//        }
+//      }
+//    }
+//
+//  });
+
+}]);
+fg.directive('fgEdit', function () {
+  return {
+    priority: 100,
+    require: 'fgSchema',
+    restrict: 'AE',
+    scope: {
+      // // The schema model to edit
+      schema: '=?fgSchema',
+      functions: '=?fgFunctions'
+      //      // Boolean indicating wether to show the default form action buttons
+      //      actionsEnabled: '=?fgActionsEnabled',
+      //      // Callback function when the user presses save -- any argument named 'schema' is set to the schema model.
+      //      onSave: '&fgOnSave',
+      //      // Callback function when the user presses cancel -- any argument named 'schema' is set to the schema model.
+      //      onCancel: '&fgOnCancel',
+      //      // Boolean indicating wether the edit is in preview mode or not
+      //      preview: '=?fgPreview'
+    },
+    replace: true,
+    controller: 'fgEditController as editCtrl',
+    templateUrl: 'angular-form-gen/edit/edit.ng.html',
+    link: function ($scope, $element, $attrs, schemaCtrl) {
+      console.log($scope.functions);
+      if ($scope.schema === undefined) {
+        $scope.schema = {};
+      }
+
+      $scope.$watch('functions', function (newValue, oldValue) {
+        if (newValue) {
+          console.log($scope.functions);
+          $scope.functions = newValue;
+        }
+      }, true);
+
+      //      if ($scope.actionsEnabled === undefined) {
+      //        $scope.actionsEnabled = true;
+      //      }
+      //
+      //      if ($scope.preview === undefined) {
+      //        $scope.preview = false;
+      //      }
+
+      schemaCtrl.model($scope.schema);
+      $scope.schemaCtrl = schemaCtrl;
+    }
+  }
+});
 angular.module('dq', []).factory('dqUtils', ["$window", "$rootScope", function($window, $rootScope) {
 
   var _dragData = null;
@@ -1173,93 +1260,6 @@ angular.module('dq').directive('dqDraggable', ["dqUtils", "$rootScope", function
   };
 
 }]);
-fg.controller('fgEditController', ["$scope", "fgUtils", "$location", function ($scope, fgUtils, $location) {
-
-//  var self = this;
-
-//  $scope.preview = $location.search().preview;
-//
-//  this.setMetaForm = function(metaForm) {
-//    self.metaForm = metaForm;
-//  };
-
-//  this.togglePreview = function() {
-//    $scope.preview = !$scope.preview;
-//  };
-
-//  $scope.$watch(function () {
-//
-//    var schema = $scope.schemaCtrl.model();
-//
-//    // Seems that this watch is sometimes fired after the scope has been destroyed(?)
-//
-//    if (schema) {
-////      schema.$_invalid = self.metaForm ? self.metaForm.$invalid : false;
-////
-////      if (!schema.$_invalid) {
-//
-//      var fields = schema.fields;
-//
-//      if (fields) {
-//
-//        var i = fields.length;
-//
-//        while (--i >= 0 && !schema.$_invalid) {
-//          schema.$_invalid = fields[i].$_invalid;
-//        }
-//      }
-//    }
-//
-//  });
-
-}]);
-fg.directive('fgEdit', function () {
-  return {
-    priority: 100,
-    require: 'fgSchema',
-    restrict: 'AE',
-    scope: {
-      // // The schema model to edit
-      schema: '=?fgSchema',
-      functions: '=?fgFunctions'
-      //      // Boolean indicating wether to show the default form action buttons
-      //      actionsEnabled: '=?fgActionsEnabled',
-      //      // Callback function when the user presses save -- any argument named 'schema' is set to the schema model.
-      //      onSave: '&fgOnSave',
-      //      // Callback function when the user presses cancel -- any argument named 'schema' is set to the schema model.
-      //      onCancel: '&fgOnCancel',
-      //      // Boolean indicating wether the edit is in preview mode or not
-      //      preview: '=?fgPreview'
-    },
-    replace: true,
-    controller: 'fgEditController as editCtrl',
-    templateUrl: 'angular-form-gen/edit/edit.ng.html',
-    link: function ($scope, $element, $attrs, schemaCtrl) {
-      console.log($scope.functions);
-      if ($scope.schema === undefined) {
-        $scope.schema = {};
-      }
-
-      $scope.$watch('functions', function (newValue, oldValue) {
-        if (newValue) {
-          console.log($scope.functions);
-          $scope.functions = newValue;
-        }
-      }, true);
-
-      //      if ($scope.actionsEnabled === undefined) {
-      //        $scope.actionsEnabled = true;
-      //      }
-      //
-      //      if ($scope.preview === undefined) {
-      //        $scope.preview = false;
-      //      }
-
-      schemaCtrl.model($scope.schema);
-      $scope.schemaCtrl = schemaCtrl;
-    }
-  }
-});
 fg.controller('fgFormController', ["$scope", "$parse", function($scope, $parse) {
 
   this.model = {};

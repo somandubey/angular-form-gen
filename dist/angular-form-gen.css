@@ -131,54 +131,6 @@
 .fg-validation-summary {
 	margin-top: 10px;
 }
-/*.jsonify {*/
-    /*position: relative;*/
-    /*margin: 15px 0;*/
-    /*padding: 39px 19px 14px;*/
-    /*background-color: #fff;*/
-    /*border: 1px solid #ddd;*/
-    /*-webkit-border-radius: 4px;*/
-    /*-moz-border-radius: 4px;*/
-    /*border-radius: 4px;*/
-/*}*/
-
-/*.jsonify-label {*/
-    /*position: absolute;*/
-    /*top: -1px;*/
-    /*left: -1px;*/
-    /*padding: 3px 7px;*/
-    /*font-size: 12px;*/
-    /*font-weight: bold;*/
-    /*background-color: #f5f5f5;*/
-    /*border: 1px solid #ddd;*/
-    /*color: #9da0a4;*/
-    /*-webkit-border-radius: 4px 0 4px 0;*/
-    /*-moz-border-radius: 4px 0 4px 0;*/
-    /*border-radius: 4px 0 4px 0;*/
-/*}*/
-
-/*.jsonify-button {*/
-    /*display: none;*/
-    /*cursor: pointer;*/
-/*}*/
-
-/*.jsonify:hover .jsonify-button {*/
-    /*display: inline-block;*/
-/*}*/
-
-.jsonify {
-  margin-top: 10px;
-  position: relative;
-}
-
-.jsonify .btn-toolbar-right {
-  right: 5px;
-}
-.jsonify .btn-toolbar {
-  position: absolute;
-  margin: 0px;
-  top: -10px;
-}
 .fg-tabs > .nav-tabs {
 	margin-bottom: 0px;
 }
@@ -297,6 +249,72 @@
     margin-bottom: 20px;
   }
 }
+/*.jsonify {*/
+    /*position: relative;*/
+    /*margin: 15px 0;*/
+    /*padding: 39px 19px 14px;*/
+    /*background-color: #fff;*/
+    /*border: 1px solid #ddd;*/
+    /*-webkit-border-radius: 4px;*/
+    /*-moz-border-radius: 4px;*/
+    /*border-radius: 4px;*/
+/*}*/
+
+/*.jsonify-label {*/
+    /*position: absolute;*/
+    /*top: -1px;*/
+    /*left: -1px;*/
+    /*padding: 3px 7px;*/
+    /*font-size: 12px;*/
+    /*font-weight: bold;*/
+    /*background-color: #f5f5f5;*/
+    /*border: 1px solid #ddd;*/
+    /*color: #9da0a4;*/
+    /*-webkit-border-radius: 4px 0 4px 0;*/
+    /*-moz-border-radius: 4px 0 4px 0;*/
+    /*border-radius: 4px 0 4px 0;*/
+/*}*/
+
+/*.jsonify-button {*/
+    /*display: none;*/
+    /*cursor: pointer;*/
+/*}*/
+
+/*.jsonify:hover .jsonify-button {*/
+    /*display: inline-block;*/
+/*}*/
+
+.jsonify {
+  margin-top: 10px;
+  position: relative;
+}
+
+.jsonify .btn-toolbar-right {
+  right: 5px;
+}
+.jsonify .btn-toolbar {
+  position: absolute;
+  margin: 0px;
+  top: -10px;
+}
+
+
+
+.form .control-label, .fg-edit-palette .control-label {
+  float: none;
+  width: 100%;
+  text-align: left;
+  padding: 0;
+}
+
+.form .fg-field-inner > div, .form .fg-property-field > div, .fg-edit-palette .fg-field-inner > div {
+  margin-left: 0;
+  width: 100%;
+  float: none;
+  padding: 0;
+}
+
+
 
 /*.fg-edit-palette .controls {*/
   /*margin-left: 0;*/
@@ -393,24 +411,6 @@ hr.m5{
 .fg-form .panel-body{
   padding:  0px !important;
 }
-
-
-
-.form .control-label, .fg-edit-palette .control-label {
-  float: none;
-  width: 100%;
-  text-align: left;
-  padding: 0;
-}
-
-.form .fg-field-inner > div, .form .fg-property-field > div, .fg-edit-palette .fg-field-inner > div {
-  margin-left: 0;
-  width: 100%;
-  float: none;
-  padding: 0;
-}
-
-
 .fg-field-properties-container {
   max-height: 0;
   overflow: hidden;

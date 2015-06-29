@@ -1,6 +1,6 @@
 fg.controller('fgEditPaletteController', function ($scope, fgConfig, $modal) {
 
-  $scope.templates = [];
+  // $scope.templates = [];
   $scope.allTemplates = [];
   $scope.allTemplatesCategory = {};
   $scope.populate_template = false;
@@ -15,12 +15,12 @@ fg.controller('fgEditPaletteController', function ($scope, fgConfig, $modal) {
 
   while (i--) {
     var tmpl = tmpls[i];
-    $scope.allTemplates.unshift(angular.copy(tmpl));
+    $scope.allTemplates.unshift(tmpl);
     $scope.allTemplatesCategory[tmpl.type] = tmpl;
     if (tmpl.editor && tmpl.editor.visible == false) {
       continue;
     }
-    $scope.templates.unshift(angular.copy(tmpl));
+    //$scope.templates.unshift(tmpl);
   }
 
   $scope.templateFilter = function (template) {
@@ -45,7 +45,7 @@ fg.controller('fgEditPaletteController', function ($scope, fgConfig, $modal) {
     $scope.populate_template = true;
     for (var i = 0; i <= tmpls.length; i++) {
       if (selected == tmpls[i].displayName) {
-        $scope.template = tmpls[i];
+        $scope.template = angular.copy(tmpls[i]);
         $scope.template.$_displayProperties = true;
         break;
       }

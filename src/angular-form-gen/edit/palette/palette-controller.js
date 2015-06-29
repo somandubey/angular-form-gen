@@ -44,7 +44,7 @@ fg.controller('fgEditPaletteController', function ($scope, fgConfig, $modal) {
   $scope.changedFieldValue = function (selected) {
     $scope.populate_template = true;
     for (var i = 0; i <= tmpls.length; i++) {
-      if (selected == tmpls[i].displayName) {
+      if (selected === tmpls[i].displayName) {
         $scope.template = tmpls[i];
         $scope.template.$_displayProperties = true;
         break;
@@ -116,8 +116,8 @@ fg.controller('fgEditPaletteController', function ($scope, fgConfig, $modal) {
     $scope.functions.createField(_field, groupId).then(function (createdField) {
       _.forEach($scope.groups, function (group) {
         if (group.fieldGroupId === groupId) {
-          if (!group.associatedFields || group.associatedFields.length) {
-            group.associatedFields = []
+          if (!group.associatedFields || !group.associatedFields.length) {
+            group.associatedFields = [];
           }
           group.associatedFields.push(createdField);
           return false;

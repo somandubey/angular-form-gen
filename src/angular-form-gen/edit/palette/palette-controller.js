@@ -91,6 +91,7 @@ fg.controller('fgEditPaletteController', function ($scope, fgConfig, $modal) {
   $scope.editField = function (groupId, field) {
     $scope.model.ifNewFieldOpen = true;
     $scope.editFieldFlag = true;
+    $scope.populate_template = true;
     $scope.template = field;
     for (var i = 0; i <= tmpls.length; i++) {
       if (field.type === tmpls[i].type) {

@@ -3,7 +3,7 @@
 -->
 
 <!-- minlength -->
-<div ng-if="fields.minlength" class="fg-property-field-validation">
+<div ng-if="field.type==='text' || field.type==='textarea' || field.type==='email' || field.type==='select list' || field.type==='number' || field.type==='password'"  class="fg-property-field-validation">
   <div fg-property-field="minlength"
        fg-property-field-label="Minimum length">
     <input type="text"
@@ -21,7 +21,7 @@
 </div>
 
 <!-- maxlength -->
-<div ng-if="fields.maxlength" class="fg-property-field-validation">
+<div ng-if="field.type==='text' || field.type==='textarea' || field.type==='email' || field.type==='select list' || field.type==='number' || field.type==='password'" class="fg-property-field-validation">
   <div fg-property-field="maxlength"
        fg-property-field-label="Maximum length">
     <input type="text"
@@ -39,7 +39,7 @@
 </div>
 
 <!-- pattern -->
-<div ng-if="fields.pattern" class="fg-property-field-validation">
+<div ng-if="field.type==='text' || field.type==='textarea' || field.type==='email' || field.type==='select list' || field.type==='number' || field.type==='password'"  class="fg-property-field-validation">
   <div fg-property-field="pattern"
        fg-property-field-label="Pattern">
     <div fg-dropdown-input="patternOptions"

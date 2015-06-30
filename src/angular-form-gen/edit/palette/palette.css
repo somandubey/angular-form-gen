@@ -84,6 +84,7 @@ hr.m5{
   margin: 5px;
   background-color: #999;
   -webkit-border-radius: 5px;
+  border-radius: 5px;
 }
  
 .fg-form::-webkit-scrollbar-button:start:decrement,

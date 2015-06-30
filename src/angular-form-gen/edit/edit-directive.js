@@ -5,7 +5,7 @@ fg.directive('fgEdit', function () {
     restrict: 'AE',
     scope: {
       // // The schema model to edit
-      schema: '=?fgSchema',
+      schema: '=?$scope.myForm',
       functions: '=?fgFunctions'
       //      // Boolean indicating wether to show the default form action buttons
       //      actionsEnabled: '=?fgActionsEnabled',
@@ -29,6 +29,13 @@ fg.directive('fgEdit', function () {
         if (newValue) {
           console.log($scope.functions);
           $scope.functions = newValue;
+        }
+      }, true);
+       $scope.$watch('schema', function (newValue, oldValue) {
+        if (newValue) {
+          $scope.schema = newValue;
+          schemaCtrl.model($scope.schema);
+          $scope.schemaCtrl = schemaCtrl;
         }
       }, true);
 

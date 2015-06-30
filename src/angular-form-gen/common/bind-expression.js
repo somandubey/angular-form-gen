@@ -3,7 +3,7 @@ fg.directive('fgBindExpression', function ($interpolate) {
   function buildWatchExpression(interpolateFn) {
     var sb = [];
     var parts = interpolateFn.parts;
-    var ii = parts.length;
+    var ii = parts && parts.length;
 
     while (ii--) {
       var part = parts[ii];

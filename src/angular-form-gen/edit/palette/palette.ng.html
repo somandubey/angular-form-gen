@@ -3,7 +3,7 @@
     <div fg-edit-palette-categories data-category="selectedCategory"></div>
     <accordion close-others="accordion.oneAtATime">
       <accordion-group is-open="model.ifNewFieldOpen">
-        <accordion-heading>Add New Field
+        <accordion-heading>{{editFieldFlag ? "Edit Field": "Add New Field"}}
           <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
         </accordion-heading>
         <div id="fieldType" class="row">
@@ -26,25 +26,25 @@
           <div class="col-sm-12" ng-show="populate_template">
             <div fg-edit-canvas-field-properties="template"></div>
             <div class="row">
-              <div fg-property-field="fieldGroup" fg-property-field-label="Field group">
+              <div fg-property-field="fieldGroup" fg-property-field-label="Field group" style="padding: 0px 20px;">
                 <div class='row'>
-                  <div class='col-md-9'>
+                  <div class='col-md-9' style="padding-right: 0px;">
                     <select class="form-control" ng-model="selectedGroup" ng-options="group.fieldGroupId as group.fieldGroupName for group in groups"></select>
                   </div>
-                  <div class='col-md-3'>
-                    <button class='btn btn-primary btn-sm' ng-click='openCreateGroupModal()'>
+                  <div class='col-md-3' style="padding-left: 15px;">
+                    <button class='btn btn-primary btn-sm' ng-click='openCreateGroupModal()' style="height: 33px;">
                       <i class='fa fa-plus'></i>
                     </button>
                   </div>
                 </div>
-                <div class="col-sm-12">
-                  <div class="col-sm-3">
+                <div class="col-sm-12" style="padding: 8px 10px 8px 0px;">
+                  <div class="col-sm-3" style="margin-right: 10px; padding: 0px 0px;">
                     <a ng-click="associateField(template, selectedGroup)" class="btn btn-primary btn-sm margin-top-2"> <i
                             class="fa fa-plus normal"></i> OK
                       </a>
                   </div>
-                  <div class="col-sm-9">
-                    <a ng-click="resetField()" class="btn btn-primary btn-sm margin-top-2">
+                  <div class="col-sm-8" style="padding: 0px 0px;">
+                    <a ng-click="resetField()" class="btn btn-danger btn-sm margin-top-2">
                         <i class="fa fa-times normal"></i> Cancel
                       </a>
                   </div>
@@ -67,8 +67,11 @@
           style="width:100%;background-color: #FD9753;border-color: #FB6705;text-align: left;font-weight: bold;font-size: 12px;border-radius: 0px; margin-bottom: 0px;">
             <div class="fg-field-overlay">
               <div class="btn-toolbar btn-toolbar-right">
-                <button class="btn btn-default btn-xs btn-primary" type="button" ng-click="schemaCtrl.addField(template)" title="Add this field.">
+                <button class="btn btn-default btn-xs btn-primary" type="button" ng-click="schemaCtrl.addField(template)" title="Add this field to Form.">
                   <span class="glyphicon glyphicon-plus"></span>
+                </button>
+                <button class="btn btn-default btn-xs btn-primary" type="button" ng-click="editField(group.fieldGroupId, template)" title="Edit this field.">
+                  <span class="glyphicon glyphicon-pencil"></span>
                 </button>
               </div>
             </div>

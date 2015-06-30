@@ -5,7 +5,7 @@
 <!-- minlength -->
 <div ng-if="field.type==='text' || field.type==='textarea' || field.type==='email' || field.type==='select list' || field.type==='number' || field.type==='password'"  class="fg-property-field-validation">
   <div fg-property-field="minlength"
-       fg-property-field-label="Minimum length">
+       fg-property-field-label="Min. length">
     <input type="text"
            fg-field-redraw
            fg-input-number
@@ -23,7 +23,7 @@
 <!-- maxlength -->
 <div ng-if="field.type==='text' || field.type==='textarea' || field.type==='email' || field.type==='select list' || field.type==='number' || field.type==='password'" class="fg-property-field-validation">
   <div fg-property-field="maxlength"
-       fg-property-field-label="Maximum length">
+       fg-property-field-label="Max. length">
     <input type="text"
            fg-field-redraw
            fg-input-number
@@ -52,6 +52,24 @@
 
   <div ng-if="field.validation.pattern.length > 0" >
     <div fg-edit-validation-message="pattern"></div>
+  </div>
+</div>
+
+<!--date-->
+<div ng-if="field.type==='date'" class="fg-property-field-validation">
+  <div fg-property-field="date" fg-property-field-label="Start Date Range">
+    <div>
+      <label title="Indicates start range for this field.">
+        <input type="date" ng-model="field.validation.startDate" />
+      </label>
+      </div>
+    </div>
+  <div fg-property-field="date" fg-property-field-label="End date range">
+    <div>
+      <label title="Indicates end range for this field.">
+        <input type="date" ng-model="field.validation.endDate" />
+      </label>
+    </div>
   </div>
 </div>
 

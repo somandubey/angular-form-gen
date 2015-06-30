@@ -78,10 +78,38 @@ fg.controller('fgEditPaletteController', function ($scope, fgConfig, $modal) {
     }
   } ();
 
+  $scope.clearField = function () {
+    $scope.editFieldFlag = false;
+    $scope.template = {};
+  }
   $scope.resetField = function () {
     $scope.model.ifNewFieldOpen = false;
+    $scope.clearField();
   };
 
+
+  $scope.editField = function (groupId, field) {
+    $scope.model.ifNewFieldOpen = true;
+    $scope.editFieldFlag = true;
+    $scope.populate_template = true;
+    $scope.template = field;
+    for (var i = 0; i <= tmpls.length; i++) {
+      if (field.type === tmpls[i].type) {
+        $scope.selected = tmpls[i].displayName;
+        $scope.template.$_displayProperties = true;
+        break;
+      }
+    }
+    $scope.selectedGroup = groupId;
+
+
+    // $scope.template.id = field
+    // .type,
+    //   "name": field.name,
+    //   "displayName": field.displayName,
+    //   "placeholder": field.placeholder,
+    //   "tooltip": field.tooltip
+  }
 
   $scope.associateField = function (field, groupId) {
     var _field = {
@@ -113,20 +141,62 @@ fg.controller('fgEditPaletteController', function ($scope, fgConfig, $modal) {
       }
     };
 
-    $scope.functions.createField(_field, groupId).then(function (createdField) {
-      _.forEach($scope.groups, function (group) {
-        if (group.fieldGroupId === groupId) {
-          if (!group.associatedFields || !group.associatedFields.length) {
-            group.associatedFields = []
+    if ($scope.editFieldFlag) {
+      console.log('create vs save : saving edited field: ', field.fieldId);
+      $scope.functions.saveField(field.fieldId, _field, groupId).then(function (savedField) {
+        // var break = false;
+        _.forEach($scope.groups, function (group) {
+          var breakLoop = false;
+          if (group.fieldGroupId === groupId) {
+            _.forEach(group.associatedFields, function(associatedField, idx) {
+              if (associatedField.fieldId === savedField.fieldId) {
+                group.associatedFields[idx] = savedField;
+                breakLoop = true;
+                return false;
+              }
+            });
+            if (!breakLoop) {
+              // remove from previous group
+              _.forEach($scope.groups, function (prevgroup) {
+                if (prevgroup.fieldGroupId !== groupId) {
+                  group.associatedFields = _.reject(group.associatedFields, function(n) {
+                    return n.fieldId === savedField.fieldId;
+                  });
+                } 
+              });
+              // add in new group
+              if (!group.associatedFields || !group.associatedFields.length) {
+                group.associatedFields = []
+              }
+              group.associatedFields.push(savedField);
+              return false;  
+            }
           }
-          group.associatedFields.push(createdField);
-          return false;
-        }
+          if (breakLoop) {
+            return false;
+          }
+        });
+        field = {};
+        groupId = false;
+        $scope.resetField();
       });
-      field = {};
-      groupId = false;
-      $scope.resetField();
-    });
+    } else {
+      console.log('create vs save : creating new field.');
+      $scope.functions.createField(_field, groupId).then(function (createdField) {
+        _.forEach($scope.groups, function (group) {
+          if (group.fieldGroupId === groupId) {
+            if (!group.associatedFields || !group.associatedFields.length) {
+              group.associatedFields = []
+            }
+            group.associatedFields.push(createdField);
+            return false;
+          }
+        });
+        field = {};
+        groupId = false;
+        $scope.resetField();
+      });
+    }
   };
 
 }).controller('addGrpCtrl', function ($scope, $modalInstance) {

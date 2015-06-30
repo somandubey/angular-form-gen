@@ -143,9 +143,10 @@ fg.controller('fgEditPaletteController', function ($scope, fgConfig, $modal) {
 
     if ($scope.editFieldFlag) {
       console.log('create vs save : saving edited field: ', field.fieldId);
-      $scope.functions.saveField(field.fieldId, _field, groupId).then(function (savedField) {
+      var savedField = field;
+      $scope.functions.saveField(field.fieldId, _field, groupId).then(function () {
         // var break = false;
-        _.forEach($scope.groups, function (group) {
+        _.forEach($scope.groups, function (group, idx) {
           var breakLoop = false;
           if (group.fieldGroupId === groupId) {
             _.forEach(group.associatedFields, function(associatedField, idx) {
@@ -157,12 +158,12 @@ fg.controller('fgEditPaletteController', function ($scope, fgConfig, $modal) {
             });
             if (!breakLoop) {
               // remove from previous group
-              _.forEach($scope.groups, function (prevgroup) {
+              _.forEach($scope.groups, function (prevgroup, pidx) {
                 if (prevgroup.fieldGroupId !== groupId) {
-                  group.associatedFields = _.reject(group.associatedFields, function(n) {
+                  prevgroup.associatedFields = _.reject(prevgroup.associatedFields, function(n) {
                     return n.fieldId === savedField.fieldId;
                   });
-                } 
+                }
               });
               // add in new group
               if (!group.associatedFields || !group.associatedFields.length) {

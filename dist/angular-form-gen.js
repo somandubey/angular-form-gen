@@ -309,7 +309,7 @@ angular.module('fg').run(['$templateCache', function($templateCache){
   $templateCache.put('angular-form-gen/common/tabs/tabs.ng.html', '<div class=\"fg-tabs tabbable\" style=\"margin-bottom: 0px;\"><ul class=\"nav nav-tabs\"><li ng-repeat=\"tab in tabs.items\" ng-class=\"{ active: tab === tabs.active, disabled: tab.disabled }\"><a href=\"\" ng-click=\"tabs.activate(tab)\">{{ tab.title }}</a></li></ul><div class=\"tab-content\" ng-transclude=\"\"></div></div>');
   $templateCache.put('angular-form-gen/edit/canvas/canvas.ng.html', '<div class=\"fg-edit-canvas\" ng-class=\"{ \'fg-edit-canvas-dragging\': dragging }\"><fieldset><div class=\"fg-edit-canvas-area\" dq-drag-area=\"fg-edit-canvas\" dq-drag-enter=\"canvasCtrl.dragEnter()\" dq-drag-leave=\"canvasCtrl.dragLeave()\" dq-drop=\"canvasCtrl.drop()\"><div ng-if=\"!(schema.fields.length)\"><div ng-if=\"!dragPlaceholder.visible\" class=\"fg-edit-canvas-area-empty alert alert-info text-center\"><p class=\"lead hidden-phone\"><strong>Drag</strong> one of the <strong>Fields</strong> from <strong>Field Palette</strong> onto <strong>Form Designer</strong> to create a new form.</p></div></div><div ng-repeat=\"field in schema.fields\"><div ng-class=\"{ \'fg-drag-placeholder-visible\' : dragPlaceholder.visible && dragPlaceholder.index === $index }\" class=\"fg-drag-placeholder\"></div><div fg-edit-canvas-field=\"\"></div></div><div ng-class=\"{ \'fg-drag-placeholder-visible\': dragPlaceholder.visible && dragPlaceholder.index == schema.fields.length }\" class=\"fg-drag-placeholder\"></div></div></fieldset></div>');
   $templateCache.put('angular-form-gen/edit/palette/group.ng.html', '<div class=\"modal-header\"><h3 class=\"modal-title\">Add Field group name</h3></div><div class=\"modal-body\"><div class=\"form-group\"><input type=\"text\" class=\"form-control\" name=\"group-name\" ,=\"\" ng-model=\"model.groupName\" placeholder=\"Enter field group name\"></div></div><div class=\"modal-footer\"><button class=\"btn btn-primary\" ng-click=\"ok()\">OK</button> <button class=\"btn btn-warning\" ng-click=\"cancel()\">Cancel</button></div>');
-  $templateCache.put('angular-form-gen/edit/palette/palette.ng.html', '<div class=\"fg-edit-palette\"><fieldset><div fg-edit-palette-categories=\"\" data-category=\"selectedCategory\"></div><accordion close-others=\"accordion.oneAtATime\"><accordion-group is-open=\"model.ifNewFieldOpen\"><accordion-heading>{{editFieldFlag ? \"Edit Field\": \"Add New Field\"}} <i class=\"pull-right glyphicon\" ng-class=\"{\'glyphicon-chevron-down\': status.open, \'glyphicon-chevron-right\': !status.open}\"></i></accordion-heading><div id=\"fieldType\" class=\"row\"><div class=\"col-sm-12 margin-top-5\"><div class=\"col-sm-5\"><h5>Field Type</h5></div><div class=\"col-sm-7\"><select class=\"form-control\" ng-model=\"selected\" ng-change=\"changedFieldValue(selected)\"><option ng-repeat=\"template in allTemplates | filter:allTemplateFilter\" class=\"fg-field\"><span>{{template.displayName}}</span><div fg-field=\"template\" fg-tab-index=\"3\" fg-no-validation-summary=\"true\" fg-edit-mode=\"true\"></div></option></select></div></div><div class=\"row\"><hr class=\"m5 col-xs-12\"></div><div class=\"col-sm-12\" ng-show=\"populate_template\"><div fg-edit-canvas-field-properties=\"template\"></div><div class=\"row\"><div fg-property-field=\"fieldGroup\" fg-property-field-label=\"Field group\" style=\"padding: 0px 20px;\"><div class=\"row\"><div class=\"col-md-9\" style=\"padding-right: 0px;\"><select class=\"form-control\" ng-model=\"selectedGroup\" ng-options=\"group.fieldGroupId as group.fieldGroupName for group in groups\"></select></div><div class=\"col-md-3\" style=\"padding-left: 15px;\"><button class=\"btn btn-primary btn-sm\" ng-click=\"openCreateGroupModal()\" style=\"height: 33px;\"><i class=\"fa fa-plus\"></i></button></div></div><div class=\"col-sm-12\" style=\"padding: 8px 10px 8px 0px;\"><div class=\"col-sm-3\" style=\"margin-right: 15px; padding: 0px 0px;\"><a ng-click=\"associateField(template, selectedGroup)\" class=\"btn btn-primary btn-sm margin-top-2\"><i class=\"fa fa-plus normal\"></i> Save</a></div><div class=\"col-sm-8\" style=\"padding: 0px 0px;\"><a ng-click=\"resetField()\" class=\"btn btn-danger btn-sm margin-top-2\"><i class=\"fa fa-times normal\"></i> Cancel</a></div></div><br></div></div></div><div ng-class=\"{ \'fg-drag-placeholder-visible\' : dragPlaceholder.visible && dragPlaceholder.index === $index }\" class=\"fg-drag-placeholder\"></div></div></accordion-group></accordion><accordion close-others=\"accordion.oneAtATime\"><accordion-group class=\"field-pallette-accordian\" data-toggle=\"collapse\" data-target=\"#collapse{{group.fieldGroupName}}\" ng-repeat=\"group in groups\"><accordion-heading>{{group.fieldGroupName}} <i class=\"pull-right glyphicon\" ng-class=\"{\'glyphicon-chevron-down\': status.open, \'glyphicon-chevron-right\': !status.open}\"></i></accordion-heading><div id=\"collapse{{group.name}}\"><div ng-repeat=\"template in group.associatedFields\" class=\"fg-field\" dq-draggable=\"fg-edit-canvas\" dq-drag-begin=\"{ source: \'palette\', field: template }\" style=\"width:100%;background-color: #FD9753;border-color: #FB6705;text-align: left;font-weight: bold;font-size: 12px;border-radius: 0px; margin-bottom: 0px;\"><div class=\"fg-field-overlay\"><div class=\"btn-toolbar btn-toolbar-right\"><button class=\"btn btn-default btn-xs btn-primary\" type=\"button\" ng-click=\"schemaCtrl.addField(template)\" title=\"Add this field to Form.\"><span class=\"glyphicon glyphicon-plus\"></span></button> <button class=\"btn btn-default btn-xs btn-primary\" type=\"button\" ng-click=\"editField(group.fieldGroupId, template)\" title=\"Edit this field.\"><span class=\"glyphicon glyphicon-pencil\"></span></button></div></div><div fg-field=\"template\" fg-tab-index=\"-1\" fg-no-validation-summary=\"true\" fg-edit-mode=\"true\"></div></div></div></accordion-group></accordion></fieldset></div>');
+  $templateCache.put('angular-form-gen/edit/palette/palette.ng.html', '<div class=\"fg-edit-palette\"><fieldset><div fg-edit-palette-categories=\"\" data-category=\"selectedCategory\"></div><accordion close-others=\"accordion.oneAtATime\"><accordion-group is-open=\"model.ifNewFieldOpen\"><accordion-heading>{{editFieldFlag ? \"Edit Field\": \"Add New Field\"}} <i class=\"pull-right glyphicon\" ng-class=\"{\'glyphicon-chevron-down\': status.open, \'glyphicon-chevron-right\': !status.open}\"></i></accordion-heading><div id=\"fieldType\" class=\"row\"><div class=\"col-sm-12 margin-top-5\"><div class=\"col-sm-5\"><h5>Field Type</h5></div><div class=\"col-sm-7\"><select class=\"form-control\" ng-model=\"selected\" ng-change=\"changedFieldValue(selected)\" ng-disabled=\"editFieldFlag\"><option ng-repeat=\"template in allTemplates | filter:allTemplateFilter\" class=\"fg-field\"><span>{{template.displayName}}</span><div fg-field=\"template\" fg-tab-index=\"3\" fg-no-validation-summary=\"true\" fg-edit-mode=\"true\"></div></option></select></div></div><div class=\"row\"><hr class=\"m5 col-xs-12\"></div><div class=\"col-sm-12\" ng-show=\"populate_template\"><div fg-edit-canvas-field-properties=\"template\"></div><div class=\"row\"><div fg-property-field=\"fieldGroup\" fg-property-field-label=\"Field group\" style=\"padding: 0px 20px;\"><div class=\"row\"><div class=\"col-md-9\" style=\"padding-right: 0px;\"><select class=\"form-control\" ng-model=\"selectedGroup\" ng-options=\"group.fieldGroupId as group.fieldGroupName for group in groups\"></select></div><div class=\"col-md-3\" style=\"padding-left: 15px;\"><button class=\"btn btn-primary btn-sm\" ng-click=\"openCreateGroupModal()\" style=\"height: 33px;\"><i class=\"fa fa-plus\"></i></button></div></div><div class=\"col-sm-12\" style=\"padding: 8px 10px 8px 0px;\"><div class=\"col-sm-3\" style=\"margin-right: 15px; padding: 0px 0px;\"><a ng-click=\"associateField(template, selectedGroup)\" class=\"btn btn-primary btn-sm margin-top-2\"><i class=\"fa fa-plus normal\"></i> Save</a></div><div class=\"col-sm-8\" style=\"padding: 0px 0px;\"><a ng-click=\"resetField()\" class=\"btn btn-danger btn-sm margin-top-2\"><i class=\"fa fa-times normal\"></i> Cancel</a></div></div><br></div></div></div><div ng-class=\"{ \'fg-drag-placeholder-visible\' : dragPlaceholder.visible && dragPlaceholder.index === $index }\" class=\"fg-drag-placeholder\"></div></div></accordion-group></accordion><accordion close-others=\"accordion.oneAtATime\"><accordion-group class=\"field-pallette-accordian\" data-toggle=\"collapse\" data-target=\"#collapse{{group.fieldGroupName}}\" ng-repeat=\"group in groups\"><accordion-heading>{{group.fieldGroupName}} <i class=\"pull-right glyphicon\" ng-class=\"{\'glyphicon-chevron-down\': status.open, \'glyphicon-chevron-right\': !status.open}\"></i></accordion-heading><div id=\"collapse{{group.name}}\"><div ng-repeat=\"template in group.associatedFields\" class=\"fg-field\" dq-draggable=\"fg-edit-canvas\" dq-drag-begin=\"{ source: \'palette\', field: template }\" style=\"width:100%;background-color: #FD9753;border-color: #FB6705;text-align: left;font-weight: bold;font-size: 12px;border-radius: 0px; margin-bottom: 0px;\"><div class=\"fg-field-overlay\"><div class=\"btn-toolbar btn-toolbar-right\"><button class=\"btn btn-default btn-xs btn-primary\" type=\"button\" ng-click=\"schemaCtrl.addField(template)\" title=\"Add this field to Form.\"><span class=\"glyphicon glyphicon-plus\"></span></button> <button class=\"btn btn-default btn-xs btn-primary\" type=\"button\" ng-click=\"editField(group.fieldGroupId, template)\" title=\"Edit this field.\"><span class=\"glyphicon glyphicon-pencil\"></span></button></div></div><div fg-field=\"template\" fg-tab-index=\"-1\" fg-no-validation-summary=\"true\" fg-edit-mode=\"true\"></div></div></div></accordion-group></accordion></fieldset></div>');
   $templateCache.put('angular-form-gen/edit/palette/template.ng.html', '<div><div><div fg-property-field=\"fieldName\" fg-property-field-label=\"Name\" class=\"ng-hide\"><input type=\"text\" class=\"form-control\" name=\"fieldName\" ng-model=\"field.type\" ng-required=\"false\" ng-pattern=\"/^[a-zA-Z]([\\w]+)?$/\" fg-unique-field-name=\"\"></div></div><div><div fg-property-field=\"displayName\" fg-property-field-label=\"Label\"><input type=\"text\" class=\"form-control\" name=\"displayName\" ng-model=\"field.displayName\"></div></div><div><div fg-property-field=\"fieldPlaceholder\" fg-property-field-label=\"Placeholder text\"><input type=\"text\" class=\"form-control\" name=\"fieldPlaceholder\" ng-model=\"field.placeholder\"></div></div><div><div fg-property-field=\"fieldTooltip\" fg-property-field-label=\"Tooltip\"><input type=\"text\" class=\"form-control\" name=\"fieldTooltip\" ng-model=\"field.tooltip\"></div></div><! -- field group --><div><div fg-property-field=\"fieldGroup\" fg-property-field-label=\"Field group\"><select class=\"form-control\" ng-model=\"selected\" ng-change=\"changedGroupValue(selected)\"><option ng-repeat=\"group in groups\"><span>{{group.name}}</span></option></select></div></div></div>');
   $templateCache.put('angular-form-gen/field-templates/default/checkbox.ng.html', '<div class=\"checkbox\"><label title=\"{{ field.schema.tooltip }}\"><input fg-field-input=\"\" id=\"{{ field.$_id }}\" type=\"checkbox\" tabindex=\"{{ tabIndex }}\" ng-model=\"form.data[field.schema.name]\"> <span ng-if=\"field.schema.nolabel\">{{ field.schema.name }}</span></label></div>');
   $templateCache.put('angular-form-gen/field-templates/default/checkboxlist.ng.html', '<div fg-checkboxlist=\"\" fg-field-input=\"\" ng-model=\"form.data[field.schema.name]\" name=\"{{ field.schema.name }}\"><div class=\"checkbox\" ng-repeat=\"option in field.schema.options\"><label title=\"{{ field.schema.tooltip }}\"><input type=\"checkbox\" tabindex=\"{{ tabIndex }}\" value=\"{{ option.value }}\" ng-model=\"form.data[field.schema.name][option.value]\"> <span>{{option.text || option.value}}</span></label></div></div>');
@@ -1722,6 +1722,123 @@ fg.directive('fgEditCanvas', function() {
   };
 });
 
+fg.directive('fgCheckboxlist', function() {
+
+  function validateRequired(validation, value, options) {
+
+    var required = validation ? validation.required : false;
+
+    // Set in field-templates/default/checkboxlist.ng.html
+
+    if(required) {
+
+      // Ensures that at least one option is checked
+
+      var x = options.length;
+
+      while(x--) {
+        if(value[options[x].value]) {
+          return true;
+        }
+      }
+
+      return false;
+    }
+
+    return true;
+
+  }
+
+  function selectionCount(value) {
+    var c = 0;
+
+    for(var k in value) {
+      if(value[k]) {
+        c += 1;
+      }
+    }
+
+    return c;
+  }
+
+  return {
+    require: ['^fgField'],
+    link: function($scope, $element, $attrs, $ctrls) {
+
+      var field = $ctrls[0].field();
+
+      var formData = $scope.form.data, schema = field.schema;
+
+      $scope.$watchCollection(function() {
+        return formData[schema.name];
+      }, function(value, oldValue) {
+
+        // Ensure that the field is marked as dirty on changes
+        if(!field.state.$dirty && value !== oldValue) {
+          field.state.$setViewValue(value);
+        }
+
+        if(schema.validation) {
+          var required = validateRequired(schema.validation, value, schema.options);
+          field.state.$setValidity('required', required);
+
+          var minc = schema.validation.minoptions;
+          var maxc = schema.validation.maxoptions;
+
+          var min = true, max = true;
+
+          if(minc || maxc) {
+            var c = selectionCount(value);
+
+            if(minc) {
+              min = c >= schema.validation.minoptions;
+            }
+
+            if(maxc) {
+              max = c <= schema.validation.maxoptions;
+            }
+          }
+
+          field.state.$setValidity('minoptions', min);
+          field.state.$setValidity('maxoptions', max);
+        }
+      });
+    }
+  };
+});
+
+fg.directive('fgSelectlist', ["$timeout", function($timeout) {
+
+  // Angular adds a '? undefined:undefined ?' option dom element if it cannot find a matching model value in the
+  // options list. Somehow this also happens if the value is in the option list. This directive simply removes
+  // the invalid option from the dom.
+
+  // https://github.com/angular/angular.js/issues/1019
+  // http://stackoverflow.com/questions/12654631/why-does-angularjs-include-an-empty-option-in-select
+
+  return {
+    priority: 1000,
+    link: function($scope, $element) {
+
+      // Ensure that the ng-repeat has finished by suspending the remove.
+
+      $timeout(function() {
+
+        var $options = $element.find('option');
+        var i = $options.length;
+
+        while(--i >= 0) {
+          var $option = angular.element($options[i]);
+          if($option.val() == '? undefined:undefined ?') {
+            $option.remove();
+            break;
+          }
+        }
+      }, 0);
+    }
+  }
+}]);
+
 fg.controller('fgEditPaletteController', ["$scope", "fgConfig", "$modal", function ($scope, fgConfig, $modal) {
 
   // $scope.templates = [];
@@ -2014,123 +2131,6 @@ fg.directive('templateDirective', function () {
  
 });
 
-fg.directive('fgCheckboxlist', function() {
-
-  function validateRequired(validation, value, options) {
-
-    var required = validation ? validation.required : false;
-
-    // Set in field-templates/default/checkboxlist.ng.html
-
-    if(required) {
-
-      // Ensures that at least one option is checked
-
-      var x = options.length;
-
-      while(x--) {
-        if(value[options[x].value]) {
-          return true;
-        }
-      }
-
-      return false;
-    }
-
-    return true;
-
-  }
-
-  function selectionCount(value) {
-    var c = 0;
-
-    for(var k in value) {
-      if(value[k]) {
-        c += 1;
-      }
-    }
-
-    return c;
-  }
-
-  return {
-    require: ['^fgField'],
-    link: function($scope, $element, $attrs, $ctrls) {
-
-      var field = $ctrls[0].field();
-
-      var formData = $scope.form.data, schema = field.schema;
-
-      $scope.$watchCollection(function() {
-        return formData[schema.name];
-      }, function(value, oldValue) {
-
-        // Ensure that the field is marked as dirty on changes
-        if(!field.state.$dirty && value !== oldValue) {
-          field.state.$setViewValue(value);
-        }
-
-        if(schema.validation) {
-          var required = validateRequired(schema.validation, value, schema.options);
-          field.state.$setValidity('required', required);
-
-          var minc = schema.validation.minoptions;
-          var maxc = schema.validation.maxoptions;
-
-          var min = true, max = true;
-
-          if(minc || maxc) {
-            var c = selectionCount(value);
-
-            if(minc) {
-              min = c >= schema.validation.minoptions;
-            }
-
-            if(maxc) {
-              max = c <= schema.validation.maxoptions;
-            }
-          }
-
-          field.state.$setValidity('minoptions', min);
-          field.state.$setValidity('maxoptions', max);
-        }
-      });
-    }
-  };
-});
-
-fg.directive('fgSelectlist', ["$timeout", function($timeout) {
-
-  // Angular adds a '? undefined:undefined ?' option dom element if it cannot find a matching model value in the
-  // options list. Somehow this also happens if the value is in the option list. This directive simply removes
-  // the invalid option from the dom.
-
-  // https://github.com/angular/angular.js/issues/1019
-  // http://stackoverflow.com/questions/12654631/why-does-angularjs-include-an-empty-option-in-select
-
-  return {
-    priority: 1000,
-    link: function($scope, $element) {
-
-      // Ensure that the ng-repeat has finished by suspending the remove.
-
-      $timeout(function() {
-
-        var $options = $element.find('option');
-        var i = $options.length;
-
-        while(--i >= 0) {
-          var $option = angular.element($options[i]);
-          if($option.val() == '? undefined:undefined ?') {
-            $option.remove();
-            break;
-          }
-        }
-      }, 0);
-    }
-  }
-}]);
-
 fg.controller('fgFieldController', ["$scope", "fgUtils", function($scope, fgUtils) {
 
   var self = this;
@@ -2330,26 +2330,6 @@ fg.directive('fgFieldInput', ["fgFieldInputLinkFn", function(fgFieldInputLinkFn)
     fgFieldCtrl.setFieldState(ngModelCtrl);
   };
 });
-fg.directive('fgFormFields', function() {
-
-  return {
-    require: ['^?fgForm'],
-    restrict: 'AE',
-    templateUrl: 'angular-form-gen/form/form-fields/form-fields.ng.html',
-    scope: {},
-    link: function($scope, $element, $attrs, ctrls) {
-
-      var fgForm = ctrls[0];
-
-      $scope.$watch(function() {
-        return fgForm.model;
-      }, function(value) {
-        $scope.form = value;
-      });
-    }
-  };
-
-});
 fg.controller('fgSchemaController', ["$scope", "fgUtils", function ($scope, fgUtils) {
 
   var _model;
@@ -2413,6 +2393,26 @@ fg.directive('fgSchema', ["fgSchemaLinkFn", function(fgSchemaLinkFn) {
 });
 
 
+fg.directive('fgFormFields', function() {
+
+  return {
+    require: ['^?fgForm'],
+    restrict: 'AE',
+    templateUrl: 'angular-form-gen/form/form-fields/form-fields.ng.html',
+    scope: {},
+    link: function($scope, $element, $attrs, ctrls) {
+
+      var fgForm = ctrls[0];
+
+      $scope.$watch(function() {
+        return fgForm.model;
+      }, function(value) {
+        $scope.form = value;
+      });
+    }
+  };
+
+});
 fg.directive('fgEditCanvasField', ["$timeout", function ($timeout) {
 
   return {

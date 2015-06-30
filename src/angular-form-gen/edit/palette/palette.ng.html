@@ -12,7 +12,7 @@
               <h5>Field Type</h5>
             </div>
             <div class="col-sm-7">
-              <select class="form-control" ng-model="selected" ng-change="changedFieldValue(selected)">
+              <select class="form-control" ng-model="selected" ng-change="changedFieldValue(selected)" ng-disabled="editFieldFlag">
                 <option ng-repeat="template in allTemplates | filter:allTemplateFilter" class="fg-field">
                   <span>{{template.displayName}}</span>
                   <div fg-field="template" fg-tab-index="3" fg-no-validation-summary="true" fg-edit-mode="true"></div>

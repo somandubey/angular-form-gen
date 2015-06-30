@@ -7,7 +7,8 @@
       </div> -->
       <div fg-tabs-pane="Properties">
 		  <div
-		      fg-property-field-common="{ fieldname: true, displayname: true, placeholder: true, tooltip: true }"></div>
+		      fg-property-field-common="{ fieldname: true, displayname: true, placeholder: true, tooltip: true }">
+		  </div>
 		  <!-- <div
 		      fg-property-field-common="{ displayname: true, placeholder: true, tooltip: true }"></div> -->
 		  <div fg-property-field-value>
@@ -25,14 +26,12 @@
                          name="fieldDateValue" ng-model="field.date"ng-min="{{ field.validation.startDate }}"
                          ng-max="{{ field.validation.endDate }}"/>
                 </div>
-            </div>
-            
-          </div>
+           </div>
+   		</div>
+   		
+   		<div fg-tabs-pane="Validation">
+			  <div fg-property-field-validation="{ required: true, minlength: true, maxlength: true, pattern: true }"></div>
+			</div>
 		</div>
-
-	<div fg-tabs-pane="Validation">
-	  <div fg-property-field-validation="{ required: true, minlength: true, maxlength: true, pattern: true }"></div>
-	</div>
-    </div>
   </div>
 </div>

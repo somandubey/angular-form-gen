@@ -27,10 +27,21 @@ fg.directive('fgEdit', function () {
 
       $scope.$watch('functions', function (newValue, oldValue) {
         if (newValue) {
-          console.log($scope.functions);
           $scope.functions = newValue;
         }
       }, true);
+      
+      console.log($scope.schema);
+      
+       $scope.$watch('schema', function (newValue, oldValue) {
+        if (newValue) {
+          $scope.schema = newValue;
+          schemaCtrl.model($scope.schema);
+          $scope.schemaCtrl = schemaCtrl;
+          console.log($scope.schema);
+        }
+      }, true);
+      
 
       //      if ($scope.actionsEnabled === undefined) {
       //        $scope.actionsEnabled = true;

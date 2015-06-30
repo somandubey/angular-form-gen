@@ -157,8 +157,8 @@ fg.config(function (fgConfigProvider, FgField) {
     maxlength: 'The value exceeds the maximum length{{ field.schema && (" of " + field.schema.validation.maxlength + " characters" || "")}}.',
     pattern: 'The value "{{ field.state.$viewValue }}" does not match the required format.',
     email: 'The value "{{ field.state.$viewValue }}" is not a valid email address.',
-    unique: 'The value "{{ field.state.$viewValue }}" is already in use.',
-    number: 'The value "{{ field.state.$viewValue }}" is not a number.',
+    unique: 'The value {{ field.state.$viewValue }} is already in use.',
+    number: 'The value {{ field.state.$viewValue }} is not a number.',
     min: 'The value {{ field.schema && ("should be at least " + field.schema.validation.min) || field.state.$viewValue + " is too low" }}',
     max: 'The value {{ field.schema && ("should be less than " + field.schema.validation.max) || field.state.$viewValue + " is too high" }}',
     minoptions: 'At least {{ field.schema.validation.minoptions }} option(s) should be selected.',
@@ -172,11 +172,11 @@ fg.config(function (fgConfigProvider, FgField) {
   var categories = {
     'Text input fields': [
       new FgField('text', {
-        displayName: 'Textbox'
+        displayName: ''
       }),
       new FgField('email'),
       new FgField('number', {
-        validation: { maxlength: 15 /* to prevent > Number.MAX_VALUE */ }
+        validation: { maxlength: 15 }
       }),
       new FgField('password'),
       new FgField('textarea')

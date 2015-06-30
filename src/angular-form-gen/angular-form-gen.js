@@ -245,7 +245,10 @@ fg.config(function (fgConfigProvider, FgField) {
           }
         ],
         value: ''
-      }) // ,
+      }) , 
+      new FgField('date')
+
+       //,
       // new FgField('dropdownlist', {
       //   options: [{
       //     value: '1',

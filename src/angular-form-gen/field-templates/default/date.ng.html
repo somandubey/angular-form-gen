@@ -1,0 +1,11 @@
+<input class="form-control"
+       fg-field-input
+       type="date"
+       id="{{ field.$_id }}"
+       title="{{ field.schema.tooltip }}"
+       tabindex="{{ tabIndex }}"
+       placeholder="{{ field.schema.placeholder }}"
+       ng-model="form.data[field.schema.name]"
+       ng-required="field.schema.validation.required"
+       min="{{ field.schema.validation.startDate }}"
+       max="{{ field.schema.validation.endDate }}">

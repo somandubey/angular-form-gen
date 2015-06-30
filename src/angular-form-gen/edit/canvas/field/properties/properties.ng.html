@@ -18,7 +18,18 @@
 		              ng-maxlength="{{ field.validation.maxlength }}"
 		              ng-pattern="/{{ field.validation.pattern }}/" />
 		  </div>
+
+		  <div ng-if="field.type==='date' ">
+               <div fg-property-field="fieldDateValue" fg-property-field-label="Date">
+                 	<input type="date" class="form-control"
+                         name="fieldDateValue" ng-model="field.date"ng-min="{{ field.validation.startDate }}"
+                         ng-max="{{ field.validation.endDate }}"/>
+                </div>
+            </div>
+            
+          </div>
 		</div>
+
 	<div fg-tabs-pane="Validation">
 	  <div fg-property-field-validation="{ required: true, minlength: true, maxlength: true, pattern: true }"></div>
 	</div>

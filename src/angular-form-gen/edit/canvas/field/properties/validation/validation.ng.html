@@ -55,6 +55,24 @@
   </div>
 </div>
 
+<!--date-->
+<div ng-if="field.type==='date'" class="fg-property-field-validation">
+  <div fg-property-field="date" fg-property-field-label="Start Date Range">
+    <div>
+      <label title="Indicates start range for this field.">
+        <input type="date" ng-model="field.validation.startDate" />
+      </label>
+      </div>
+    </div>
+  <div fg-property-field="date" fg-property-field-label="End date range">
+    <div>
+      <label title="Indicates end range for this field.">
+        <input type="date" ng-model="field.validation.endDate" />
+      </label>
+    </div>
+  </div>
+</div>
+
 <!-- required -->
 <div ng-if="fields.required" class="fg-property-field-validation">
   <div fg-property-field="required">

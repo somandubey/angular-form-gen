@@ -109,7 +109,7 @@ fg.controller('fgEditPaletteController', function ($scope, fgConfig, $modal) {
     for (var i = 0; i <= tmpls.length; i++) {
       if (field.type === tmpls[i].type) {
         $scope.selected = tmpls[i].displayName;
-        $scope.template.$_displayProperties = true;
+        $scope.template.$_displayProperties = false;
         break;
       }
     }

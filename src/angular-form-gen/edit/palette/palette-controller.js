@@ -61,14 +61,27 @@ fg.controller('fgEditPaletteController', function ($scope, fgConfig, $modal) {
     });
     modalInstance.result.then(function (groupName) {
       var _group = { "fieldGroupName": groupName };
-      $scope.functions.createGroup(_group).then(function (response) {
+      if(groupName==undefined){$scope.groupFeildFlag=true;}
+       for(var i = 0; i < $scope.groups.length; i++){
+          console.log('Group Name :!!!'  + $scope.groups[i].fieldGroupName);
+         if(groupName === $scope.groups[i].fieldGroupName){
+          $scope.groupFeildFlag=true;
+          
+         }
+       }
+       if(!$scope.groupFeildFlag){
+        $scope.functions.createGroup(_group).then(function (response) {
         if (!($scope.groups && $scope.groups.length)) {
           $scope.groups = [];
         }
         $scope.groups.push(response);
       });
+      }
+      else{ alert('Group Name exisits or is not provided!!!');}  
     }, function () { });
-  };
+ 
+
+};
 
   var _loadGroups = function () {
     if ($scope.functions.getGroups) {

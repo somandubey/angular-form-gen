@@ -77,7 +77,7 @@ hr.m5{
 
 
 .fg-form::-webkit-scrollbar {
-  width: 5px;
+  width: 10px;
 }
  
 .fg-form::-webkit-scrollbar-thumb:vertical {

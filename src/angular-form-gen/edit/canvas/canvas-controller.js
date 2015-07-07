@@ -78,4 +78,17 @@ fg.controller('fgEditCanvasController', function ($scope, dqUtils, $timeout, fgU
     }
   };
 
+  this.splitFields = function (idx) {
+  
+    var fields = $scope.schema.fields;
+    if(fields[idx].$_colspan){
+      fields[idx].$_colspan = false;
+    }
+    else{
+      fields[idx].$_colspan = true; 
+    }
+    //console.log('Fields ' + fields[idx1]  +  fields[idx2]);
+
+  };
+
 });

@@ -15,6 +15,8 @@ fg.controller('fgSchemaController', function ($scope, fgUtils) {
   };
 
   this.addField = function (field, index) {
+    //initialize to false as its need for expand and compress.
+    field.$_colspan=false;
     var copy = fgUtils.copyField(field);
     index = index === undefined ? _model.fields.length : index;
     _model.fields.splice(index, 0, copy);

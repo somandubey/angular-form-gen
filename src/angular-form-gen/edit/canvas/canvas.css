@@ -17,13 +17,14 @@
 /*}*/
 
 .fg-edit-canvas-area {
-  min-height: 340px;
+  min-height: 340px;*/
   /*position: relative;*/
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   border-radius: 4px;
   border: 1px solid #ddd;
   padding: 20px;
+  overflow-y: auto;
 }
 
 .fg-edit-canvas-area-empty {

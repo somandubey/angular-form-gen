@@ -42,14 +42,17 @@ fg.controller('fgEditPaletteController', function ($scope, fgConfig, $modal) {
   };
 
   $scope.changedFieldValue = function (selected) {
-    $scope.populate_template = true;
-    for (var i = 0; i <= tmpls.length; i++) {
-      if (selected == tmpls[i].displayName) {
-        $scope.template = angular.copy(tmpls[i]);
-        $scope.template.$_displayProperties = true;
-        break;
+   
+      for (var i = 0; i <= tmpls.length; i++) {
+        if (selected == tmpls[i].displayName) {
+          $scope.populate_template = true;
+          $scope.template = angular.copy(tmpls[i]);
+          $scope.template.$_displayProperties = true;
+          break;
+        }
       }
-    }
+      $scope.selected=undefined;
+   
   };
 
   $scope.openCreateGroupModal = function () {
@@ -61,23 +64,17 @@ fg.controller('fgEditPaletteController', function ($scope, fgConfig, $modal) {
     });
     modalInstance.result.then(function (groupName) {
       var _group = { "fieldGroupName": groupName };
-      if(groupName==undefined){$scope.groupFeildFlag=true;}
-       for(var i = 0; i < $scope.groups.length; i++){
-          console.log('Group Name :!!!'  + $scope.groups[i].fieldGroupName);
-         if(groupName === $scope.groups[i].fieldGroupName){
-          $scope.groupFeildFlag=true;
-          
-         }
-       }
-       if(!$scope.groupFeildFlag){
+      
+       
+      
         $scope.functions.createGroup(_group).then(function (response) {
         if (!($scope.groups && $scope.groups.length)) {
           $scope.groups = [];
         }
         $scope.groups.push(response);
       });
-      }
-      else{ alert('Group Name exisits or is not provided!!!');}  
+     
+      
     }, function () { });
  
 
@@ -94,6 +91,10 @@ fg.controller('fgEditPaletteController', function ($scope, fgConfig, $modal) {
   $scope.clearField = function () {
     $scope.editFieldFlag = false;
     $scope.template = {};
+    $scope.populate_template = false;
+    //$scope.template.$_displayProperties = false;
+    //$("select").each(function() { this.selectedIndex = 0 });
+
   }
   $scope.resetField = function () {
     $scope.model.ifNewFieldOpen = false;
@@ -125,6 +126,9 @@ fg.controller('fgEditPaletteController', function ($scope, fgConfig, $modal) {
   }
 
   $scope.associateField = function (field, groupId) {
+    if(groupId === ""){
+
+    }  
     var _field = {
       "type": field.type,
       "name": field.name,
@@ -152,6 +156,7 @@ fg.controller('fgEditPaletteController', function ($scope, fgConfig, $modal) {
           "required": fvm.required
         }
       }
+      $scope.resetField();
     };
 
     if ($scope.editFieldFlag) {
@@ -217,7 +222,10 @@ fg.controller('fgEditPaletteController', function ($scope, fgConfig, $modal) {
 
   $scope.model = {};
 
-  $scope.ok = function () {
+  $scope.ok = function () {   
+    if($scope.model.groupName===undefined){     
+      return;
+    }
     $modalInstance.close($scope.model.groupName);
   };
 

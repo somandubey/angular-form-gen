@@ -7,7 +7,7 @@ fg.controller('fgPropertyFieldOptionsController', function($scope) {
   // watch for every option value.
   // Watchers are deleted when removing options from the array.
 
-  $scope.$watchCollection('field.options', function(options) {
+  $scope.$watchCollection('field.fieldoptions', function(options) {
     if (options) {
       angular.forEach(options, function(option) {
         if (!option.$_valueWatchFn) {
@@ -50,17 +50,17 @@ fg.controller('fgPropertyFieldOptionsController', function($scope) {
 
   this.addOption = function() {
 
-    if (!$scope.field.options) {
-      $scope.field.options = [];
+    if (!$scope.field.fieldoptions) {
+      $scope.field.fieldoptions = [];
     }
 
     var option = {
       value: 'Option ' + optionCounter++
     };
 
-    $scope.field.options.push(option);
+    $scope.field.fieldoptions.push(option);
 
-    var count = $scope.field.options.length;
+    var count = $scope.field.fieldoptions.length;
 
     if(!$scope.multiple && count === 1) {
       $scope.field.value = option.value;
@@ -69,7 +69,7 @@ fg.controller('fgPropertyFieldOptionsController', function($scope) {
   };
 
   this.removeOption = function(index) {
-    var options = $scope.field.options.splice(index, 1);
+    var options = $scope.field.fieldoptions.splice(index, 1);
 
     if (options && options.length) {
 
@@ -82,8 +82,8 @@ fg.controller('fgPropertyFieldOptionsController', function($scope) {
 
       } else {
 
-        if (option.value === $scope.field.value && $scope.field.options.length) {
-          $scope.field.value = $scope.field.options[0].value;
+        if (option.value === $scope.field.value && $scope.field.fieldoptions.length) {
+          $scope.field.value = $scope.field.fieldoptions[0].value;
         }
 
         option.$_valueWatchFn();

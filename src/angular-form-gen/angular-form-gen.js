@@ -34,7 +34,7 @@ fg.config(function ($provide) {
     };
 
     var templates = config.fields.templates;
-
+    console.log("Template",templates)
     function indexOfTemplate(type) {
       var idx = templates.length;
 
@@ -155,16 +155,18 @@ fg.config(function (fgConfigProvider, FgField) {
     required: 'A value is required for this field.',
     minlength: 'The value does not match the minimum length{{ field.schema && (" of " + field.schema.validation.minlength + " characters" || "")}}.',
     maxlength: 'The value exceeds the maximum length{{ field.schema && (" of " + field.schema.validation.maxlength + " characters" || "")}}.',
-    pattern: 'The value "{{ field.state.$viewValue }}" does not match the required format.',
-    email: 'The value "{{ field.state.$viewValue }}" is not a valid email address.',
-    unique: 'The value {{ field.state.$viewValue }} is already in use.',
-    number: 'The value {{ field.state.$viewValue }} is not a number.',
-    min: 'The value {{ field.schema && ("should be at least " + field.schema.validation.min) || field.state.$viewValue + " is too low" }}',
-    max: 'The value {{ field.schema && ("should be less than " + field.schema.validation.max) || field.state.$viewValue + " is too high" }}',
+    pattern: 'The value  does not match the required format.',
+    email: 'The value  is not a valid email address.',
+    unique: 'The value  is already in use.',
+    number: 'The value  is not a number.',
+    min: 'The value  is too low',
+    max: 'The value  is too high',
     minoptions: 'At least {{ field.schema.validation.minoptions }} option(s) should be selected.',
     maxoptions: 'No more than {{ field.schema.validation.maxoptions }} option(s) should be selected.'
   });
+  
 
+  
   // - - - - - - - - - - - - - - - - - - - - - -
   // Fields
   // - - - - - - - - - - - - - - - - - - - - - -
@@ -185,7 +187,7 @@ fg.config(function (fgConfigProvider, FgField) {
       new FgField('checkbox', { nolabel: true }),
       new FgField('checkboxlist', {
         displayName: 'Checkbox List',
-        options: [
+        fieldoptions: [
           {
             value: '1',
             text: 'Option 1'
@@ -208,7 +210,7 @@ fg.config(function (fgConfigProvider, FgField) {
     'Select input fields': [
       new FgField('radiobuttonlist', {
         displayName: 'Radiobutton List',
-        options: [
+        fieldoptions: [
           {
             value: '1',
             text: 'Option 1'
@@ -226,7 +228,7 @@ fg.config(function (fgConfigProvider, FgField) {
       }),
       new FgField('selectlist', {
         displayName: 'Select List',
-        options: [
+        fieldoptions: [
           {
             value: '',
             text: 'Select an option'

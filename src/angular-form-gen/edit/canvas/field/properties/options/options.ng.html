@@ -1,10 +1,10 @@
-<div ng-if="!field.options || field.options.length === 0" ng-click="optionsCtrl.addOption()" class="alert alert-info">
+<div ng-if="!field.fieldoptions || field.fieldoptions.length === 0"  class="alert alert-info">
   <h2>No options defined</h2>
 
-  <p class="lead">Click here to add a new option definition to this field.</p>
+  
 </div>
 
-<table ng-if="field.options.length > 0" class="table-field-options">
+<table ng-if="field.fieldoptions.length > 0" class="table-field-options">
   <thead>
   <tr>
     <th></th>
@@ -18,7 +18,7 @@
   </tr>
   </thead>
   <tbody>
-  <tr ng-form="fieldOptionForm" ng-repeat="option in field.options" ng-class="{ 'error': fieldOptionForm.$invalid }">
+  <tr ng-form="fieldOptionForm" ng-repeat="option in field.fieldoptions" ng-class="{ 'error': fieldOptionForm.$invalid }">
     <td ng-if="multiple === false">
       <input type="radio" name="{{ field.name }}selection[]" value="{{ option.value }}" ng-model="field.value" ng-click="optionsCtrl.toggleOption(option.value)"/>
     </td>

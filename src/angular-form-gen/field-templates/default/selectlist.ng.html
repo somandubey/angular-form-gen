@@ -7,7 +7,7 @@
         ng-required="field.schema.validation.required"
         tabindex="{{ tabIndex }}">
 
-        <option ng-repeat="option in field.schema.options"
+        <option ng-repeat="option in field.schema.fieldoptions"
                 value="{{ option.value }}"
                 ng-selected="form.data[field.schema.name] === option.value">{{ option.text || option.value }}
         </option>

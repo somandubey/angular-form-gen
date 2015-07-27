@@ -18,7 +18,7 @@
                   <!--ng-if="dragPlaceholder.visible && dragPlaceholder.index === $index"-->
                     <div ng-class="{ 'fg-drag-placeholder-visible' : dragPlaceholder.visible && dragPlaceholder.index === $index }"
                          class="fg-drag-placeholder"></div>
-                    <div fg-edit-canvas-field ng-class="{false:'col-md-12', true:'col-sm-6'}[field.$_colspan]"></div>
+                    <div fg-edit-canvas-field ng-class="{false:'col-md-12', true:'col-sm-6'}[field.colSpanFlag]"></div>
                 </div>
                 <!--<div class="fg-drag-placeholder">-->
                 <!--<div ng-if="dragPlaceholder.visible && dragPlaceholder.index == schema.fields.length" class="fg-drag-placeholder">-->

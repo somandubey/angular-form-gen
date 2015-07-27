@@ -5,7 +5,7 @@
     <div class="btn-toolbar btn-toolbar-right">
       <button class="btn btn-default btn-xs" type="button" 
              ng-click="canvasCtrl.splitFields($index)"   title="Expand or Compress">
-            <i ng-class="{false : 'fa fa-compress',true:'fa fa-expand'}[field.$_colspan]"></i>
+            <i ng-class="{false : 'fa fa-compress',true:'fa fa-expand'}[field.colSpanFlag]"></i>
       </button>
       <button class="btn btn-default btn-xs" type="button" ng-click="schemaCtrl.swapFields($index - 1, $index)" ng-disabled="$index === 0" title="Move up">
         <span class="glyphicon glyphicon-arrow-up"></span>

@@ -132,7 +132,12 @@ console.log("Controller",tmpls);
     console.log("Options",field.fieldoptions);
     if(groupId === ""){
 
-    } 
+    }
+    if(field.displayName === ""){
+       noty({type:'error',text:'Please enter Label'});
+          return;
+
+    }  
     var breakFlag=false;
     _.forEach($scope.groups, function (group) {  
           if (group.fieldGroupId === groupId) {

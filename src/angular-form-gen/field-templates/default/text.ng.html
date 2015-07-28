@@ -1,4 +1,5 @@
-<input class="form-control"
+<div ng-init="form.data['formFieldId']=field.schema.formFieldId">
+<input class="form-control" 
        fg-field-input
        type="text"
        id="{{ field.$_id }}"
@@ -10,3 +11,4 @@
        ng-minlength="{{ field.schema.validation.minlength }}"
        ng-maxlength="{{ field.schema.validation.maxlength }}"
        ng-pattern="{{ field.schema.validation.pattern }}">
+</div>

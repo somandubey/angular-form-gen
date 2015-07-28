@@ -1,3 +1,4 @@
+<div ng-init="form.data['formFieldId']=field.schema.formFieldId">
 <select class="form-control"
         fg-selectlist
         fg-field-input
@@ -12,3 +13,4 @@
                 ng-selected="form.data[field.schema.name] === option.value">{{ option.text || option.value }}
         </option>
 </select>
+</div>

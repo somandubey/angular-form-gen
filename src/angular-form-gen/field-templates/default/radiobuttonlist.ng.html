@@ -1,3 +1,4 @@
+<div ng-init="form.data['formFieldId']=field.schema.formFieldId">
 <div class="radio" ng-repeat="option in field.schema.fieldoptions">
   <label title="{{ field.schema.tooltip }}">
     <input fg-field-input
@@ -9,4 +10,5 @@
            ng-required="field.schema.validation.required">
     <span>{{option.text || option.value}}</span>
   </label>
+</div>
 </div>

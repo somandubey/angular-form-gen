@@ -206,11 +206,13 @@
 /*}*/
 
 .fg-edit-canvas-area {
-  min-height: 340px;
-  /*position: relative;*/
+  min-height: 340px;*/
+  
+  -webkit-border-radius  -webkit-border-radius: 4px;
   border-radius: 4px;
   border: 1px solid #ddd;
   padding: 20px;
+  overflow-y: auto;
 }
 
 .fg-edit-canvas-area-empty {
@@ -376,7 +378,7 @@ hr.m5{
 
 
 .fg-form::-webkit-scrollbar {
-  width: 5px;
+  width: 10px;
 }
  
 .fg-form::-webkit-scrollbar-thumb:vertical {
@@ -546,7 +548,7 @@ hr.m5{
 
 
 .table-field-options .form-control {
-  width: auto;
+  width: 130px;
 }
 /*.fg-property-field-validation + .fg-property-field-validation,*/
 /*.fg-property-field-validation + div > .fg-property-field-validation {*/

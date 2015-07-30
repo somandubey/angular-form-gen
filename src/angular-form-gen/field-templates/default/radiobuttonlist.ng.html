@@ -1,4 +1,3 @@
-<div ng-init="form.data['formFieldId']=field.schema.formFieldId">
 <div class="radio" ng-repeat="option in field.schema.fieldoptions">
   <label title="{{ field.schema.tooltip }}">
     <input fg-field-input
@@ -6,9 +5,9 @@
            name="{{ field.schema.name }}[]"
            tabindex="{{ tabIndex }}"
            value="{{ option.value }}"
-           ng-model="form.data[field.schema.name]"
+           ng-model="form.data[field.schema.formFieldId]"
            ng-required="field.schema.validation.required">
     <span>{{option.text || option.value}}</span>
   </label>
 </div>
-</div>
+

@@ -1,4 +1,3 @@
-<div ng-init="form.data['formFieldId']=field.schema.formFieldId">
 <input class="form-control"
        fg-field-input
        type="date"
@@ -6,8 +5,7 @@
        title="{{ field.schema.tooltip }}"
        tabindex="{{ tabIndex }}"
        placeholder="{{ field.schema.placeholder }}"
-       ng-model="form.data[field.schema.name]"
-       ng-required="field.schema.validation.required"
+       ng-model="form.data[field.schema.formFieldId]"
+       ng-required="field.schema.validation.required">
      <!--   ng-min="{{ field.schema.validation.startDate }}"
-       ng-max="{{ field.schema.validation.endDate }}" -->>
-</div>       
+       ng-max="{{ field.schema.validation.endDate }}" -->

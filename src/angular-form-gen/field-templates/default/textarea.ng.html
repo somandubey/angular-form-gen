@@ -1,8 +1,7 @@
-<div ng-init="form.data['formFieldId']=field.schema.formFieldId">
 <textarea class="form-control"
           fg-field-input
 		      fg-placeholder="field.schema.placeholder"
-		      ng-model="form.data[field.schema.name]"
+		      ng-model="form.data[field.schema.formFieldId]"
 		      id="{{ field.$_id }}"
 		      title="{{ field.schema.tooltip }}"
 		      tabindex="{{ tabIndex }}"
@@ -11,4 +10,3 @@
           ng-maxlength="{{ field.schema.validation.maxlength }}"
           ng-pattern="{{ field.schema.validation.pattern }}">
 </textarea>
-</div>

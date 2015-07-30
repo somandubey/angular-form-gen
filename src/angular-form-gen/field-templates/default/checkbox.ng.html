@@ -1,12 +1,9 @@
-<div ng-init="form.data['formFieldId']=field.schema.formFieldId">
 <div class="checkbox">
   <label title="{{ field.schema.tooltip }}">
-    <input fg-field-input
-           id="{{ field.$_id }}"
-           type="checkbox"
-           tabindex="{{ tabIndex }}"
-           ng-model="form.data[field.schema.name]">
+    <input fg-field-input id="{{ field.$_id }}" 
+      type="checkbox" 
+      tabindex="{{ tabIndex }}" 
+      ng-model="form.data[field.schema.formFieldId]">
     <span ng-if="field.schema.nolabel">{{ field.schema.name }}</span>
   </label>
-</div>
 </div>

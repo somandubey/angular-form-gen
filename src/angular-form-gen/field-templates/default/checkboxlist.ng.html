@@ -1,5 +1,4 @@
-<div ng-init="form.data['formFieldId']=field.schema.formFieldId">
-<div fg-checkboxlist fg-field-input ng-model="form.data[field.schema.name]" name="{{ field.schema.name }}">
+<div fg-checkboxlist fg-field-input ng-model="form.data[field.schema.formFieldId]" name="{{ field.schema.name }}">
   <div class="checkbox" ng-repeat="option in field.schema.fieldoptions">
     <label title="{{ field.schema.tooltip }}">
       <input type="checkbox"
@@ -9,5 +8,4 @@
       <span>{{option.text || option.value}}</span>
     </label>
   </div>
-</div>
 </div>

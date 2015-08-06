@@ -4,7 +4,7 @@
            type="radio"
            name="{{ field.schema.name }}[]"
            tabindex="{{ tabIndex }}"
-           value="{{ option.value }}"
+           value="{{ option.text }}"
            ng-model="form.data[field.schema.formFieldId]"
            ng-required="field.schema.validation.required">
     <span>{{option.text || option.value}}</span>

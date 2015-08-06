@@ -1,9 +1,9 @@
-<div class="fg-edit-palette">
+<div ng-mouseleave="toggleDDL()" class="fg-edit-palette">
   <fieldset>
     <div fg-edit-palette-categories data-category="selectedCategory"></div>
     <accordion close-others="accordion.oneAtATime">
       <accordion-group is-open="model.ifNewFieldOpen">
-        <accordion-heading>{{editFieldFlag ? "Edit Field": "Add New Field"}}
+        <accordion-heading>{{editFieldFlag ? "Edit Field": "Add New Fields"}}
           <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
         </accordion-heading>
         <div id="fieldType" class="row">
@@ -12,7 +12,7 @@
               <h5>Field Type</h5>
             </div>
             <div class="col-sm-7">
-              <select class="form-control" ng-model="selected" ng-click="changedFieldValue(selected)" ng-disabled="editFieldFlag">              
+              <select class="form-control" ng-model="model.selected" ng-click="changedFieldValue(model.selected)" ng-disabled="editFieldFlag">              
                 <option ng-repeat="template in allTemplates | filter:allTemplateFilter" class="fg-field">
                   <span>{{template.displayName}}</span>
                   <div fg-field="template" fg-tab-index="3" fg-no-validation-summary="true" fg-edit-mode="true"></div>
@@ -30,7 +30,7 @@
               <div fg-property-field="fieldGroup" fg-property-field-label="Field group" style="padding: 0px 20px;">
                 <div class='row'>
                   <div class='col-md-9' style="padding-right: 0px;">
-                    <select class="form-control" ng-model="selectedGroup" ng-options="group.fieldGroupId as group.fieldGroupName for group in groups"> 
+                    <select class="form-control" ng-model="model.selectedGroup" ng-options="group.fieldGroupId as group.fieldGroupName for group in groups"> 
                   </div>
                   <div class='col-md-3' style="padding-left: 15px;">
                     <button class='btn btn-primary btn-sm' ng-click='openCreateGroupModal()' style="height: 33px;">
@@ -40,7 +40,7 @@
                 </div>
                 <div class="col-sm-12" style="padding: 8px 10px 8px 0px;">
                   <div class="col-sm-3" style="margin-right: 28px; padding: 0px 0px;">
-                    <a ng-click="associateField(template, selectedGroup)" class="btn btn-primary btn-sm margin-top-2"> <i
+                    <a ng-click="associateField(template, model.selectedGroup)" class="btn btn-primary btn-sm margin-top-2"> <i
                             class="fa fa-plus normal"></i> Save
                       </a>
                   </div>
@@ -57,8 +57,8 @@
           <div ng-class="{ 'fg-drag-placeholder-visible' : dragPlaceholder.visible && dragPlaceholder.index === $index }" class="fg-drag-placeholder"></div>
       </accordion-group>
     </accordion>
-    <accordion close-others="accordion.oneAtATime">
-      <accordion-group class="field-pallette-accordian" data-toggle="collapse" data-target="#collapse{{group.fieldGroupName}}"
+    <accordion close-others="accordion.oneAtATime">    
+      <accordion-group is-open="group.ifNewGroupOpen" class="field-pallette-accordian" data-toggle="collapse" data-target="#collapse{{group.fieldGroupName}}"
       ng-repeat="group in groups">
         <accordion-heading>{{group.fieldGroupName}}
           <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>

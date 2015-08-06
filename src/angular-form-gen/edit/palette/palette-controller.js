@@ -64,7 +64,10 @@ console.log("Controller",tmpls);
       size: ''
     });
     modalInstance.result.then(function (groupName) {
-      var _group = { "fieldGroupName": groupName };
+      var _group = { 
+                      "fieldGroupName": groupName,
+                      "ifNewGroupOpen": false 
+                   };
       
        
       
@@ -90,6 +93,16 @@ console.log("Controller",tmpls);
     }
   } ();
 
+$scope.toggleDDL = function () {
+  var elem = angular.element(document.getElementById("dropdownElement"));
+  console.log("element",elem);
+   var scope = elem.scope();
+   console.log("Sc",scope);
+   if(scope){
+        scope.dropdownVisible = false; 
+      }
+     }  
+
   $scope.clearField = function () {
     $scope.editFieldFlag = false;
     $scope.template = {};
@@ -100,6 +113,8 @@ console.log("Controller",tmpls);
   }
   $scope.resetField = function () {
     $scope.model.ifNewFieldOpen = false;
+    $scope.model.selected=undefined;
+    $scope.model.selectedGroup=undefined;
     $scope.clearField();
   };
 
@@ -109,15 +124,23 @@ console.log("Controller",tmpls);
     $scope.model.ifNewFieldOpen = true;
     $scope.editFieldFlag = true;
     $scope.populate_template = true;
-    $scope.template = field;
+    $scope.template = angular.copy(field);
     for (var i = 0; i <= tmpls.length; i++) {
       if (field.type === tmpls[i].type) {
-        $scope.selected = tmpls[i].displayName;
+        $scope.model.selected = tmpls[i].displayName;
         $scope.template.$_displayProperties = false;
         break;
       }
     }
-    $scope.selectedGroup = groupId;
+    _.forEach($scope.groups, function (group) {
+          if (group.fieldGroupId === groupId) {
+           group.ifNewGroupOpen=false;
+          }
+        });
+    $scope.model.selectedGroup = groupId;
+    window.location.hash = 'fieldType';
+    //$scope.model.ifNewFieldOpen = false;
+    
 
 
     // $scope.template.id = field
@@ -235,6 +258,7 @@ console.log("Controller",tmpls);
         });
         field = {};
         groupId = false;
+        $scope.resetField();
         
       });
     } else {

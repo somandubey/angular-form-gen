@@ -8,7 +8,7 @@
         tabindex="{{ tabIndex }}">
 
         <option ng-repeat="option in field.schema.fieldoptions"
-                value="{{ option.value }}"
+                value="{{ option.text }}"
                 ng-selected="form.data[field.schema.formFieldId] === option.value">{{ option.text || option.value }}
         </option>
 </select>

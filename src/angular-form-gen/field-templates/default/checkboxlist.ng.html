@@ -3,8 +3,8 @@
     <label title="{{ field.schema.tooltip }}">
       <input type="checkbox"
              tabindex="{{ tabIndex }}"
-             value="{{ option.value }}"
-             ng-model="form.data[field.schema.name][option.value]">
+             value="{{ option.text }}"
+             ng-model="form.data[field.schema.formFieldId][option.value]">
       <span>{{option.text || option.value}}</span>
     </label>
   </div>

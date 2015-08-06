@@ -5,8 +5,8 @@ fg.directive('fgDropdownInput', function ($compile, $document, $timeout, $parse,
     var template = '<div class="fg-dropdown-input input-group">' +
       '<input type="text" class="form-control"/>' +
       '<span class="input-group-btn">' +
-      '<button class="btn btn-default" type="button" ng-click="dropdownToggle()">' +
-      '<span class="caret"></span>' +
+      '<button class="btn btn-default" type="button"  ng-click="dropdownToggle($event)">' +
+      '<span class="caret"></span>' + 
       '</button>' +
       '</span>' +
       '</div>';
@@ -27,11 +27,27 @@ fg.directive('fgDropdownInput', function ($compile, $document, $timeout, $parse,
     var $button = $template.find('button');
     var closeTimeout;
 
-    $scope.dropdownToggle = function () {
+    $scope.dropdownToggle = function (event) {
 //      $button[0].focus(); // force focus for chrome
-      $scope.dropdownVisible = !$scope.dropdownVisible;
-    };
+   
+        $scope.dropdownVisible = !$scope.dropdownVisible; 
+        event.stopPropagation();
+     }  
 
+ /*window.onclick = function() {
+     angular.element('dropdownElement').bind('onclick', function () {
+        return;
+     });
+      if ($scope.dropdownVisible) {
+              console.log("true");
+              $scope.dropdownVisible = false;
+
+        // You should let angular know about the update that you have made, so that it can refresh the UI
+              $scope.$apply();
+      }
+    //});
+
+ }*/
 //    $button.on('blur', function () {
 //      closeTimeout = $timeout(function () {
 //        $scope.dropdownVisible = false;
@@ -51,7 +67,7 @@ fg.directive('fgDropdownInput', function ($compile, $document, $timeout, $parse,
     var modelGetter = $parse($attrs.ngModel);
     var modelSetter = modelGetter.assign;
 
-    var template = '<div class="fg-dropdown" ng-class="{ \'open\': dropdownVisible }">' +
+    var template = '<div ng-mouseover="visible()" id="dropdownElement" class="fg-dropdown"  ng-class="{ \'open\': dropdownVisible }">' +
       '<ul ng-if="items && items.length" class="dropdown-menu">' +
       '<li ng-repeat="item in items" ng-class="{ active: item.value === getModelValue() }">' +
       '<a href="" ng-click="setModelValue(item.value)">{{ item.text || item.value }}</a>' +
@@ -60,6 +76,8 @@ fg.directive('fgDropdownInput', function ($compile, $document, $timeout, $parse,
       '</div>';
 
     var $template = angular.element(template);
+
+    $scope.visible = function (value) {$scope.dropdownVisible = true;}
 
     $scope.setModelValue = function (value) {
 

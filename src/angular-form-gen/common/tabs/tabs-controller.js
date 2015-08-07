@@ -16,6 +16,13 @@ fg.controller('fgTabsController', function ($scope) {
     }
   };
 
+  this.resetTab = function(){
+      var idx = 0;
+      var defaultItem = this.items[idx];
+      this.active = $scope.active = defaultItem;
+      this.activeIndex = $scope.activeIndex = idx;
+  };
+
   this.activate = function (itemOrIndex) {
 
     var idx = -1, item;

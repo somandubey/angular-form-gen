@@ -53,6 +53,7 @@ console.log("Controller",tmpls);
         }
       }
       $scope.selected=undefined;
+      $scope.resetPropertiesTab();
    
   };
 
@@ -103,6 +104,15 @@ $scope.toggleDDL = function () {
       }
      }  
 
+$scope.resetPropertiesTab = function(){
+      var elem = angular.element(document.getElementById("tabsElement"));
+      console.log("element",elem);
+      var scope = elem.scope();
+      console.log('items' , scope.property.tabs);
+      scope.property.tabs.resetTab();
+
+};
+
   $scope.clearField = function () {
     $scope.editFieldFlag = false;
     $scope.template = {};
@@ -116,6 +126,7 @@ $scope.toggleDDL = function () {
     $scope.model.selected=undefined;
     $scope.model.selectedGroup=undefined;
     $scope.clearField();
+    $scope.resetPropertiesTab();
   };
 
 

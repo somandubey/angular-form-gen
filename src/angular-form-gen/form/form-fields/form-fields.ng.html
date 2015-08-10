@@ -1,8 +1,7 @@
 <div class="fg-form-fields">
   <fieldset>
-    <div class='row' ng-repeat="field in form.schema.fields" ng-class="{false:'col-md-12', true:'col-sm-6'}[field.colSpanFlag]">
+    <div ng-repeat="field in form.schema.fields" ng-class-odd="'odd'" ng-class-even="'even'" ng-class="{false:'col-md-12', true:'col-md-6'}[field.colSpanFlag]">
       <div fg-field="field"></div>
     </div>
   </fieldset>
-  
 </div>

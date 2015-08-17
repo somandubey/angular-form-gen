@@ -303,7 +303,8 @@ $scope.resetPropertiesTab = function(){
   $scope.model = {};
 
   $scope.ok = function () {   
-    if($scope.model.groupName===undefined){     
+    if($scope.model.groupName===undefined){ 
+       noty({type:'error',text:'Please enter Group name'});
       return;
     }
     $modalInstance.close($scope.model.groupName);

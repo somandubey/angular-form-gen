@@ -145,11 +145,12 @@ $scope.resetPropertiesTab = function(){
     }
     _.forEach($scope.groups, function (group) {
           if (group.fieldGroupId === groupId) {
+             console.log("Editss", field);
            group.ifNewGroupOpen=false;
           }
         });
     $scope.model.selectedGroup = groupId;
-    window.location.hash = 'fieldType';
+    //window.location.hash = 'fieldType';
     //$scope.model.ifNewFieldOpen = false;
     
 

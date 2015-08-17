@@ -66,12 +66,12 @@
         <div id="collapse{{group.name}}">
           <div ng-repeat="template in group.associatedFields" class="fg-field" dq-draggable="fg-edit-canvas" dq-drag-begin="{ source: 'palette', field: template }"
           style="width:100%;background-color: #FD9753;border-color: #FB6705;text-align: left;font-weight: bold;font-size: 12px;border-radius: 0px; margin-bottom: 0px;">
-            <div class="fg-field-overlay">
-              <div class="btn-toolbar btn-toolbar-right">
+            <div class=" ">
+              <div class="btn-toolbar btn-toolbar-right pull-right">
                 <button class="btn btn-default btn-xs btn-primary" type="button" ng-click="schemaCtrl.addField(template)" title="Add this field to Form.">
                   <span class="glyphicon glyphicon-plus"></span>
                 </button>
-                <button class="btn btn-default btn-xs btn-primary" type="button" ng-click="editField
+                <button class="btn btn-default btn-xs btn-primary pull-right" type="button" ng-click="editField
                 (group.fieldGroupId, template)" title="Edit this field.">
                   <span class="glyphicon glyphicon-pencil"></span>
                 </button>
